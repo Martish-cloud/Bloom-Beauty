@@ -1,0 +1,21 @@
+{
+  "name": "bloom-beauty",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Bloom Beauty — Premium Women's Cosmetics & Beauty E-Commerce Store",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "cosmetics",
+    "beauty",
+    "e-commerce",
+    "makeup",
+    "skincare",
+    "bloom-beauty"
+  ],
+  "author": "Bloom Beauty",
+  "license": "MIT"
+}

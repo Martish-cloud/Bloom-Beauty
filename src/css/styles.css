@@ -1,0 +1,560 @@
+/* ========================================================
+   BLOOM BEAUTY — PREMIUM DESIGN SYSTEM & ANIMATIONS
+   Colors:
+     Background: #FFFDF9 (Warm Ivory)
+     Secondary: #F8E9EC (Soft Blush)
+     Accent: #DDA6B3 (Blush Rose)
+     Secondary Accent: #C98498 (Dusty Rose)
+     Deep Rose: #A6536F
+     Text: #292329 (Plum Black)
+     Muted: #777078
+     Border: #EEE7E9
+     Gold/Champagne: #C5A880
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #FFFDF9;
+  --color-surface: #FFFFFF;
+  --color-soft: #F8E9EC;
+  --color-blush: #F3D2DA;
+  --color-accent: #DDA6B3;
+  --color-rose: #C98498;
+  --color-deep-rose: #A6536F;
+  --color-text: #292329;
+  --color-muted: #777078;
+  --color-border: #EEE7E9;
+  --color-gold: #C5A880;
+  --color-dark: #1F191F;
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --shadow-subtle: 0 4px 20px -2px rgba(41, 35, 41, 0.05);
+  --shadow-hover: 0 14px 34px -6px rgba(41, 35, 41, 0.12);
+  --shadow-modal: 0 25px 50px -12px rgba(25, 20, 25, 0.25);
+  --shadow-drawer: -10px 0 35px rgba(0, 0, 0, 0.16);
+
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #FDF9FA;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8D3D8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rose);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Hide scrollbar for carousel while allowing touch and wheel scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ========================================================
+   HEADER & STICKY NAVIGATION
+   ======================================================== */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: rgba(255, 253, 249, 0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.sticky-header.scrolled {
+  box-shadow: 0 8px 24px -4px rgba(41, 35, 41, 0.08);
+}
+
+/* Mega Menu Dropdown */
+.mega-menu-wrapper {
+  position: static;
+}
+
+.mega-menu-trigger:hover + .mega-menu-panel,
+.mega-menu-panel:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mega-menu-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 20px 40px -10px rgba(41, 35, 41, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.25s var(--ease-spring),
+              transform 0.25s var(--ease-spring),
+              visibility 0.25s;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Search autocomplete dropdown */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px -4px rgba(41, 35, 41, 0.12);
+  z-index: 60;
+  max-height: 480px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.2s var(--ease-spring);
+}
+
+.search-dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ========================================================
+   CRITICAL PRODUCT HOVER SYSTEM (SECTION 6 & 7)
+   ======================================================== */
+.bloom-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 300ms var(--ease-spring),
+              box-shadow 300ms var(--ease-spring),
+              border-color 300ms var(--ease-spring);
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  width: 100%;
+}
+
+.bloom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: #DFCAD1;
+}
+
+/* Dual image container */
+.bloom-image-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #FBF8F9;
+  overflow: hidden;
+}
+
+.bloom-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bloom-img-primary {
+  transition: transform 500ms var(--ease-spring), opacity 300ms ease;
+}
+
+.bloom-img-secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 320ms var(--ease-spring), transform 500ms var(--ease-spring);
+}
+
+.bloom-card:hover .bloom-img-secondary {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.bloom-card:hover .bloom-img-primary {
+  transform: scale(1.03);
+}
+
+/* Wishlist heart button */
+.bloom-wishlist-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(238, 231, 233, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-muted);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 220ms ease, transform 220ms var(--ease-spring), color 180ms ease, background-color 180ms ease;
+}
+
+.bloom-card:hover .bloom-wishlist-toggle,
+.bloom-wishlist-toggle.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bloom-wishlist-toggle:hover {
+  background-color: #FFFFFF;
+  color: #D93856;
+}
+
+.bloom-wishlist-toggle.is-active {
+  color: #D93856;
+  fill: #D93856;
+}
+
+/* Quick Action Overlay (Slide-up) */
+.bloom-quick-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 75%, rgba(255, 255, 255, 0));
+  display: flex;
+  gap: 8px;
+  transform: translateY(105%);
+  opacity: 0;
+  transition: transform 260ms var(--ease-spring), opacity 260ms ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bloom-card:hover .bloom-quick-actions {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Small badges */
+.bloom-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bloom-badge-bestseller {
+  background-color: #292329;
+  color: #FFFDF9;
+}
+
+.bloom-badge-new {
+  background-color: var(--color-rose);
+  color: #FFFFFF;
+}
+
+.bloom-badge-deal {
+  background-color: #C0392B;
+  color: #FFFFFF;
+}
+
+.bloom-badge-value {
+  background-color: var(--color-gold);
+  color: #1F191F;
+}
+
+/* Swatches */
+.shade-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+
+.shade-dot:hover {
+  transform: scale(1.25);
+}
+
+.shade-dot.is-selected {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ========================================================
+   CAROUSEL CONTROLS
+   ======================================================== */
+.carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(41, 35, 41, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background-color: var(--color-text);
+  color: #FFFFFF;
+  border-color: var(--color-text);
+  transform: scale(1.05);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================================
+   MODALS, DRAWERS & BACKDROPS
+   ======================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(28, 22, 28, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+.modal-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content-box {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: var(--shadow-modal);
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.28s var(--ease-spring);
+  width: 92%;
+  max-width: 920px;
+}
+
+.modal-backdrop.is-active .modal-content-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Cart Drawer */
+.cart-drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background: #FFFFFF;
+  box-shadow: var(--shadow-drawer);
+  z-index: 110;
+  transform: translateX(100%);
+  transition: transform 0.35s var(--ease-spring);
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer-panel.is-open {
+  transform: translateX(0);
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast-message {
+  pointer-events: auto;
+  background-color: #292329;
+  color: #FFFDF9;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: toastIn 0.25s var(--ease-spring);
+  max-width: 360px;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hero Carousel */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Brand Grid Cards */
+.brand-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease, border-color 0.22s ease;
+  cursor: pointer;
+  height: 100%;
+}
+
+.brand-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -4px rgba(41, 35, 41, 0.08);
+  border-color: var(--color-rose);
+}
+
+/* Image Zoom Lens in Product Detail */
+.zoom-container {
+  overflow: hidden;
+  position: relative;
+  cursor: crosshair;
+}
+
+.zoom-container img {
+  transition: transform 0.15s ease-out;
+  transform-origin: center center;
+}
+
+.zoom-container:hover img {
+  transform: scale(1.6);
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Media query adjustments for touch devices */
+@media (hover: none) {
+  .bloom-quick-actions {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .bloom-wishlist-toggle {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bloom-card:hover {
+    transform: none !important;
+  }
+}

@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bloom-bg: #FFFDF9;
+    --bloom-surface: #FFFFFF;
+    --bloom-soft: #F8E9EC;
+    --bloom-blush: #F3D2DA;
+    --bloom-accent: #DDA6B3;
+    --bloom-rose: #C98498;
+    --bloom-deep-rose: #A6536F;
+    --bloom-text: #292329;
+    --bloom-muted: #777078;
+    --bloom-border: #EEE7E9;
+    --bloom-gold: #C5A880;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bloom-bg);
+    color: var(--bloom-text);
+    overflow-x: hidden;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #FAF6F7;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #E5CDD3;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C98498;
+  }
+}
+
+/* Hide scrollbar for carousel while preserving smooth touch scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Product Card Premium Hover System */
+.bloom-product-card {
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 280ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+}
+
+.bloom-product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px -6px rgba(41, 35, 41, 0.12);
+  border-color: #E2CFD4;
+}
+
+/* Secondary image smooth crossfade */
+.product-image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #FAF6F7;
+}
+
+.product-image-primary {
+  transition: opacity 300ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-image-secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1), transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bloom-product-card:hover .product-image-secondary {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.bloom-product-card:hover .product-image-primary {
+  transform: scale(1.03);
+}
+
+/* Quick Action Reveal Buttons */
+.card-quick-actions {
+  transform: translateY(12px);
+  opacity: 0;
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.bloom-product-card:hover .card-quick-actions {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Heart wishlist floating button */
+.card-wishlist-btn {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.bloom-product-card:hover .card-wishlist-btn,
+.card-wishlist-btn.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Mega menu dropdown smooth display */
+.mega-menu-content {
+  animation: megaMenuIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes megaMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bloom-product-card:hover {
+    transform: none !important;
+  }
+}

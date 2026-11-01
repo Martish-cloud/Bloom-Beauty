@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bloom Beauty | Premium Women's Cosmetics & Beauty Store</title>
+  <meta name="description" content="Discover premium women's cosmetics, skincare, haircare, and luxury beauty essentials at Bloom Beauty. Experience effortless elegance with 100% authentic products." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C98498'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z'/></svg>" />
+
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN for utility classes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bloom: {
+              bg: '#FFFDF9',
+              soft: '#F8E9EC',
+              blush: '#F3D2DA',
+              accent: '#DDA6B3',
+              rose: '#C98498',
+              deepRose: '#A6536F',
+              text: '#292329',
+              muted: '#777078',
+              border: '#EEE7E9',
+              gold: '#C5A880',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Bloom Beauty Custom CSS System -->
+  <link rel="stylesheet" href="/src/css/styles.css" />
+</head>
+<body class="bg-bloom-bg text-bloom-text font-sans antialiased selection:bg-bloom-blush selection:text-bloom-text min-h-screen flex flex-col">
+
+  <!-- ========================================================
+       1. TOP ANNOUNCEMENT BAR
+       ======================================================== -->
+  <div class="bg-[#292329] text-[#FFFDF9] py-2 px-4 text-xs font-medium border-b border-[#3B323B]">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <!-- Rotating Announcement Message -->
+      <div class="flex items-center gap-2 overflow-hidden py-0.5">
+        <span class="inline-block w-2 h-2 rounded-full bg-[#DDA6B3] animate-pulse"></span>
+        <span id="announcement-text" class="transition-opacity duration-300">
+          ✨ Discover Your Beauty, Your Way | Complimentary Deluxe Mini on Orders over $45
+        </span>
+      </div>
+
+      <!-- Quick Utility Links (Desktop) -->
+      <div class="hidden md:flex items-center gap-5 text-[11px] text-[#DDD6DE]">
+        <button type="button" class="hover:text-white transition-colors" data-action="track-order">Track Order</button>
+        <span class="text-gray-600">|</span>
+        <a href="#footer" class="hover:text-white transition-colors">Help & FAQ</a>
+        <span class="text-gray-600">|</span>
+        <div class="flex items-center gap-1 cursor-pointer hover:text-white">
+          <span>🇺🇸 USD ($)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       2. MAIN HEADER (Sticky on scroll)
+       ======================================================== -->
+  <header class="sticky-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Main Row -->
+      <div class="flex items-center justify-between h-20 gap-4">
+        
+        <!-- Mobile Menu Trigger -->
+        <button type="button" id="mobile-menu-trigger" class="lg:hidden p-2 text-bloom-text hover:text-bloom-rose" aria-label="Open Mobile Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+          </svg>
+        </button>
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5 flex-shrink-0 group">
+          <div class="w-9 h-9 rounded-full bg-bloom-soft border border-bloom-border flex items-center justify-center text-bloom-deepRose group-hover:scale-105 transition-transform shadow-xs">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-serif text-2xl md:text-3xl font-bold tracking-tight text-bloom-text">Bloom Beauty</span>
+            <span class="text-[9px] uppercase tracking-[0.25em] text-bloom-rose font-semibold -mt-1">Cosmetics & Care</span>
+          </div>
+        </a>
+
+        <!-- Central Search Bar with Instant Suggestions -->
+        <div id="search-container" class="hidden md:flex flex-1 max-w-xl mx-4 relative">
+          <div class="relative w-full">
+            <input type="text" 
+                   id="main-search-input" 
+                   placeholder="Search cosmetics, skincare, brands, ingredients (e.g. Maybelline, Serum, Olaplex)..." 
+                   class="w-full bg-[#FAF6F7] hover:bg-white focus:bg-white border border-bloom-border focus:border-bloom-rose rounded-full py-2.5 pl-11 pr-10 text-xs text-bloom-text placeholder-[#8E8790] focus:outline-none transition-all shadow-inner"
+                   autocomplete="off" />
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-bloom-muted">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+              </svg>
+            </div>
+            <button type="button" class="open-catalog-btn absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs font-semibold text-bloom-deepRose hover:text-bloom-text" title="Browse Filters">
+              Filter
+            </button>
+          </div>
+
+          <!-- Instant Search Auto-suggestions Dropdown -->
+          <div id="search-dropdown" class="search-dropdown">
+            <div id="search-suggestions-list"></div>
+            <!-- Popular searches footer -->
+            <div class="p-3 border-t border-bloom-border bg-[#FCFAFB] flex items-center justify-between text-[11px] text-bloom-muted">
+              <span>Popular: 
+                <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-category" data-category="Makeup">Lipsticks</button>,
+                <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-brand" data-brand="The Ordinary">The Ordinary</button>,
+                <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-category" data-category="Skincare">Serums</button>,
+                <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-brand" data-brand="Olaplex">Olaplex</button>
+              </span>
+              <button type="button" class="open-catalog-btn text-xs font-bold text-bloom-deepRose hover:underline">View All &rarr;</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right User Actions (Account, Wishlist, Cart) -->
+        <div class="flex items-center gap-2 sm:gap-4">
+          <!-- Account Button -->
+          <button type="button" class="hidden sm:flex items-center gap-2 p-2 rounded-lg hover:bg-bloom-soft text-bloom-text transition-colors" data-action="track-order" title="Account & Orders">
+            <svg class="w-5 h-5 text-bloom-text" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+            </svg>
+            <span class="text-xs font-semibold hidden xl:inline">Account</span>
+          </button>
+
+          <!-- Wishlist Button -->
+          <button type="button" class="open-wishlist-btn relative p-2 rounded-lg hover:bg-bloom-soft text-bloom-text transition-colors" aria-label="Open Wishlist" title="Saved Wishlist">
+            <svg class="w-5 h-5 text-bloom-text" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+            </svg>
+            <span class="wishlist-badge absolute top-1 right-1 w-4 h-4 rounded-full bg-bloom-rose text-white text-[10px] font-bold flex items-center justify-center hidden">0</span>
+          </button>
+
+          <!-- Shopping Bag Button -->
+          <button type="button" class="open-cart-btn relative flex items-center gap-2 bg-[#292329] hover:bg-bloom-deepRose text-white px-3.5 py-2.5 rounded-full transition-colors shadow-sm" aria-label="Open Shopping Bag">
+            <div class="relative">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+              <span class="cart-badge absolute -top-2 -right-2 w-4 h-4 rounded-full bg-bloom-rose text-white text-[9px] font-bold flex items-center justify-center hidden">0</span>
+            </div>
+            <span class="text-xs font-bold hidden sm:inline cart-subtotal-display">$0.00</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Bar (Desktop Mega Menus) -->
+      <nav class="hidden lg:flex items-center justify-center border-t border-bloom-border text-xs font-semibold tracking-wide text-bloom-text relative">
+        <ul class="flex items-center gap-1 xl:gap-3 py-2">
+          
+          <!-- 1. Makeup Mega Menu -->
+          <li class="mega-menu-wrapper">
+            <button type="button" class="mega-menu-trigger px-3 py-2 rounded hover:text-bloom-deepRose transition-colors flex items-center gap-1" data-action="filter-category" data-category="Makeup">
+              Makeup
+              <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="mega-menu-panel">
+              <div class="max-w-7xl mx-auto p-8 grid grid-cols-5 gap-8">
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Lips</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Matte Lipsticks</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Liquid Lipsticks</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">High Shine Glosses</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Lip Liners & Balms</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Face</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Foundations</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Concealers</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Primers & Setting Sprays</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Blush & Highlighters</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Eyes</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Eyeshadow Palettes</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Volumizing Mascaras</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Eyeliners & Kohl</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Makeup">Brow Definers</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Top Makeup Brands</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Maybelline New York">Maybelline New York</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="MAC Cosmetics">MAC Cosmetics</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Huda Beauty">Huda Beauty</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="NYX Professional Makeup">NYX Professional</a></li>
+                  </ul>
+                </div>
+                <!-- Spotlight Card -->
+                <div class="bg-bloom-soft rounded-xl p-4 border border-bloom-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-bold text-bloom-deepRose uppercase tracking-wider block mb-1">Editor's Pick</span>
+                    <h5 class="text-xs font-bold text-bloom-text mb-1">Maybelline Ultimatte Lipstick</h5>
+                    <p class="text-[11px] text-bloom-muted mb-3">Plum burgundy velvet texture with 12h wear.</p>
+                  </div>
+                  <button type="button" class="w-full bg-[#292329] hover:bg-bloom-deepRose text-white py-1.5 rounded-lg text-xs font-semibold transition-colors" data-action="view-details" data-id="prod-maybelline-burgundy-glow">
+                    View Product
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 2. Skincare Mega Menu -->
+          <li class="mega-menu-wrapper">
+            <button type="button" class="mega-menu-trigger px-3 py-2 rounded hover:text-bloom-deepRose transition-colors flex items-center gap-1" data-action="filter-category" data-category="Skincare">
+              Skincare
+              <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="mega-menu-panel">
+              <div class="max-w-7xl mx-auto p-8 grid grid-cols-5 gap-8">
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Cleansers & Toners</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Gentle Cleansers</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Foaming Face Wash</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Hydrating Toners</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Serums & Actives</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Niacinamide Serums</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Hyaluronic Acid</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Salicylic Acid (BHA)</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Moisturizers & SPF</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Barrier Repair Creams</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Water Gel Creams</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Skincare">Sunscreen SPF 50+</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Skincare Brands</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="The Ordinary">The Ordinary</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="CeraVe">CeraVe</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Cetaphil">Cetaphil</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Minimalist">Minimalist</a></li>
+                  </ul>
+                </div>
+                <div class="bg-bloom-soft rounded-xl p-4 border border-bloom-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-bold text-bloom-deepRose uppercase tracking-wider block mb-1">Holy Grail Active</span>
+                    <h5 class="text-xs font-bold text-bloom-text mb-1">Niacinamide 10% + Zinc 1%</h5>
+                    <p class="text-[11px] text-bloom-muted mb-3">Visible pore reduction and oil balance.</p>
+                  </div>
+                  <button type="button" class="w-full bg-[#292329] hover:bg-bloom-deepRose text-white py-1.5 rounded-lg text-xs font-semibold transition-colors" data-action="view-details" data-id="prod-ordinary-niacinamide">
+                    View Product
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 3. Haircare Mega Menu -->
+          <li class="mega-menu-wrapper">
+            <button type="button" class="mega-menu-trigger px-3 py-2 rounded hover:text-bloom-deepRose transition-colors flex items-center gap-1" data-action="filter-category" data-category="Haircare">
+              Haircare
+              <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </button>
+            <div class="mega-menu-panel">
+              <div class="max-w-7xl mx-auto p-8 grid grid-cols-4 gap-8">
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Treatments & Repair</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Haircare">Bond Building Treatments</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Haircare">Deep Conditioning Masks</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Haircare">Anti-Frizz Serums</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Wash & Care</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Haircare">Sulfate-Free Shampoos</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Haircare">Nourishing Conditioners</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-category" data-category="Haircare">Leave-In Detanglers</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Pro Hair Brands</h4>
+                  <ul class="space-y-2 text-xs text-bloom-muted">
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Olaplex">Olaplex</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="L'Oréal Professionnel">L'Oréal Professionnel</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Schwarzkopf">Schwarzkopf</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="TRESemmé">TRESemmé</a></li>
+                  </ul>
+                </div>
+                <div class="bg-bloom-soft rounded-xl p-4 border border-bloom-border flex flex-col justify-between">
+                  <div>
+                    <span class="text-[10px] font-bold text-bloom-deepRose uppercase tracking-wider block mb-1">Global Bestseller</span>
+                    <h5 class="text-xs font-bold text-bloom-text mb-1">Olaplex No. 3 Hair Perfector</h5>
+                    <p class="text-[11px] text-bloom-muted mb-3">Patented bond multiplier repair.</p>
+                  </div>
+                  <button type="button" class="w-full bg-[#292329] hover:bg-bloom-deepRose text-white py-1.5 rounded-lg text-xs font-semibold transition-colors" data-action="view-details" data-id="prod-olaplex-no3">
+                    View Product
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- 4. Bath & Body -->
+          <li>
+            <button type="button" class="px-3 py-2 rounded hover:text-bloom-deepRose transition-colors" data-action="filter-category" data-category="Bath & Body">
+              Bath & Body
+            </button>
+          </li>
+
+          <!-- 5. Fragrance -->
+          <li>
+            <button type="button" class="px-3 py-2 rounded hover:text-bloom-deepRose transition-colors" data-action="filter-category" data-category="Fragrance">
+              Fragrance
+            </button>
+          </li>
+
+          <!-- 6. Nail Care -->
+          <li>
+            <button type="button" class="px-3 py-2 rounded hover:text-bloom-deepRose transition-colors" data-action="filter-category" data-category="Nail Care">
+              Nail Care
+            </button>
+          </li>
+
+          <!-- 7. Beauty Tools -->
+          <li>
+            <button type="button" class="px-3 py-2 rounded hover:text-bloom-deepRose transition-colors" data-action="filter-category" data-category="Beauty Tools">
+              Beauty Tools
+            </button>
+          </li>
+
+          <!-- 8. Brands -->
+          <li>
+            <a href="#brands-section" class="px-3 py-2 rounded hover:text-bloom-deepRose transition-colors">
+              Brands
+            </a>
+          </li>
+
+          <!-- 9. Offers Tag -->
+          <li>
+            <a href="#savings-section" class="px-3 py-2 rounded text-bloom-deepRose font-bold hover:underline flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+              Offers
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       3. HERO CAMPAIGN CAROUSEL (SECTION 4)
+       ======================================================== -->
+  <section class="relative bg-bloom-soft overflow-hidden" id="hero-carousel">
+    <div class="relative w-full h-[480px] sm:h-[540px] md:h-[600px] lg:h-[640px]">
+      
+      <!-- Slide 1: Makeup Velvet Lipsticks -->
+      <div class="hero-slide is-active">
+        <div class="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1920&q=85" 
+               alt="Velvet Lipstick Campaign" 
+               class="w-full h-full object-cover object-right md:object-center" />
+          <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex items-center">
+          <div class="max-w-lg z-10">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3 py-1 rounded-full mb-3.5">
+              New Launch Collection
+            </span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
+              The Art of <br/><span class="italic font-normal text-bloom-rose">Velvet Radiance</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6">
+              Ultra-pigmented cushiony mattes infused with nourishing botanical oils for weightless, 12-hour comfortable all-day elegance.
+            </p>
+            <div class="flex items-center gap-3 sm:gap-4">
+              <button type="button" 
+                      class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg"
+                      data-action="filter-category" 
+                      data-category="Makeup">
+                Shop Lipsticks
+              </button>
+              <button type="button" 
+                      class="bg-white/80 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      data-action="view-details" 
+                      data-id="prod-maybelline-burgundy-glow">
+                Discover Burgundy Glow
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Clinical Skincare -->
+      <div class="hero-slide">
+        <div class="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1920&q=85" 
+               alt="Clinical Skincare Campaign" 
+               class="w-full h-full object-cover object-right md:object-center" />
+          <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex items-center">
+          <div class="max-w-lg z-10">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3 py-1 rounded-full mb-3.5">
+              Clinical Formulations
+            </span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
+              Pure Actives, <br/><span class="italic font-normal text-bloom-rose">Luminous Skin</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6">
+              Transformative barrier-repairing ceramides, high-potency niacinamide, and pure hyaluronic acid for radiant glass skin.
+            </p>
+            <div class="flex items-center gap-3 sm:gap-4">
+              <button type="button" 
+                      class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md"
+                      data-action="filter-category" 
+                      data-category="Skincare">
+                Explore Skincare
+              </button>
+              <button type="button" 
+                      class="bg-white/80 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all"
+                      data-action="filter-brand" 
+                      data-brand="The Ordinary">
+                The Ordinary Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Salon Haircare -->
+      <div class="hero-slide">
+        <div class="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=85" 
+               alt="Hair Repair Campaign" 
+               class="w-full h-full object-cover object-right md:object-center" />
+          <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex items-center">
+          <div class="max-w-lg z-10">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-gold bg-amber-50 px-3 py-1 rounded-full mb-3.5">
+              Molecular Hair Bonding
+            </span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
+              Salon Repair <br/><span class="italic font-normal text-bloom-rose">At Your Home</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6">
+              Reverse years of heat and styling damage with patented bond multipliers and deep keratin nourishing rituals.
+            </p>
+            <div class="flex items-center gap-3 sm:gap-4">
+              <button type="button" 
+                      class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md"
+                      data-action="filter-category" 
+                      data-category="Haircare">
+                Shop Hair Treatments
+              </button>
+              <button type="button" 
+                      class="bg-white/80 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all"
+                      data-action="filter-brand" 
+                      data-brand="Olaplex">
+                Shop Olaplex
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Carousel Controls -->
+    <div class="absolute bottom-6 inset-x-0 z-20 max-w-7xl mx-auto px-6 flex items-center justify-between pointer-events-none">
+      <!-- Dots -->
+      <div class="flex items-center gap-2 pointer-events-auto">
+        <button type="button" class="hero-dot w-7 h-2 rounded-full bg-[#292329] transition-all" aria-label="Slide 1"></button>
+        <button type="button" class="hero-dot w-2.5 h-2 rounded-full bg-gray-300 transition-all" aria-label="Slide 2"></button>
+        <button type="button" class="hero-dot w-2.5 h-2 rounded-full bg-gray-300 transition-all" aria-label="Slide 3"></button>
+      </div>
+
+      <!-- Arrow Buttons -->
+      <div class="flex items-center gap-2 pointer-events-auto">
+        <button type="button" id="hero-prev" class="carousel-btn" aria-label="Previous Slide">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+        </button>
+        <button type="button" id="hero-next" class="carousel-btn" aria-label="Next Slide">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       4. SHOP BY CATEGORY (SECTION 5)
+       ======================================================== -->
+  <section class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-deepRose block mb-1">Curation</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text">Explore Your Beauty Essentials</h2>
+      </div>
+      <p class="text-xs sm:text-sm text-bloom-muted mt-2 sm:mt-0 max-w-md">
+        Handpicked luxury formulations across cosmetics, skincare, haircare, and personal beauty rituals.
+      </p>
+    </div>
+
+    <!-- Categories Grid -->
+    <div id="category-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3.5 sm:gap-4"></div>
+  </section>
+
+  <!-- ========================================================
+       5. MORE BEAUTY, BETTER VALUE (SECTION 6)
+       ======================================================== -->
+  <section class="py-12 bg-[#FAF6F7] border-y border-bloom-border w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header with Carousel Navigation -->
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-deepRose block mb-1">Exclusive Value</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold text-bloom-text">More Beauty, Better Value</h2>
+          <p class="text-xs sm:text-sm text-bloom-muted mt-1">Discover beauty favourites at prices you'll love.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="value-scroll-left" class="carousel-btn" aria-label="Scroll left">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+          </button>
+          <button type="button" id="value-scroll-right" class="carousel-btn" aria-label="Scroll right">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Horizontal Product Cards Track -->
+      <div id="value-products-track" class="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       6. PROMOTIONAL BANNER 1 (SECTION 12)
+       ======================================================== -->
+  <section class="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-[#292329] via-[#3D2C34] to-[#292329] text-white p-8 md:p-12 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="max-w-xl">
+        <span class="text-[11px] font-bold uppercase tracking-[0.25em] text-[#F3D2DA] bg-white/10 px-3 py-1 rounded-full mb-3 inline-block">
+          Limited Time Offer
+        </span>
+        <h3 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-white mb-2 leading-tight">
+          Up to 40% Off Selected Luxury Cosmetics & Fragrances
+        </h3>
+        <p class="text-xs sm:text-sm text-[#E2CFD4] leading-relaxed">
+          Complimentary Bloom Velvet Cosmetics Pouch & 2 Deluxe Samples included on all beauty orders over $50.
+        </p>
+      </div>
+      <div class="flex-shrink-0">
+        <button type="button" 
+                class="bg-[#FFFDF9] hover:bg-[#F8E9EC] text-[#292329] px-7 py-3.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors shadow-md hover:scale-105"
+                data-action="filter-category" 
+                data-category="Makeup">
+          Shop The Sale
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       7. MORE SAVINGS AHEAD (SECTION 7)
+       ======================================================== -->
+  <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" id="savings-section">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-[0.2em] text-[#C0392B] block mb-1">Deals & Combos</span>
+        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-bloom-text">More Savings Ahead</h2>
+        <p class="text-xs sm:text-sm text-bloom-muted mt-1">Your favourite beauty essentials, now at irresistible prices.</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button type="button" id="savings-scroll-left" class="carousel-btn" aria-label="Scroll left">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+        </button>
+        <button type="button" id="savings-scroll-right" class="carousel-btn" aria-label="Scroll right">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Carousel -->
+    <div id="savings-products-track" class="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <!-- Rendered via JS -->
+    </div>
+  </section>
+
+  <!-- ========================================================
+       8. BEAUTY BESTSELLERS (SECTION 8)
+       ======================================================== -->
+  <section class="py-14 bg-bloom-soft/40 border-t border-bloom-border w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-deepRose block mb-1">Top Rated</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold text-bloom-text">Beauty Bestsellers</h2>
+          <p class="text-xs sm:text-sm text-bloom-muted mt-1">Cult-classic formulas loved by over 50,000+ happy customers.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button type="button" class="open-catalog-btn text-xs font-bold text-bloom-deepRose hover:underline hidden sm:inline">
+            View All Bestsellers &rarr;
+          </button>
+          <div class="flex items-center gap-2">
+            <button type="button" id="bestseller-scroll-left" class="carousel-btn" aria-label="Scroll left">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+            </button>
+            <button type="button" id="bestseller-scroll-right" class="carousel-btn" aria-label="Scroll right">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="bestseller-products-track" class="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       9. OUR POPULAR BRANDS (SECTION 10)
+       ======================================================== -->
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" id="brands-section">
+    <div class="text-center max-w-2xl mx-auto mb-10">
+      <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-deepRose block mb-1">Authentic Global Brands</span>
+      <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text">Our Popular Brands</h2>
+      <p class="text-xs sm:text-sm text-bloom-muted mt-2">
+        Explore the world's most loved beauty brands. 100% genuine products sourced directly from authorized brand partners.
+      </p>
+
+      <!-- Category Tabs for Brands -->
+      <div class="flex items-center justify-center gap-2 mt-6 overflow-x-auto py-1">
+        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-[#292329] text-white border border-[#292329] transition-all" data-category="All">
+          All Brands (24)
+        </button>
+        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-[#292329] border border-bloom-border hover:border-bloom-rose transition-all" data-category="Makeup">
+          Makeup
+        </button>
+        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-[#292329] border border-bloom-border hover:border-bloom-rose transition-all" data-category="Skincare">
+          Skincare
+        </button>
+        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-[#292329] border border-bloom-border hover:border-bloom-rose transition-all" data-category="Haircare">
+          Haircare
+        </button>
+      </div>
+    </div>
+
+    <!-- Brands Grid -->
+    <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
+      <!-- Rendered via JS -->
+    </div>
+  </section>
+
+  <!-- ========================================================
+       10. NEW ARRIVALS (SECTION 9)
+       ======================================================== -->
+  <section class="py-14 bg-[#FAF6F7] border-y border-bloom-border w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-rose block mb-1">Just Landed</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold text-bloom-text">Freshly Added to Your Beauty Shelf</h2>
+          <p class="text-xs sm:text-sm text-bloom-muted mt-1">Be the first to explore seasonal launches and clean beauty innovations.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="new-arrivals-scroll-left" class="carousel-btn" aria-label="Scroll left">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+          </button>
+          <button type="button" id="new-arrivals-scroll-right" class="carousel-btn" aria-label="Scroll right">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="new-arrivals-products-track" class="flex gap-4 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       11. EDITORIAL COLLECTIONS (SECTION 11)
+       ======================================================== -->
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+      <div>
+        <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-deepRose block mb-1">Editor's Moodboard</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text">Curated Beauty Collections</h2>
+      </div>
+      <p class="text-xs sm:text-sm text-bloom-muted mt-2 sm:mt-0 max-w-md">
+        Explore thematic beauty stories tailored for your daily routine, party nights, and relaxing self-care rituals.
+      </p>
+    </div>
+
+    <!-- Editorial Cards Grid -->
+    <div id="editorial-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <!-- Rendered via JS -->
+    </div>
+  </section>
+
+  <!-- ========================================================
+       12. CUSTOMER TRUST & VALUE PROPOSITIONS
+       ======================================================== -->
+  <section class="py-12 bg-white border-y border-bloom-border w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div class="flex flex-col items-center p-4">
+          <div class="w-12 h-12 rounded-full bg-bloom-soft flex items-center justify-center text-bloom-deepRose mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+            </svg>
+          </div>
+          <h4 class="text-sm font-bold text-bloom-text mb-1">100% Genuine Beauty</h4>
+          <p class="text-xs text-bloom-muted">Direct authorized distribution from global brand partners.</p>
+        </div>
+
+        <div class="flex flex-col items-center p-4">
+          <div class="w-12 h-12 rounded-full bg-bloom-soft flex items-center justify-center text-bloom-deepRose mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.948c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75"/>
+            </svg>
+          </div>
+          <h4 class="text-sm font-bold text-bloom-text mb-1">Free Express Delivery</h4>
+          <p class="text-xs text-bloom-muted">Complimentary express shipping on all orders over $35.</p>
+        </div>
+
+        <div class="flex flex-col items-center p-4">
+          <div class="w-12 h-12 rounded-full bg-bloom-soft flex items-center justify-center text-bloom-deepRose mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
+            </svg>
+          </div>
+          <h4 class="text-sm font-bold text-bloom-text mb-1">Easy 15-Day Returns</h4>
+          <p class="text-xs text-bloom-muted">Hassle-free return policy if you are not completely delighted.</p>
+        </div>
+
+        <div class="flex flex-col items-center p-4">
+          <div class="w-12 h-12 rounded-full bg-bloom-soft flex items-center justify-center text-bloom-deepRose mb-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
+            </svg>
+          </div>
+          <h4 class="text-sm font-bold text-bloom-text mb-1">Deluxe Samples</h4>
+          <p class="text-xs text-bloom-muted">Receive complimentary luxury beauty samples with every purchase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       13. FOOTER (SECTION 17)
+       ======================================================== -->
+  <footer class="bg-[#1C161C] text-[#FFFDF9] pt-16 pb-24 lg:pb-12 border-t border-[#2F262F] mt-auto" id="footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Top Row: Brand & Newsletter -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-[#2F262F]">
+        <div class="lg:col-span-5">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-8 h-8 rounded-full bg-bloom-rose flex items-center justify-center text-white">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
+              </svg>
+            </span>
+            <span class="font-serif text-2xl font-bold tracking-tight text-white">BLOOM BEAUTY</span>
+          </div>
+          <p class="text-xs italic text-[#DDA6B3] mb-4">"Your Beauty. Your Confidence. Your Bloom."</p>
+          <p class="text-xs text-[#A89FA9] max-w-sm leading-relaxed mb-6">
+            A premium digital beauty sanctuary celebrating feminine radiance, clean formulations, and iconic cosmetics from the world's most trusted beauty houses.
+          </p>
+
+          <!-- Social Links -->
+          <div class="flex items-center gap-3 text-xs">
+            <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bloom-rose flex items-center justify-center text-white transition-colors" aria-label="Instagram">IG</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bloom-rose flex items-center justify-center text-white transition-colors" aria-label="Facebook">FB</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bloom-rose flex items-center justify-center text-white transition-colors" aria-label="Pinterest">PIN</a>
+            <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-bloom-rose flex items-center justify-center text-white transition-colors" aria-label="YouTube">YT</a>
+          </div>
+        </div>
+
+        <!-- Newsletter Subscription -->
+        <div class="lg:col-span-7 bg-[#292329] p-6 sm:p-8 rounded-2xl border border-[#3B323B]">
+          <span class="text-[11px] uppercase font-bold tracking-widest text-[#DDA6B3] block mb-1">Beauty Insider Club</span>
+          <h3 class="text-lg sm:text-xl font-serif font-bold text-white mb-2">Subscribe for 15% Off Your First Order</h3>
+          <p class="text-xs text-[#A89FA9] mb-4">Be the first to receive VIP launch previews, secret promo codes, and personalized shade recommendations.</p>
+          
+          <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2.5">
+            <input type="email" 
+                   id="newsletter-email" 
+                   required
+                   placeholder="Enter your email address..." 
+                   class="bg-[#1C161C] border border-[#3B323B] focus:border-bloom-rose text-xs text-white px-4 py-3 rounded-xl flex-1 focus:outline-none" />
+            <button type="submit" class="bg-bloom-rose hover:bg-bloom-deepRose text-white px-6 py-3 rounded-xl text-xs font-semibold tracking-wide transition-colors">
+              Join the Bloom Club
+            </button>
+          </form>
+          <span class="text-[10px] text-gray-500 mt-2 block">By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.</span>
+        </div>
+      </div>
+
+      <!-- Bottom Columns -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-10 text-xs">
+        <div>
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Shop Categories</h4>
+          <ul class="space-y-2 text-[#A89FA9]">
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Makeup">Makeup</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Skincare">Skincare</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Haircare">Haircare</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Bath & Body">Bath & Body</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Fragrance">Fragrance</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Nail Care">Nail Care</a></li>
+            <li><a href="#" class="hover:text-white transition-colors" data-action="filter-category" data-category="Beauty Tools">Beauty Tools</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Customer Care</h4>
+          <ul class="space-y-2 text-[#A89FA9]">
+            <li><a href="#" class="hover:text-white transition-colors" data-action="track-order">Track Your Order</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Shipping & Delivery Rates</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">15-Day Returns & Exchanges</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Frequently Asked Questions</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Contact Customer Service</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Shade Match Consultation</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">About Bloom Beauty</h4>
+          <ul class="space-y-2 text-[#A89FA9]">
+            <li><a href="#" class="hover:text-white transition-colors">Our Story & Heritage</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">100% Authenticity Guarantee</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Cruelty-Free Commitment</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Clean Beauty Standards</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Terms & Conditions</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="font-bold text-white text-xs uppercase tracking-wider mb-4">Secure Shopping</h4>
+          <p class="text-xs text-[#A89FA9] mb-4">
+            Protected by 256-bit SSL encryption. We accept all major payment methods.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[11px] font-bold text-white">
+            <span class="bg-white/10 px-2.5 py-1 rounded">VISA</span>
+            <span class="bg-white/10 px-2.5 py-1 rounded">Mastercard</span>
+            <span class="bg-white/10 px-2.5 py-1 rounded">Apple Pay</span>
+            <span class="bg-white/10 px-2.5 py-1 rounded">PayPal</span>
+            <span class="bg-white/10 px-2.5 py-1 rounded">Amex</span>
+          </div>
+          <div class="mt-4 p-3 bg-white/5 rounded-xl border border-white/10 text-[11px] text-[#A89FA9]">
+            🛡️ Verified Authentic Cosmetics Partner
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 border-t border-[#2F262F] flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#777078] gap-3">
+        <p>&copy; 2026 Bloom Beauty Inc. All rights reserved. Exclusively Women's Cosmetics & Beauty.</p>
+        <p>Inspired by clean e-commerce excellence. Crafted with original Bloom Beauty styling.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       14. CART SLIDE-OVER DRAWER (SECTION 14)
+       ======================================================== -->
+  <div id="cart-backdrop" class="modal-backdrop"></div>
+  <aside id="cart-drawer" class="cart-drawer-panel">
+    <!-- Header -->
+    <div class="p-4 border-b border-bloom-border flex items-center justify-between bg-bloom-soft/50">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-bloom-text" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+        </svg>
+        <h3 class="font-serif font-bold text-base text-bloom-text">Your Shopping Bag (<span class="cart-badge">0</span>)</h3>
+      </div>
+      <button type="button" id="close-cart-btn" class="p-1.5 text-gray-500 hover:text-bloom-text rounded-lg hover:bg-white" aria-label="Close Cart">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Free Shipping Progress Tracker -->
+    <div class="px-5 py-3 bg-[#FAF6F7] border-b border-bloom-border">
+      <div class="flex items-center justify-between text-xs text-bloom-muted mb-1.5" id="shipping-progress-text">
+        Add <strong>$35.00</strong> more to get <strong>FREE Express Shipping</strong>!
+      </div>
+      <div class="w-full bg-[#E5D5DA] rounded-full h-1.5 overflow-hidden">
+        <div id="shipping-progress-bar" class="bg-bloom-rose h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Items Scroll Area -->
+    <div class="flex-1 overflow-y-auto p-4" id="cart-scroll-area">
+      <div id="cart-items-list"></div>
+
+      <!-- Empty State -->
+      <div id="cart-empty-state" class="py-16 text-center">
+        <div class="w-16 h-16 rounded-full bg-bloom-soft mx-auto flex items-center justify-center text-bloom-rose mb-3">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+          </svg>
+        </div>
+        <h4 class="font-serif font-bold text-base text-bloom-text mb-1">Your Bag is Empty</h4>
+        <p class="text-xs text-bloom-muted max-w-xs mx-auto mb-4">Discover our top-rated lipsticks, barrier serums, and haircare treasures.</p>
+        <button type="button" class="open-catalog-btn bg-[#292329] text-white px-5 py-2.5 rounded-full text-xs font-semibold hover:bg-bloom-deepRose transition-colors">
+          Start Shopping
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Summary & Checkout -->
+    <div id="cart-footer" class="p-4 border-t border-bloom-border bg-white shadow-lg space-y-3">
+      <!-- Promo Code Input -->
+      <div class="flex gap-2">
+        <input type="text" id="promo-input" placeholder="Promo code (e.g. BLOOM10, GLOW20)" class="text-xs uppercase bg-[#FAF6F7] border border-bloom-border rounded-lg px-3 py-2 flex-1 focus:outline-none focus:border-bloom-rose" />
+        <button type="button" id="apply-promo-btn" class="bg-[#292329] hover:bg-bloom-deepRose text-white px-3.5 py-2 rounded-lg text-xs font-semibold transition-colors">Apply</button>
+      </div>
+      <div id="applied-promo-tag" class="hidden"></div>
+
+      <!-- Financials Breakdown -->
+      <div class="space-y-1.5 text-xs text-bloom-muted border-t border-bloom-border pt-2">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="cart-subtotal" class="font-bold text-bloom-text">$0.00</span>
+        </div>
+        <div class="flex justify-between text-bloom-deepRose">
+          <span>Promo Discount</span>
+          <span id="cart-discount" class="font-semibold">-$0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Estimated Shipping</span>
+          <span id="cart-shipping" class="font-semibold text-emerald-700">FREE</span>
+        </div>
+        <div class="flex justify-between text-sm font-bold text-bloom-text border-t border-bloom-border pt-1.5">
+          <span>Estimated Total</span>
+          <span id="cart-total" class="text-base text-bloom-deepRose">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <button type="button" 
+              id="proceed-to-checkout-btn" 
+              class="w-full bg-[#292329] hover:bg-bloom-deepRose text-white py-3.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors shadow-md flex items-center justify-center gap-2">
+        <span>Proceed to Checkout</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ========================================================
+       15. QUICK VIEW MODAL
+       ======================================================== -->
+  <div id="quickview-modal" class="modal-backdrop">
+    <div class="modal-content-box relative max-w-2xl">
+      <button type="button" id="close-quickview-btn" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/90 border border-bloom-border flex items-center justify-center text-gray-500 hover:text-bloom-text" aria-label="Close">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="quickview-content"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       16. FULL PRODUCT DETAIL MODAL (SECTION 13)
+       ======================================================== -->
+  <div id="product-detail-modal" class="modal-backdrop">
+    <div class="modal-content-box relative max-w-4xl">
+      <button type="button" id="close-detail-btn" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/90 border border-bloom-border flex items-center justify-center text-gray-500 hover:text-bloom-text shadow-sm" aria-label="Close Detail">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="product-detail-content"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       17. WISHLIST MODAL
+       ======================================================== -->
+  <div id="wishlist-modal" class="modal-backdrop">
+    <div class="modal-content-box relative max-w-lg p-6">
+      <div class="flex items-center justify-between pb-4 border-b border-bloom-border mb-4">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-bloom-rose fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <h3 class="font-serif font-bold text-lg text-bloom-text">Saved Wishlist</h3>
+        </div>
+        <button type="button" id="close-wishlist-btn" class="p-1 text-gray-400 hover:text-bloom-text" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      
+      <div id="wishlist-items-list" class="max-h-96 overflow-y-auto"></div>
+      
+      <div id="wishlist-empty-state" class="py-12 text-center hidden">
+        <p class="text-xs text-bloom-muted mb-3">No saved items in your wishlist yet.</p>
+        <button type="button" class="open-catalog-btn bg-[#292329] text-white px-4 py-2 rounded-full text-xs font-semibold">
+          Explore Bestsellers
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       18. CHECKOUT MODAL FLOW (SECTION 14)
+       ======================================================== -->
+  <div id="checkout-modal" class="modal-backdrop">
+    <div class="modal-content-box relative max-w-2xl p-6 sm:p-8">
+      <button type="button" id="close-checkout-btn" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white border border-bloom-border flex items-center justify-center text-gray-500 hover:text-bloom-text" aria-label="Close Checkout">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Step 1: Shipping Details -->
+      <div id="checkout-step-1">
+        <span class="text-[10px] font-bold text-bloom-rose uppercase tracking-widest block mb-1">Step 1 of 2</span>
+        <h3 class="text-xl font-serif font-bold text-bloom-text mb-4">Shipping & Delivery Details</h3>
+        
+        <form class="space-y-3" onsubmit="event.preventDefault();">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-bloom-muted mb-1">Full Name</label>
+              <input type="text" id="checkout-name" value="Jane Doe" required class="w-full text-xs bg-[#FAF6F7] border border-bloom-border rounded-lg p-2.5 focus:outline-none focus:border-bloom-rose" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-bloom-muted mb-1">Email Address</label>
+              <input type="email" id="checkout-email" value="jane.doe@example.com" required class="w-full text-xs bg-[#FAF6F7] border border-bloom-border rounded-lg p-2.5 focus:outline-none focus:border-bloom-rose" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-bloom-muted mb-1">Shipping Address</label>
+            <input type="text" id="checkout-address" value="742 Evergreen Terrace, Suite 4B" required class="w-full text-xs bg-[#FAF6F7] border border-bloom-border rounded-lg p-2.5 focus:outline-none focus:border-bloom-rose" />
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-bloom-muted mb-1">City</label>
+              <input type="text" value="New York" class="w-full text-xs bg-[#FAF6F7] border border-bloom-border rounded-lg p-2.5 focus:outline-none focus:border-bloom-rose" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-bloom-muted mb-1">State</label>
+              <input type="text" value="NY" class="w-full text-xs bg-[#FAF6F7] border border-bloom-border rounded-lg p-2.5 focus:outline-none focus:border-bloom-rose" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-bloom-muted mb-1">Zip Code</label>
+              <input type="text" value="10001" class="w-full text-xs bg-[#FAF6F7] border border-bloom-border rounded-lg p-2.5 focus:outline-none focus:border-bloom-rose" />
+            </div>
+          </div>
+
+          <!-- Total Summary Badge -->
+          <div class="p-3 bg-bloom-soft rounded-xl border border-bloom-border flex items-center justify-between text-xs mt-4">
+            <span class="text-bloom-muted">Order Total: <strong class="checkout-total-val text-bloom-text">$0.00</strong></span>
+            <span class="text-emerald-700 font-semibold">Free Express Courier</span>
+          </div>
+
+          <div class="pt-3">
+            <button type="button" id="checkout-step1-btn" class="w-full bg-[#292329] hover:bg-bloom-deepRose text-white py-3 rounded-xl text-xs font-semibold tracking-wide transition-colors">
+              Continue to Payment &rarr;
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Payment Method -->
+      <div id="checkout-step-2" class="hidden">
+        <span class="text-[10px] font-bold text-bloom-rose uppercase tracking-widest block mb-1">Step 2 of 2</span>
+        <h3 class="text-xl font-serif font-bold text-bloom-text mb-4">Choose Payment Method</h3>
+        
+        <div class="space-y-3 mb-5">
+          <label class="flex items-center gap-3 p-3.5 border-2 border-bloom-rose bg-bloom-soft/40 rounded-xl cursor-pointer">
+            <input type="radio" name="payment_method" checked class="text-bloom-rose" />
+            <div class="flex-1">
+              <span class="text-xs font-bold text-bloom-text block">Credit / Debit Card (Demo Showcase)</span>
+              <span class="text-[11px] text-bloom-muted">Instant secure validation (Visa, Mastercard, Amex)</span>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-3.5 border border-bloom-border rounded-xl cursor-pointer hover:bg-bloom-soft">
+            <input type="radio" name="payment_method" class="text-bloom-rose" />
+            <div class="flex-1">
+              <span class="text-xs font-bold text-bloom-text block">Apple Pay / Google Pay</span>
+              <span class="text-[11px] text-bloom-muted">One-tap mobile biometric checkout</span>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-3.5 border border-bloom-border rounded-xl cursor-pointer hover:bg-bloom-soft">
+            <input type="radio" name="payment_method" class="text-bloom-rose" />
+            <div class="flex-1">
+              <span class="text-xs font-bold text-bloom-text block">Cash on Delivery (COD)</span>
+              <span class="text-[11px] text-bloom-muted">Pay at doorstep upon package inspection</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="p-3 bg-[#FCFAFB] border border-bloom-border rounded-xl text-[11px] text-bloom-muted mb-5">
+          🔒 Educational Demo E-Commerce Showcase: No real financial transaction will be billed.
+        </div>
+
+        <div class="flex gap-3">
+          <button type="button" id="checkout-back-step1" class="px-4 py-3 border border-bloom-border rounded-xl text-xs font-semibold text-bloom-text hover:bg-bloom-soft">
+            Back
+          </button>
+          <button type="button" id="checkout-pay-btn" class="flex-1 bg-bloom-rose hover:bg-bloom-deepRose text-white py-3 rounded-xl text-xs font-bold tracking-wider uppercase transition-colors">
+            Place Order (<span class="checkout-total-val">$0.00</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Order Confirmed -->
+      <div id="checkout-step-3" class="hidden text-center py-6">
+        <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-4">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+          </svg>
+        </div>
+        <span class="text-[11px] font-bold uppercase tracking-widest text-bloom-rose block mb-1">Order Placed Successfully!</span>
+        <h3 class="text-2xl font-serif font-bold text-bloom-text mb-2">Thank you for blooming with us!</h3>
+        <p class="text-xs text-bloom-muted max-w-sm mx-auto mb-4">
+          Your beauty package is being carefully prepared with complimentary deluxe samples.
+        </p>
+
+        <div class="bg-bloom-soft p-4 rounded-xl border border-bloom-border max-w-xs mx-auto text-xs mb-6 text-left space-y-1">
+          <div class="flex justify-between">
+            <span class="text-bloom-muted">Order Number:</span>
+            <strong id="confirmed-order-id" class="text-bloom-text">BLM-849201</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-bloom-muted">Estimated Delivery:</span>
+            <strong class="text-bloom-text">In 2 Business Days</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-bloom-muted">Status:</span>
+            <span class="text-emerald-700 font-bold">Confirmed & Packing</span>
+          </div>
+        </div>
+
+        <button type="button" onclick="BloomApp.closeCheckoutModal()" class="bg-[#292329] text-white px-6 py-2.5 rounded-full text-xs font-semibold hover:bg-bloom-deepRose transition-colors">
+          Continue Browsing
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       19. CATALOG SEARCH & FILTER MODAL
+       ======================================================== -->
+  <div id="search-filter-modal" class="modal-backdrop">
+    <div class="modal-content-box relative max-w-5xl p-6 sm:p-8">
+      <div class="flex items-center justify-between pb-4 border-b border-bloom-border mb-6">
+        <div>
+          <h3 class="text-xl font-serif font-bold text-bloom-text">Browse Beauty Catalog</h3>
+          <span id="catalog-count" class="text-xs text-bloom-muted">24 Products Found</span>
+        </div>
+        <button type="button" id="close-catalog-btn" class="p-1.5 text-gray-500 hover:text-bloom-text" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Filter Controls Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-6 bg-bloom-soft/40 p-4 rounded-xl border border-bloom-border">
+        <div>
+          <label class="block text-[11px] font-bold text-bloom-muted mb-1">Filter by Category</label>
+          <select id="catalog-category-select" class="w-full text-xs bg-white border border-bloom-border rounded-lg p-2 focus:outline-none focus:border-bloom-rose">
+            <option value="All">All Categories</option>
+            <option value="Makeup">Makeup</option>
+            <option value="Skincare">Skincare</option>
+            <option value="Haircare">Haircare</option>
+            <option value="Bath & Body">Bath & Body</option>
+            <option value="Fragrance">Fragrance</option>
+            <option value="Nail Care">Nail Care</option>
+            <option value="Beauty Tools">Beauty Tools</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-bloom-muted mb-1">Sort Products</label>
+          <select id="catalog-sort-select" class="w-full text-xs bg-white border border-bloom-border rounded-lg p-2 focus:outline-none focus:border-bloom-rose">
+            <option value="featured">Featured / Best Match</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Highest Customer Rating</option>
+            <option value="newest">New Arrivals</option>
+          </select>
+        </div>
+
+        <div class="flex items-end">
+          <button type="button" onclick="BloomApp.openSearchModal('All', 'All')" class="w-full bg-white border border-bloom-border hover:bg-bloom-soft text-bloom-text p-2 rounded-lg text-xs font-semibold">
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Results Grid -->
+      <div id="catalog-results-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto p-1">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       20. MOBILE NAVIGATION DRAWER
+       ======================================================== -->
+  <div id="mobile-drawer-backdrop" class="modal-backdrop"></div>
+  <aside id="mobile-drawer" class="fixed inset-y-0 left-0 w-80 max-w-[85%] bg-white z-[120] shadow-2xl transform -translate-x-full transition-transform duration-300 flex flex-col">
+    <div class="p-4 border-b border-bloom-border flex items-center justify-between bg-bloom-soft">
+      <div class="flex items-center gap-2">
+        <span class="font-serif font-bold text-lg text-bloom-text">Bloom Beauty</span>
+      </div>
+      <button type="button" id="close-mobile-drawer" class="p-1 text-gray-500 hover:text-bloom-text" aria-label="Close Menu">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile Search -->
+    <div class="p-3 border-b border-bloom-border">
+      <div class="relative">
+        <input type="text" 
+               placeholder="Search cosmetics..." 
+               class="w-full bg-[#FAF6F7] border border-bloom-border rounded-lg py-2 pl-9 pr-3 text-xs focus:outline-none" 
+               oninput="BloomApp.handleSearchInput(this.value)" />
+        <svg class="w-4 h-4 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+      </div>
+    </div>
+
+    <!-- Menu Links -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-1 text-sm font-semibold">
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Makeup" onclick="BloomApp.closeMobileDrawer()">💄 Makeup</button>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Skincare" onclick="BloomApp.closeMobileDrawer()">🧴 Skincare</button>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Haircare" onclick="BloomApp.closeMobileDrawer()">✨ Haircare</button>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Bath & Body" onclick="BloomApp.closeMobileDrawer()">🛁 Bath & Body</button>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Fragrance" onclick="BloomApp.closeMobileDrawer()">🌸 Fragrance</button>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Nail Care" onclick="BloomApp.closeMobileDrawer()">💅 Nail Care</button>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Beauty Tools" onclick="BloomApp.closeMobileDrawer()">🪞 Beauty Tools</button>
+      <a href="#brands-section" class="block py-2.5 px-3 rounded hover:bg-bloom-soft" onclick="BloomApp.closeMobileDrawer()">🏷️ Popular Brands</a>
+      <a href="#savings-section" class="block py-2.5 px-3 rounded text-bloom-deepRose font-bold hover:bg-bloom-soft" onclick="BloomApp.closeMobileDrawer()">🔥 Offers & Deals</a>
+    </div>
+
+    <div class="p-4 border-t border-bloom-border text-xs text-bloom-muted bg-[#FAF6F7]">
+      <p class="font-bold text-bloom-text mb-1">Bloom Beauty Concierge</p>
+      <p>Need shade matching? Call 1-800-BLOOM-GLOW</p>
+    </div>
+  </aside>
+
+  <!-- ========================================================
+       21. MOBILE STICKY BOTTOM NAVIGATION
+       ======================================================== -->
+  <div class="lg:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-bloom-border z-40 py-2 px-6 flex items-center justify-between shadow-lg">
+    <a href="/" class="flex flex-col items-center text-[10px] text-bloom-deepRose font-semibold">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+      <span>Home</span>
+    </a>
+    <button type="button" class="open-catalog-btn flex flex-col items-center text-[10px] text-bloom-muted hover:text-bloom-text font-medium">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+      <span>Shop</span>
+    </button>
+    <button type="button" class="open-catalog-btn flex flex-col items-center text-[10px] text-bloom-muted hover:text-bloom-text font-medium">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+      <span>Search</span>
+    </button>
+    <button type="button" class="open-wishlist-btn relative flex flex-col items-center text-[10px] text-bloom-muted hover:text-bloom-text font-medium">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+      <span>Wishlist</span>
+      <span class="wishlist-badge absolute -top-1 right-2 w-3.5 h-3.5 rounded-full bg-bloom-rose text-white text-[8px] font-bold flex items-center justify-center hidden">0</span>
+    </button>
+    <button type="button" class="open-cart-btn relative flex flex-col items-center text-[10px] text-bloom-muted hover:text-bloom-text font-medium">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/></svg>
+      <span>Bag</span>
+      <span class="cart-badge absolute -top-1 right-1 w-3.5 h-3.5 rounded-full bg-bloom-rose text-white text-[8px] font-bold flex items-center justify-center hidden">0</span>
+    </button>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/src/js/data.js"></script>
+  <script src="/src/js/state.js"></script>
+  <script src="/src/js/components.js"></script>
+  <script src="/src/js/app.js"></script>
+</body>
+</html>
