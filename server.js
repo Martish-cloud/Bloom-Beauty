@@ -23,6 +23,11 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   // Normalize URL
   let reqPath = decodeURI(req.url.split('?')[0]);
+  if (reqPath.startsWith('/Bloom-Beauty/')) {
+    reqPath = reqPath.slice('/Bloom-Beauty'.length);
+  } else if (reqPath === '/Bloom-Beauty') {
+    reqPath = '/index.html';
+  }
   if (reqPath === '/' || reqPath === '') {
     reqPath = '/index.html';
   }

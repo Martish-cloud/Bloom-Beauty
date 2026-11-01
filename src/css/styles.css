@@ -49,6 +49,8 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -56,7 +58,17 @@ body {
   color: var(--color-text);
   font-family: var(--font-sans);
   line-height: 1.5;
+  width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Safe area padding for mobile sticky navigation */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* Custom Scrollbars */
@@ -82,7 +94,7 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Hide scrollbar for carousel while allowing touch and wheel scrolling */
+/* Hide scrollbar for carousel while preserving smooth momentum scrolling */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -100,19 +112,22 @@ body {
   z-index: 40;
   background-color: rgba(255, 253, 249, 0.98);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  width: 100%;
 }
 
 .sticky-header.scrolled {
   box-shadow: 0 8px 24px -4px rgba(41, 35, 41, 0.08);
 }
 
-/* Mega Menu Dropdown */
+/* Mega Menu Dropdown with hover gap bridge */
 .mega-menu-wrapper {
   position: static;
 }
 
+.mega-menu-wrapper:hover > .mega-menu-panel,
 .mega-menu-trigger:hover + .mega-menu-panel,
 .mega-menu-panel:hover {
   opacity: 1;
@@ -131,12 +146,23 @@ body {
   box-shadow: 0 20px 40px -10px rgba(41, 35, 41, 0.1);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.25s var(--ease-spring),
-              transform 0.25s var(--ease-spring),
-              visibility 0.25s;
+  transform: translateY(6px);
+  transition: opacity 0.22s var(--ease-spring),
+              transform 0.22s var(--ease-spring),
+              visibility 0.22s;
   pointer-events: none;
   z-index: 50;
+}
+
+/* Invisible bridge preventing cursor flicker between trigger & panel */
+.mega-menu-panel::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: transparent;
 }
 
 /* Search autocomplete dropdown */
@@ -181,12 +207,43 @@ body {
   will-change: transform, box-shadow;
   transform: translateZ(0);
   width: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .bloom-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-hover);
   border-color: #DFCAD1;
+}
+
+/* Horizontal Carousels Tracks Fix */
+[id$="-products-track"] {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.75rem;
+  width: 100%;
+}
+
+[id$="-products-track"] > .bloom-card {
+  flex: 0 0 260px !important;
+  min-width: 260px !important;
+  max-width: 280px !important;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 640px) {
+  [id$="-products-track"] {
+    gap: 0.75rem;
+  }
+  [id$="-products-track"] > .bloom-card {
+    flex: 0 0 190px !important;
+    min-width: 190px !important;
+    max-width: 210px !important;
+  }
 }
 
 /* Dual image container */
@@ -235,6 +292,7 @@ body {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(238, 231, 233, 0.8);
   display: flex;
   align-items: center;
@@ -262,14 +320,14 @@ body {
   fill: #D93856;
 }
 
-/* Quick Action Overlay (Slide-up) */
+/* Quick Action Overlay (Slide-up on Desktop, Clean on Touch) */
 .bloom-quick-actions {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   padding: 8px 12px;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 75%, rgba(255, 255, 255, 0));
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.96) 80%, rgba(255, 255, 255, 0));
   display: flex;
   gap: 8px;
   transform: translateY(105%);
@@ -327,6 +385,8 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.15);
   cursor: pointer;
   transition: transform 0.18s ease;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 .shade-dot:hover {
@@ -354,6 +414,7 @@ body {
   cursor: pointer;
   color: var(--color-text);
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .carousel-btn:hover {
@@ -377,6 +438,7 @@ body {
   inset: 0;
   background-color: rgba(28, 22, 28, 0.55);
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 100;
   display: flex;
   align-items: center;
@@ -397,10 +459,12 @@ body {
   box-shadow: var(--shadow-modal);
   max-height: 90vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transform: scale(0.96) translateY(8px);
   transition: transform 0.28s var(--ease-spring);
   width: 92%;
   max-width: 920px;
+  box-sizing: border-box;
 }
 
 .modal-backdrop.is-active .modal-content-box {
@@ -428,6 +492,27 @@ body {
   transform: translateX(0);
 }
 
+/* Mobile Drawer Fix */
+#mobile-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 320px;
+  max-width: 85vw;
+  background: #FFFFFF;
+  z-index: 120;
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.16);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+#mobile-drawer.is-open {
+  transform: translateX(0) !important;
+}
+
 /* Toast Notifications */
 .toast-container {
   position: fixed;
@@ -438,6 +523,14 @@ body {
   flex-direction: column;
   gap: 10px;
   pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .toast-container {
+    bottom: 74px;
+    right: 16px;
+    left: 16px;
+  }
 }
 
 .toast-message {
@@ -514,8 +607,10 @@ body {
   transform-origin: center center;
 }
 
-.zoom-container:hover img {
-  transform: scale(1.6);
+@media (hover: hover) {
+  .zoom-container:hover img {
+    transform: scale(1.6);
+  }
 }
 
 /* Animations */
@@ -535,15 +630,33 @@ body {
 }
 
 /* Media query adjustments for touch devices */
-@media (hover: none) {
+@media (hover: none), (max-width: 768px) {
   .bloom-quick-actions {
     transform: translateY(0);
     opacity: 1;
     pointer-events: auto;
+    position: static;
+    background: #FFFFFF;
+    padding: 6px 10px 10px;
   }
   .bloom-wishlist-toggle {
     opacity: 1;
     transform: scale(1);
+  }
+  .bloom-card:hover {
+    transform: none;
+    box-shadow: 0 2px 10px rgba(41, 35, 41, 0.05);
+  }
+  .modal-content-box {
+    width: 95%;
+    margin: 10px;
+  }
+}
+
+/* Large displays and Smart TVs (>= 1920px) */
+@media (min-width: 1920px) {
+  .max-w-7xl {
+    max-width: 1440px !important;
   }
 }
 

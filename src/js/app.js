@@ -1230,8 +1230,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Mobile Drawer Toggle
       document.getElementById('mobile-menu-trigger')?.addEventListener('click', () => this.openMobileDrawer());
+      document.getElementById('mobile-nav-shop-btn')?.addEventListener('click', () => this.openMobileDrawer());
       document.getElementById('close-mobile-drawer')?.addEventListener('click', () => this.closeMobileDrawer());
       document.getElementById('mobile-drawer-backdrop')?.addEventListener('click', () => this.closeMobileDrawer());
+
+      // Global Keyboard Accessibility (Escape to close modals/drawers)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.closeCart();
+          this.closeWishlist();
+          this.closeQuickView();
+          this.closeProductDetail();
+          this.closeCheckoutModal();
+          this.closeSearchModal();
+          this.closeMobileDrawer();
+          document.getElementById('search-dropdown')?.classList.remove('is-open');
+        }
+      });
 
       // Newsletter Form
       document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
