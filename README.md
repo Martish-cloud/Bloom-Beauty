@@ -1,4 +1,4 @@
-# 🌸 Bloom Beauty — Premium Women's Cosmetics & Beauty E-Commerce
+# 🌸 Bloom Beauty
 
 > *"Your Beauty. Your Confidence. Your Bloom."*
 

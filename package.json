@@ -2,7 +2,7 @@
   "name": "bloom-beauty",
   "private": true,
   "version": "1.0.0",
-  "description": "Bloom Beauty — Premium Women's Cosmetics & Beauty E-Commerce Store",
+  "description": "Bloom Beauty",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
