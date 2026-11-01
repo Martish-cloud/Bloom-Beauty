@@ -6,7 +6,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "keywords": [
     "cosmetics",
@@ -17,5 +19,8 @@
     "bloom-beauty"
   ],
   "author": "Bloom Beauty",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
 }
