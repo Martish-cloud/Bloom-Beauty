@@ -44,7 +44,683 @@
   </script>
 
   <!-- Bloom Beauty Custom CSS System -->
-  <link rel="stylesheet" href="./src/css/styles.css" />
+  <style id="bloom-core-styles">
+/* ========================================================
+   BLOOM BEAUTY — PREMIUM DESIGN SYSTEM & ANIMATIONS
+   Colors:
+     Background: #FFFDF9 (Warm Ivory)
+     Secondary: #F8E9EC (Soft Blush)
+     Accent: #DDA6B3 (Blush Rose)
+     Secondary Accent: #C98498 (Dusty Rose)
+     Deep Rose: #A6536F
+     Text: #292329 (Plum Black)
+     Muted: #777078
+     Border: #EEE7E9
+     Gold/Champagne: #C5A880
+   ======================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --color-bg: #FFFDF9;
+  --color-surface: #FFFFFF;
+  --color-soft: #F8E9EC;
+  --color-blush: #F3D2DA;
+  --color-accent: #DDA6B3;
+  --color-rose: #C98498;
+  --color-deep-rose: #A6536F;
+  --color-text: #292329;
+  --color-muted: #777078;
+  --color-border: #EEE7E9;
+  --color-gold: #C5A880;
+  --color-dark: #1F191F;
+  
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --shadow-subtle: 0 4px 20px -2px rgba(41, 35, 41, 0.05);
+  --shadow-hover: 0 14px 34px -6px rgba(41, 35, 41, 0.12);
+  --shadow-modal: 0 25px 50px -12px rgba(25, 20, 25, 0.25);
+  --shadow-drawer: -10px 0 35px rgba(0, 0, 0, 0.16);
+
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Safe area padding for mobile sticky navigation */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(62px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #FDF9FA;
+}
+::-webkit-scrollbar-thumb {
+  background: #E8D3D8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rose);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Hide scrollbar for carousel while preserving smooth momentum scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ========================================================
+   HEADER & STICKY NAVIGATION
+   ======================================================== */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: rgba(255, 253, 249, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  width: 100%;
+}
+
+.sticky-header.scrolled {
+  box-shadow: 0 8px 24px -4px rgba(41, 35, 41, 0.08);
+}
+
+/* Mega Menu Dropdown with hover gap bridge */
+.mega-menu-wrapper {
+  position: static;
+}
+
+.mega-menu-wrapper:hover > .mega-menu-panel,
+.mega-menu-trigger:hover + .mega-menu-panel,
+.mega-menu-panel:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mega-menu-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 20px 40px -10px rgba(41, 35, 41, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.22s var(--ease-spring),
+              transform 0.22s var(--ease-spring),
+              visibility 0.22s;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Invisible bridge preventing cursor flicker between trigger & panel */
+.mega-menu-panel::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
+  background: transparent;
+}
+
+/* Search autocomplete dropdown */
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px -4px rgba(41, 35, 41, 0.12);
+  z-index: 60;
+  max-height: 480px;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: all 0.2s var(--ease-spring);
+}
+
+.search-dropdown.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ========================================================
+   CRITICAL PRODUCT HOVER SYSTEM (SECTION 6 & 7)
+   ======================================================== */
+.bloom-card {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 300ms var(--ease-spring),
+              box-shadow 300ms var(--ease-spring),
+              border-color 300ms var(--ease-spring);
+  will-change: transform, box-shadow;
+  transform: translateZ(0);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.bloom-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: #DFCAD1;
+}
+
+/* Horizontal Carousels Tracks Fix */
+[id$="-products-track"] {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.75rem;
+  width: 100%;
+}
+
+[id$="-products-track"] > .bloom-card {
+  flex: 0 0 260px !important;
+  min-width: 260px !important;
+  max-width: 280px !important;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 640px) {
+  [id$="-products-track"] {
+    gap: 0.75rem;
+  }
+  [id$="-products-track"] > .bloom-card {
+    flex: 0 0 190px !important;
+    min-width: 190px !important;
+    max-width: 210px !important;
+  }
+}
+
+/* Dual image container */
+.bloom-image-box {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #FBF8F9;
+  overflow: hidden;
+}
+
+.bloom-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bloom-img-primary {
+  transition: transform 500ms var(--ease-spring), opacity 300ms ease;
+}
+
+.bloom-img-secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 320ms var(--ease-spring), transform 500ms var(--ease-spring);
+}
+
+.bloom-card:hover .bloom-img-secondary {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.bloom-card:hover .bloom-img-primary {
+  transform: scale(1.03);
+}
+
+/* Wishlist heart button */
+.bloom-wishlist-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(238, 231, 233, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-muted);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 220ms ease, transform 220ms var(--ease-spring), color 180ms ease, background-color 180ms ease;
+}
+
+.bloom-card:hover .bloom-wishlist-toggle,
+.bloom-wishlist-toggle.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bloom-wishlist-toggle:hover {
+  background-color: #FFFFFF;
+  color: #D93856;
+}
+
+.bloom-wishlist-toggle.is-active {
+  color: #D93856;
+  fill: #D93856;
+}
+
+/* Quick Action Overlay (Slide-up on Desktop, Clean on Touch) */
+.bloom-quick-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.96) 80%, rgba(255, 255, 255, 0));
+  display: flex;
+  gap: 8px;
+  transform: translateY(105%);
+  opacity: 0;
+  transition: transform 260ms var(--ease-spring), opacity 260ms ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bloom-card:hover .bloom-quick-actions {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Small badges */
+.bloom-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bloom-badge-bestseller {
+  background-color: #292329;
+  color: #FFFDF9;
+}
+
+.bloom-badge-new {
+  background-color: var(--color-rose);
+  color: #FFFFFF;
+}
+
+.bloom-badge-deal {
+  background-color: #C0392B;
+  color: #FFFFFF;
+}
+
+.bloom-badge-value {
+  background-color: var(--color-gold);
+  color: #1F191F;
+}
+
+/* Swatches */
+.shade-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.18s ease;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.shade-dot:hover {
+  transform: scale(1.25);
+}
+
+.shade-dot.is-selected {
+  outline: 2px solid var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ========================================================
+   CAROUSEL CONTROLS
+   ======================================================== */
+.carousel-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(41, 35, 41, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.carousel-btn:hover {
+  background-color: var(--color-text);
+  color: #FFFFFF;
+  border-color: var(--color-text);
+  transform: scale(1.05);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========================================================
+   MODALS, DRAWERS & BACKDROPS
+   ======================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(28, 22, 28, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+.modal-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content-box {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: var(--shadow-modal);
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: scale(0.96) translateY(8px);
+  transition: transform 0.28s var(--ease-spring);
+  width: 92%;
+  max-width: 920px;
+  box-sizing: border-box;
+}
+
+.modal-backdrop.is-active .modal-content-box {
+  transform: scale(1) translateY(0);
+}
+
+/* Cart Drawer */
+.cart-drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background: #FFFFFF;
+  box-shadow: var(--shadow-drawer);
+  z-index: 110;
+  transform: translateX(100%);
+  transition: transform 0.35s var(--ease-spring);
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-drawer-panel.is-open {
+  transform: translateX(0);
+}
+
+/* Mobile Drawer Fix */
+#mobile-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 320px;
+  max-width: 85vw;
+  background: #FFFFFF;
+  z-index: 120;
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.16);
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+#mobile-drawer.is-open {
+  transform: translateX(0) !important;
+}
+
+/* Toast Notifications */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .toast-container {
+    bottom: 74px;
+    right: 16px;
+    left: 16px;
+  }
+}
+
+.toast-message {
+  pointer-events: auto;
+  background-color: #292329;
+  color: #FFFDF9;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: toastIn 0.25s var(--ease-spring);
+  max-width: 360px;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Hero Carousel */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Brand Grid Cards */
+.brand-card {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease, border-color 0.22s ease;
+  cursor: pointer;
+  height: 100%;
+}
+
+.brand-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px -4px rgba(41, 35, 41, 0.08);
+  border-color: var(--color-rose);
+}
+
+/* Image Zoom Lens in Product Detail */
+.zoom-container {
+  overflow: hidden;
+  position: relative;
+  cursor: crosshair;
+}
+
+.zoom-container img {
+  transition: transform 0.15s ease-out;
+  transform-origin: center center;
+}
+
+@media (hover: hover) {
+  .zoom-container:hover img {
+    transform: scale(1.6);
+  }
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.animate-pulse-glow {
+  animation: pulseGlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Media query adjustments for touch devices */
+@media (hover: none), (max-width: 768px) {
+  .bloom-quick-actions {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    position: static;
+    background: #FFFFFF;
+    padding: 6px 10px 10px;
+  }
+  .bloom-wishlist-toggle {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .bloom-card:hover {
+    transform: none;
+    box-shadow: 0 2px 10px rgba(41, 35, 41, 0.05);
+  }
+  .modal-content-box {
+    width: 95%;
+    margin: 10px;
+  }
+}
+
+/* Large displays and Smart TVs (>= 1920px) */
+@media (min-width: 1920px) {
+  .max-w-7xl {
+    max-width: 1440px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bloom-card:hover {
+    transform: none !important;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body class="bg-bloom-bg text-bloom-text font-sans antialiased selection:bg-bloom-blush selection:text-bloom-text min-h-screen flex flex-col">
 
@@ -171,12 +847,12 @@
         <ul class="flex items-center gap-1 xl:gap-3 py-2">
           
           <!-- 1. Makeup Mega Menu -->
-          <li class="mega-menu-wrapper">
+          <li class="mega-menu-wrapper static group">
             <button type="button" class="mega-menu-trigger px-3 py-2 rounded hover:text-bloom-deepRose transition-colors flex items-center gap-1" data-action="filter-category" data-category="Makeup">
               Makeup
               <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
             </button>
-            <div class="mega-menu-panel">
+            <div class="mega-menu-panel absolute top-full left-0 w-full bg-white border-t border-b border-bloom-border shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-200 z-50 pointer-events-none">
               <div class="max-w-7xl mx-auto p-8 grid grid-cols-5 gap-8">
                 <div>
                   <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Lips</h4>
@@ -230,12 +906,12 @@
           </li>
 
           <!-- 2. Skincare Mega Menu -->
-          <li class="mega-menu-wrapper">
+          <li class="mega-menu-wrapper static group">
             <button type="button" class="mega-menu-trigger px-3 py-2 rounded hover:text-bloom-deepRose transition-colors flex items-center gap-1" data-action="filter-category" data-category="Skincare">
               Skincare
               <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
             </button>
-            <div class="mega-menu-panel">
+            <div class="mega-menu-panel absolute top-full left-0 w-full bg-white border-t border-b border-bloom-border shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-200 z-50 pointer-events-none">
               <div class="max-w-7xl mx-auto p-8 grid grid-cols-5 gap-8">
                 <div>
                   <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Cleansers & Toners</h4>
@@ -285,12 +961,12 @@
           </li>
 
           <!-- 3. Haircare Mega Menu -->
-          <li class="mega-menu-wrapper">
+          <li class="mega-menu-wrapper static group">
             <button type="button" class="mega-menu-trigger px-3 py-2 rounded hover:text-bloom-deepRose transition-colors flex items-center gap-1" data-action="filter-category" data-category="Haircare">
               Haircare
               <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
             </button>
-            <div class="mega-menu-panel">
+            <div class="mega-menu-panel absolute top-full left-0 w-full bg-white border-t border-b border-bloom-border shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-200 z-50 pointer-events-none">
               <div class="max-w-7xl mx-auto p-8 grid grid-cols-4 gap-8">
                 <div>
                   <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Treatments & Repair</h4>
@@ -1303,9 +1979,9 @@
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Scripts -->
-  <script type="module" src="./src/js/data.js"></script>
-  <script type="module" src="./src/js/state.js"></script>
-  <script type="module" src="./src/js/components.js"></script>
-  <script type="module" src="./src/js/app.js"></script>
+  <script type="module" src="./js/data.js"></script>
+  <script type="module" src="./js/state.js"></script>
+  <script type="module" src="./js/components.js"></script>
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>
