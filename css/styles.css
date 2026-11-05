@@ -176,20 +176,6 @@ body {
   -webkit-backdrop-filter: none !important;
 }
 
-/* Desktop Hover Interaction (Zero-latency instant preview on hover-capable devices) */
-@media (hover: hover) and (pointer: fine) {
-  #account-dropdown-wrapper:hover .account-dropdown-panel {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-  }
-  #account-dropdown-wrapper:hover #account-dropdown-chevron,
-  #account-dropdown-wrapper:hover svg.transition-transform {
-    transform: rotate(180deg) !important;
-  }
-}
-
 .account-dropdown-panel.is-open {
   opacity: 1 !important;
   visibility: visible !important;
