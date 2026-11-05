@@ -152,7 +152,7 @@ body {
   position: -webkit-sticky !important;
   position: sticky !important;
   top: 0 !important;
-  z-index: 80 !important;
+  z-index: 200 !important;
   background-color: rgba(255, 253, 249, 0.98) !important;
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
@@ -709,16 +709,18 @@ body {
 .brand-card {
   background: #FFFFFF;
   border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 20px 16px;
+  border-radius: 12px;
+  padding: 26px 20px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
-  transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease, border-color 0.22s ease;
-  cursor: pointer;
+  min-height: 210px;
   height: 100%;
+  box-sizing: border-box;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
 }
 
 .brand-card:hover {
@@ -820,13 +822,15 @@ body {
   font-weight: 500 !important;
   letter-spacing: 0.03em !important;
   color: #000000 !important;
-  background-color: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  padding: 4px 10px !important;
-  border-radius: 6px !important;
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  background: none !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
   line-height: 1.4 !important;
   white-space: nowrap !important;
 }
@@ -836,9 +840,13 @@ body {
     bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
     right: 16px !important;
     font-size: 10px !important;
-    padding: 3px 8px !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
   }
 }
+@media (max-width: 1023px) { .mega-menu-panel { display: none !important; } }
 </style>
   <link rel="stylesheet" href="./css/styles.css" />
   <!-- Preload Critical Hero Slide 1 Image -->
@@ -965,8 +973,8 @@ body {
       </div>
 
       <!-- Navigation Bar (Desktop Mega Menus) -->
-      <nav class="hidden lg:flex items-center justify-center border-t border-bloom-border text-xs font-semibold tracking-wide text-bloom-text relative">
-        <ul class="flex items-center gap-1 xl:gap-3 py-2">
+      <nav id="main-navigation" class="flex items-center justify-start lg:justify-center border-t border-bloom-border text-xs font-semibold tracking-wide text-bloom-text relative overflow-x-auto no-scrollbar px-3 lg:px-8">
+        <ul class="flex items-center gap-1 xl:gap-3 py-1.5 lg:py-2 flex-nowrap shrink-0 whitespace-nowrap">
           
           <!-- 1. Makeup Mega Menu -->
           <li class="mega-menu-wrapper static group">
@@ -1009,7 +1017,7 @@ body {
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Maybelline New York">Maybelline New York</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Praush Beauty">Praush Beauty</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Huda Beauty">Huda Beauty</a></li>
-                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Prime Matte">Prime Matte</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Maybelline New York">Maybelline New York</a></li>
                   </ul>
                 </div>
                 <!-- Spotlight Card -->
@@ -1062,7 +1070,7 @@ body {
                 <div>
                   <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Skincare Brands</h4>
                   <ul class="space-y-2 text-xs text-bloom-muted">
-                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Bloom Beauty">Bloom Beauty</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="CeraVe">CeraVe</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="CeraVe">CeraVe</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Cetaphil">Cetaphil</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Minimalist">Minimalist</a></li>
@@ -1592,24 +1600,15 @@ body {
       </p>
 
       <!-- Category Tabs for Brands -->
-      <div class="flex items-center justify-center gap-2 mt-6 overflow-x-auto py-1">
+      <div id="brand-category-tabs" class="flex items-center justify-start sm:justify-center gap-2 mt-6 overflow-x-auto no-scrollbar py-1">
         <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-[#292329] text-white border border-[#292329] transition-all" data-category="All">
-          All Brands (24)
-        </button>
-        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-[#292329] border border-bloom-border hover:border-bloom-rose transition-all" data-category="Makeup">
-          Makeup
-        </button>
-        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-[#292329] border border-bloom-border hover:border-bloom-rose transition-all" data-category="Skincare">
-          Skincare
-        </button>
-        <button type="button" class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold bg-white text-[#292329] border border-bloom-border hover:border-bloom-rose transition-all" data-category="Haircare">
-          Haircare
+          All Brands
         </button>
       </div>
     </div>
 
-    <!-- Brands Grid -->
-    <div id="brands-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
+    <!-- Brands Grid: 4 columns x 3 rows (12 Brands) -->
+    <div id="brands-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Rendered via JS -->
     </div>
   </section>
@@ -2232,10 +2231,10 @@ body {
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Scripts -->
-  <script type="module" src="./js/data.js?v=3.0.0"></script>
+  <script type="module" src="./js/data.js?v=3.5.0"></script>
   <script type="module" src="./js/state.js?v=3.0.0"></script>
-  <script type="module" src="./js/components.js?v=3.0.0"></script>
-  <script type="module" src="./js/app.js?v=3.0.0"></script>
+  <script type="module" src="./js/components.js?v=3.5.0"></script>
+  <script type="module" src="./js/app.js?v=3.5.0"></script>
 
   <!-- Global Fixed Watermark: Made by Zynova -->
   <div id="zynova-watermark" class="zynova-global-watermark" aria-hidden="true">Made by Zynova</div>

@@ -17,13 +17,6 @@ export const POPULAR_BRANDS: Brand[] = [
     "desc": "Trendsetting global cosmetics"
   },
   {
-    "id": "bloom-beauty",
-    "name": "Bloom Beauty",
-    "category": "Skincare",
-    "tag": "CLEAN CLINICAL",
-    "desc": "Dermatologically tested biocompatible skincare"
-  },
-  {
     "id": "bath-body-works",
     "name": "Bath & Body Works",
     "category": "Bath & Body",
@@ -73,25 +66,11 @@ export const POPULAR_BRANDS: Brand[] = [
     "desc": "Artisanal long-wearing luxury extrait fragrances"
   },
   {
-    "id": "titan-skinn",
-    "name": "SKINN by Titan",
-    "category": "Fragrance",
-    "tag": "FINE ART",
-    "desc": "Crafted in France, celebrated across India"
-  },
-  {
     "id": "nail-republic",
     "name": "Nail Republic",
     "category": "Nail Care",
     "tag": "GEL SYSTEM",
     "desc": "Professional cat-eye and UV salon finishes"
-  },
-  {
-    "id": "prime-matte",
-    "name": "Prime Matte",
-    "category": "Makeup",
-    "tag": "ALL DAY MATTE",
-    "desc": "Featherlight full-coverage matte lipsticks"
   },
   {
     "id": "maheorthe",
@@ -106,13 +85,6 @@ export const POPULAR_BRANDS: Brand[] = [
     "category": "Nail Care",
     "tag": "HIGH SHINE",
     "desc": "Quick-drying chip-resistant mini lacquers"
-  },
-  {
-    "id": "american-girl",
-    "name": "Bath & Body Works x American Girl",
-    "category": "Bath & Body",
-    "tag": "COLLABORATION",
-    "desc": "Vibrant vitamin-infused body splashes"
   }
 ];
 

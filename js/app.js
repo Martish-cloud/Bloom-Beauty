@@ -328,6 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // 6. Popular Brands (Section 10)
+      this.renderBrandTabs('All');
       this.renderBrandShowcase('All');
 
       // 7. Editorial Collections (Section 11)
@@ -337,14 +338,58 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     },
 
-    // --- Brand Showcase with Tabs ---
+    // --- Brand Showcase with Dynamic Tabs & Counts ---
+    renderBrandTabs(activeCategory = 'All') {
+      const tabsContainer = document.getElementById('brand-category-tabs');
+      if (!tabsContainer) return;
+
+      const brandList = data.brands || [];
+      const totalCount = brandList.length;
+
+      const categories = [
+        { label: 'All Brands', category: 'All', count: totalCount },
+        { label: 'Makeup', category: 'Makeup', count: brandList.filter(b => b.category === 'Makeup').length },
+        { label: 'Skincare', category: 'Skincare', count: brandList.filter(b => b.category === 'Skincare').length },
+        { label: 'Haircare', category: 'Haircare', count: brandList.filter(b => b.category === 'Haircare').length },
+        { label: 'Fragrance', category: 'Fragrance', count: brandList.filter(b => b.category === 'Fragrance').length },
+        { label: 'Bath & Body', category: 'Bath & Body', count: brandList.filter(b => b.category === 'Bath & Body').length },
+        { label: 'Nail Care', category: 'Nail Care', count: brandList.filter(b => b.category === 'Nail Care').length }
+      ];
+
+      tabsContainer.innerHTML = categories.map(cat => {
+        const isActive = cat.category === activeCategory;
+        const activeClasses = 'bg-[#292329] text-white border-[#292329] shadow-sm';
+        const inactiveClasses = 'bg-white text-[#292329] border-bloom-border hover:border-bloom-rose hover:text-bloom-deepRose';
+        return `
+          <button type="button" 
+                  class="brand-tab-btn px-4 py-2 rounded-full text-xs font-semibold border transition-all whitespace-nowrap shrink-0 ${isActive ? activeClasses : inactiveClasses}"
+                  data-category="${cat.category}">
+            ${cat.label} (${cat.count})
+          </button>
+        `;
+      }).join('');
+    },
+
     renderBrandShowcase(category = 'All') {
       const container = document.getElementById('brands-grid');
       if (!container) return;
 
+      const brandList = data.brands || [];
       const filtered = category === 'All' 
-        ? data.brands 
-        : data.brands.filter(b => b.category === category);
+        ? brandList 
+        : brandList.filter(b => b.category === category);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="col-span-full py-12 text-center">
+            <p class="text-sm text-bloom-muted font-medium">No brands currently listed under ${category}.</p>
+            <button type="button" class="mt-3 text-xs font-bold text-bloom-deepRose hover:underline" onclick="app.renderBrandTabs('All'); app.renderBrandShowcase('All');">
+              View All Brands (${brandList.length})
+            </button>
+          </div>
+        `;
+        return;
+      }
 
       container.innerHTML = filtered.map(b => comp.renderBrandCard(b)).join('');
     },
@@ -1389,17 +1434,12 @@ document.addEventListener('DOMContentLoaded', () => {
         this.renderCatalogResults();
       });
 
-      // Brand Filter Tabs in Section 10
-      document.querySelectorAll('.brand-tab-btn').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.brand-tab-btn').forEach(t => {
-            t.classList.remove('bg-[#292329]', 'text-white');
-            t.classList.add('bg-white', 'text-[#292329]');
-          });
-          tab.classList.add('bg-[#292329]', 'text-white');
-          tab.classList.remove('bg-white', 'text-[#292329]');
-          this.renderBrandShowcase(tab.dataset.category);
-        });
+      // Brand Filter Tabs in Section 10 (Event delegation)
+      document.getElementById('brand-category-tabs')?.addEventListener('click', (e) => {
+        const tab = e.target.closest('.brand-tab-btn');
+        if (!tab) return;
+        this.renderBrandTabs(tab.dataset.category);
+        this.renderBrandShowcase(tab.dataset.category);
       });
 
       // Mobile Drawer Toggle

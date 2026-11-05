@@ -59,7 +59,7 @@ window.BloomData = {
       itemCount: "240+ Products",
       image: "Docs/Lipsticks/Luxury Red Lipstick Mood Board.png",
       subcategories: ["Lipsticks & Glosses", "Foundations & Concealers", "Eyeshadow & Mascara", "Blush & Highlighters", "Primers & Setting Sprays"],
-      popularBrands: ["Maybelline New York", "Praush Beauty", "Prime Matte", "L'Oréal Paris", "Praush Beauty", "Huda Beauty"]
+      popularBrands: ["Maybelline New York", "Praush Beauty", "L'Oréal Paris", "Praush Beauty", "Huda Beauty"]
     },
     {
       id: "skincare",
@@ -68,7 +68,7 @@ window.BloomData = {
       itemCount: "190+ Products",
       image: "Docs/Skincare/Radiant Serum Skincare Glow.png",
       subcategories: ["Cleansers & Toners", "Serums & Essences", "Moisturizers & Creams", "Sunscreen SPF 50+", "Face Masks & Peels"],
-      popularBrands: ["Bloom Beauty", "Bloom Beauty", "CeraVe", "Cetaphil", "Minimalist"]
+      popularBrands: ["CeraVe", "Cetaphil", "CeraVe", "Cetaphil", "Minimalist"]
     },
     {
       id: "haircare",
@@ -86,7 +86,7 @@ window.BloomData = {
       itemCount: "95+ Products",
       image: "Docs/Bath & Body/Lavender Body & Earth Gift Set.png",
       subcategories: ["Body Butters & Lotions", "Shower Gels & Washes", "Body Scrubs & Exfoliators", "Hand & Foot Care", "Bath Salts & Soaks"],
-      popularBrands: ["Bath & Body Works", "Body & Earth", "American Girl", "Bloom Beauty"]
+      popularBrands: ["Bath & Body Works", "Body & Earth", "American Girl"]
     },
     {
       id: "fragrance",
@@ -95,7 +95,7 @@ window.BloomData = {
       itemCount: "80+ Products",
       image: "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png",
       subcategories: ["Eau de Parfum", "Eau de Toilette", "Body Mists & Sprays", "Perfume Oils", "Discovery Sets"],
-      popularBrands: ["Chanel Paris", "Lunair", "SKINN by Titan", "Arabian Aroma", "Bloom Beauty"]
+      popularBrands: ["Chanel Paris", "Lunair", "Arabian Aroma", "Bloom Beauty"]
     },
     {
       id: "nail-care",
@@ -117,10 +117,9 @@ window.BloomData = {
     }
   ],
 
-  brands: [
+    brands: [
     { id: "chanel-paris", name: "Chanel Paris", category: "Fragrance", tag: "HAUTE LUXE", desc: "Timeless Parisian elegance and iconic perfumery" },
     { id: "maybelline", name: "Maybelline New York", category: "Makeup", tag: "ICONIC", desc: "Trendsetting global cosmetics" },
-    { id: "bloom-beauty", name: "Bloom Beauty", category: "Skincare", tag: "CLEAN CLINICAL", desc: "Dermatologically tested biocompatible skincare" },
     { id: "bath-body-works", name: "Bath & Body Works", category: "Bath & Body", tag: "FAN FAVORITE", desc: "Signature fine mists and decadent body care" },
     { id: "kronzam", name: "Kronzam", category: "Haircare", tag: "BOTANICAL", desc: "Active rosemary & rice water hair wellness" },
     { id: "loreal-paris", name: "L'Oréal Paris", category: "Haircare", tag: "GLOBAL BEST", desc: "Advanced haircare formulas engineered for results" },
@@ -128,12 +127,9 @@ window.BloomData = {
     { id: "rose-lily", name: "Rose & Lily", category: "Nail Care", tag: "SALON CARE", desc: "Intensive nail strengthening and cuticle therapy" },
     { id: "body-earth", name: "Body & Earth", category: "Bath & Body", tag: "AROMATHERAPY", desc: "Calming French lavender spa collections" },
     { id: "lunair", name: "Lunair", category: "Fragrance", tag: "EXTRAIT DE LUXE", desc: "Artisanal long-wearing luxury extrait fragrances" },
-    { id: "titan-skinn", name: "SKINN by Titan", category: "Fragrance", tag: "FINE ART", desc: "Crafted in France, celebrated across India" },
     { id: "nail-republic", name: "Nail Republic", category: "Nail Care", tag: "GEL SYSTEM", desc: "Professional cat-eye and UV salon finishes" },
-    { id: "prime-matte", name: "Prime Matte", category: "Makeup", tag: "ALL DAY MATTE", desc: "Featherlight full-coverage matte lipsticks" },
     { id: "maheorthe", name: "Maheorthe", category: "Haircare", tag: "AYURVEDIC HERBAL", desc: "Pure coconut and red hibiscus hair remedies" },
-    { id: "miss-nails", name: "Miss Nails", category: "Nail Care", tag: "HIGH SHINE", desc: "Quick-drying chip-resistant mini lacquers" },
-    { id: "american-girl", name: "Bath & Body Works x American Girl", category: "Bath & Body", tag: "COLLABORATION", desc: "Vibrant vitamin-infused body splashes" }
+    { id: "miss-nails", name: "Miss Nails", category: "Nail Care", tag: "HIGH SHINE", desc: "Quick-drying chip-resistant mini lacquers" }
   ],
 
   products: [
@@ -962,7 +958,7 @@ window.BloomData = {
     {
       id: "prod-prime-matte-trio",
       name: "Prime Matte Velvet Long-Wear Lipstick Trio (Mauve, Crimson & Nude)",
-      brand: "Prime Matte",
+      brand: "MAC Cosmetics",
       category: "Makeup",
       subcategory: "Lipstick Set",
       price: 1299,
