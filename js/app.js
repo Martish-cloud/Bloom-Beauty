@@ -629,7 +629,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </button>
               <button type="button" 
                       class="bg-[#F8E9EC] hover:bg-[#F3D2DA] text-[#292329] px-4 py-3 rounded-xl text-sm font-semibold transition-colors"
-                      data-action="view-details" 
+                      onclick="BloomEcommerceUI.openProductPage('${product.id}')" 
                       data-id="${product.id}">
                 Full Details
               </button>
@@ -1208,7 +1208,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // View Full Details Modal
         else if (action === 'view-details') {
-          this.openProductDetail(id);
+          window.BloomEcommerceUI ? window.BloomEcommerceUI.openProductPage(id) : this.openProductDetail(id);
         }
 
         // Wishlist Toggle

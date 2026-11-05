@@ -851,6 +851,7 @@ body {
   <link rel="stylesheet" href="./css/styles.css" />
   <!-- Preload Critical Hero Slide 1 Image -->
   <link rel="preload" as="image" href="Header Images/one.png" type="image/png" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body class="bg-bloom-bg text-bloom-text font-sans antialiased selection:bg-bloom-blush selection:text-bloom-text min-h-screen flex flex-col">
 
@@ -944,7 +945,7 @@ body {
         <!-- Right User Actions (Account, Wishlist, Cart) -->
         <div class="flex items-center gap-2 sm:gap-4">
           <!-- Account Button -->
-          <button type="button" class="hidden sm:flex items-center gap-2 p-2 rounded-lg hover:bg-bloom-soft text-bloom-text transition-colors" data-action="track-order" title="Account & Orders">
+          <button type="button" class="hidden sm:flex items-center gap-2 p-2 rounded-lg hover:bg-bloom-soft text-bloom-text transition-colors open-account-btn" onclick="window.BloomEcommerceUI.openAccount('profile')" title="My Account & Orders">
             <svg class="w-5 h-5 text-bloom-text" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
             </svg>
@@ -2235,6 +2236,8 @@ body {
   <script type="module" src="./js/state.js?v=3.0.0"></script>
   <script type="module" src="./js/components.js?v=3.5.0"></script>
   <script type="module" src="./js/app.js?v=3.5.0"></script>
+  <script type="module" src="./js/ecommerce-store.js?v=3.5.0"></script>
+  <script type="module" src="./js/ecommerce-ui.js?v=3.5.0"></script>
 
   <!-- Global Fixed Watermark: Made by Zynova -->
   <div id="zynova-watermark" class="zynova-global-watermark" aria-hidden="true">Made by Zynova</div>

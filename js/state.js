@@ -116,6 +116,11 @@ class BloomStore {
 
   getDiscount() {
     const subtotal = this.getSubtotal();
+    if (!this.promoCode || subtotal === 0) return 0;
+    if (window.bloomCommerce) {
+      const res = window.bloomCommerce.validateCoupon(this.promoCode, subtotal);
+      if (res.valid) return res.discount;
+    }
     return Math.round((subtotal * this.promoDiscountPercent) / 100);
   }
 
@@ -131,20 +136,29 @@ class BloomStore {
 
   applyPromoCode(code) {
     const cleanCode = (code || '').trim().toUpperCase();
-    if (cleanCode === 'GLOW20') {
-      this.promoCode = 'GLOW20';
+    if (!cleanCode) return { success: false, message: 'Please enter a coupon code.' };
+
+    if (window.bloomCommerce) {
+      const res = window.bloomCommerce.validateCoupon(cleanCode, this.getSubtotal());
+      if (res.valid) {
+        this.promoCode = res.coupon.code;
+        this.promoDiscountPercent = res.coupon.discountPercent || 0;
+        localStorage.setItem('bloom_promo', res.coupon.code);
+        this.notify();
+        return { success: true, message: res.message };
+      } else {
+        return { success: false, message: res.message };
+      }
+    }
+
+    if (cleanCode === 'BLOOM20') {
+      this.promoCode = 'BLOOM20';
       this.promoDiscountPercent = 20;
-      localStorage.setItem('bloom_promo', 'GLOW20');
+      localStorage.setItem('bloom_promo', 'BLOOM20');
       this.notify();
       return { success: true, message: '20% OFF applied successfully!' };
-    } else if (cleanCode === 'BLOOM10') {
-      this.promoCode = 'BLOOM10';
-      this.promoDiscountPercent = 10;
-      localStorage.setItem('bloom_promo', 'BLOOM10');
-      this.notify();
-      return { success: true, message: '10% OFF applied successfully!' };
     }
-    return { success: false, message: 'Invalid code. Try "BLOOM10" or "GLOW20"' };
+    return { success: false, message: 'Invalid code. Try "BLOOM20" or "BLOOM30"' };
   }
 
   removePromoCode() {

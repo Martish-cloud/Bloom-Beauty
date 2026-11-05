@@ -65,7 +65,7 @@ window.BloomComponents = {
     return `
       <div class="bloom-card group" data-product-id="${product.id}">
         <!-- Image Box -->
-        <div class="bloom-image-box">
+        <div class="bloom-image-box cursor-pointer" data-action="view-details" data-id="${product.id}">
           <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary object-contain p-2" loading="lazy" />
           <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary object-cover" loading="lazy" />
 
@@ -75,7 +75,7 @@ window.BloomComponents = {
           <!-- Wishlist Heart Button -->
           <button type="button" 
                   class="bloom-wishlist-toggle ${isSaved ? 'is-active' : ''}" 
-                  data-action="wishlist" 
+                  data-action="wishlist" onclick="event.stopPropagation();" 
                   data-id="${product.id}"
                   aria-label="Save to Wishlist"
                   title="${isSaved ? 'Remove from Wishlist' : 'Add to Wishlist'}">
@@ -88,7 +88,7 @@ window.BloomComponents = {
           <div class="bloom-quick-actions">
             <button type="button" 
                     class="flex-1 bg-[#292329] hover:bg-[#A6536F] text-[#FFFDF9] py-2 px-3 rounded-lg text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-1.5 shadow-sm"
-                    data-action="quick-add" 
+                    data-action="quick-add" onclick="event.stopPropagation();" 
                     data-id="${product.id}">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
@@ -97,7 +97,7 @@ window.BloomComponents = {
             </button>
             <button type="button" 
                     class="bg-white hover:bg-[#F8E9EC] text-[#292329] p-2 rounded-lg border border-[#EEE7E9] text-xs font-medium transition-colors"
-                    data-action="quick-view" 
+                    data-action="quick-view" onclick="event.stopPropagation();" 
                     data-id="${product.id}"
                     aria-label="Quick View"
                     title="Quick View">
