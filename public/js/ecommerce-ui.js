@@ -147,62 +147,177 @@ const BloomEcommerceUI = {
 
     this.updateAccountDropdownUI();
 
-    // Click / Touch toggle
+    let closeTimer = null;
+    let isTouch = false;
+
+    // Detect touch interactions
+    window.addEventListener('touchstart', () => { isTouch = true; }, { passive: true, once: true });
+
+    // Open dropdown helper
+    const openMenu = () => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      this.updateAccountDropdownUI();
+      menu.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+    };
+
+    // Close dropdown helper with optional delay
+    const closeMenu = (immediate = false) => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      if (immediate) {
+        menu.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        // Intentional 220ms hover tolerance to prevent accidental closing when cursor transits
+        closeTimer = setTimeout(() => {
+          menu.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+          closeTimer = null;
+        }, 220);
+      }
+    };
+
+    // --- 1. DESKTOP HOVER: ONE CONTINUOUS HOVER INTERACTION AREA ---
+    // Moving pointer into wrapper (button OR menu panel) opens immediately and cancels close timer
+    wrapper.addEventListener('mouseenter', () => {
+      if (isTouch) return;
+      openMenu();
+    });
+
+    // Moving pointer out of the entire wrapper (both button and menu panel) closes automatically after tolerance delay
+    wrapper.addEventListener('mouseleave', () => {
+      if (isTouch) return;
+      closeMenu(false);
+    });
+
+    // Also support pointerenter and pointerleave for high-precision pointer devices
+    wrapper.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'mouse') {
+        openMenu();
+      }
+    });
+
+    wrapper.addEventListener('pointerleave', (e) => {
+      if (e.pointerType === 'mouse') {
+        closeMenu(false);
+      }
+    });
+
+    // --- 2. CLICK & TAP BEHAVIOUR ---
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      e.stopPropagation();
-      const isOpen = menu.classList.contains('is-open');
-      if (isOpen) {
-        this.closeAccountDropdown();
+      // On touch devices or if hover isn't supported, tap toggles open/close
+      const isMobileTouch = isTouch || window.matchMedia('(hover: none)').matches;
+      if (isMobileTouch) {
+        e.stopPropagation();
+        if (menu.classList.contains('is-open')) {
+          closeMenu(true);
+        } else {
+          openMenu();
+        }
       } else {
-        this.openAccountDropdown();
+        // Desktop: if already open, clicking toggles or re-opens
+        if (menu.classList.contains('is-open')) {
+          closeMenu(true);
+        } else {
+          openMenu();
+        }
       }
     });
 
-    // Close on click outside
+    // --- 3. CLOSE ON CLICK OUTSIDE ---
     document.addEventListener('click', (e) => {
       if (!wrapper.contains(e.target)) {
-        this.closeAccountDropdown();
+        closeMenu(true);
       }
     });
 
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
+    // --- 4. KEYBOARD ACCESSIBILITY ---
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        openMenu();
+        const firstItem = menu.querySelector('.account-menu-item');
+        firstItem?.focus();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeMenu(true);
+      }
+    });
+
+    wrapper.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        this.closeAccountDropdown();
+        e.preventDefault();
+        closeMenu(true);
+        btn.focus();
       }
     });
 
-    // Menu item clicks
-    menu.querySelectorAll('.account-menu-item').forEach(item => {
-      item.addEventListener('click', (e) => {
-        const tab = item.dataset.tab;
-        if (tab) {
+    // Arrow navigation within menu items
+    const menuItems = Array.from(menu.querySelectorAll('.account-menu-item'));
+    menuItems.forEach((item, index) => {
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown') {
           e.preventDefault();
-          this.closeAccountDropdown();
-          this.openAccount(tab);
-        } else if (item.id === 'account-dropdown-logout-btn') {
-          this.closeAccountDropdown();
+          const next = menuItems[(index + 1) % menuItems.length];
+          next?.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = menuItems[(index - 1 + menuItems.length) % menuItems.length];
+          prev?.focus();
         }
       });
     });
+
+    // --- 5. MENU ITEM SELECTION & NAVIGATION ---
+    menuItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        const tab = item.dataset.tab;
+        // Close menu immediately on selection
+        closeMenu(true);
+        if (tab) {
+          e.preventDefault();
+          this.openAccount(tab);
+        } else if (item.id === 'account-dropdown-logout-btn') {
+          // Logout handled by onclick
+        }
+      });
+    });
+
+    // Store references on instance
+    this._openAccountMenu = openMenu;
+    this._closeAccountMenu = closeMenu;
   },
 
   openAccountDropdown() {
-    const btn = document.getElementById('account-dropdown-btn');
-    const menu = document.getElementById('account-dropdown-menu');
-    if (!menu) return;
-    this.updateAccountDropdownUI();
-    menu.classList.add('is-open');
-    btn?.setAttribute('aria-expanded', 'true');
+    if (this._openAccountMenu) {
+      this._openAccountMenu();
+    } else {
+      const btn = document.getElementById('account-dropdown-btn');
+      const menu = document.getElementById('account-dropdown-menu');
+      if (!menu) return;
+      this.updateAccountDropdownUI();
+      menu.classList.add('is-open');
+      btn?.setAttribute('aria-expanded', 'true');
+    }
   },
 
   closeAccountDropdown() {
-    const btn = document.getElementById('account-dropdown-btn');
-    const menu = document.getElementById('account-dropdown-menu');
-    if (!menu) return;
-    menu.classList.remove('is-open');
-    btn?.setAttribute('aria-expanded', 'false');
+    if (this._closeAccountMenu) {
+      this._closeAccountMenu(true);
+    } else {
+      const btn = document.getElementById('account-dropdown-btn');
+      const menu = document.getElementById('account-dropdown-menu');
+      if (!menu) return;
+      menu.classList.remove('is-open');
+      btn?.setAttribute('aria-expanded', 'false');
+    }
   },
 
   updateAccountDropdownUI() {

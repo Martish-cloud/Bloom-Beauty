@@ -885,7 +885,7 @@ body {
     </div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Main Row -->
-      <div class="flex items-center justify-between h-20 gap-4">
+      <div class="header-main-row flex items-center justify-between h-20 gap-4 relative z-30">
         
         <!-- Mobile Menu Trigger -->
         <button type="button" id="mobile-menu-trigger" class="lg:hidden p-2 text-bloom-text hover:text-bloom-rose" aria-label="Open Mobile Menu">
@@ -943,7 +943,7 @@ body {
         <!-- Right User Actions (Account, Wishlist, Cart) -->
         <div class="flex items-center gap-2 sm:gap-4">
           <!-- COMPLETE CUSTOMER ACCOUNT DROPDOWN (Hover + Click/Touch) -->
-          <div class="relative group/account" id="account-dropdown-wrapper">
+          <div class="relative group/account" id="account-dropdown-wrapper" style="position: relative; z-index: 50;">
             <!-- Trigger Button -->
             <button type="button" 
                     id="account-dropdown-btn"
@@ -975,7 +975,7 @@ body {
                  aria-orientation="vertical">
               
               <!-- Top Header Banner of Dropdown -->
-              <div class="bg-gradient-to-r from-bloom-soft via-[#FAF3F5] to-white p-4 border-b border-bloom-border">
+              <div class="bg-[#FAF3F5] p-4 border-b border-bloom-border" style="background-color: #FAF3F5 !important;">
                 <div class="flex items-center justify-between mb-1.5">
                   <span class="text-[10px] font-bold tracking-wider text-bloom-rose uppercase">Your Account</span>
                   <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full" id="account-dropdown-badge">VIP Member</span>
@@ -992,7 +992,7 @@ body {
               </div>
 
               <!-- 8 Menu Items -->
-              <div class="py-2 px-2 divide-y divide-bloom-border/40">
+              <div class="py-2 px-2 bg-white divide-y divide-bloom-border/40" style="background-color: #FFFFFF !important;">
                 
                 <!-- Primary Account Actions -->
                 <div class="space-y-0.5 pb-2">
@@ -1173,7 +1173,7 @@ body {
       </div>
 
       <!-- Navigation Bar (Desktop Mega Menus) -->
-      <nav id="main-navigation" class="flex items-center justify-start lg:justify-center border-t border-bloom-border text-xs font-semibold tracking-wide text-bloom-text relative overflow-x-auto no-scrollbar px-3 lg:px-8">
+      <nav id="main-navigation" class="flex items-center justify-start lg:justify-center border-t border-bloom-border text-xs font-semibold tracking-wide text-bloom-text relative z-10 overflow-x-auto no-scrollbar px-3 lg:px-8">
         <ul class="flex items-center gap-1 xl:gap-3 py-1.5 lg:py-2 flex-nowrap shrink-0 whitespace-nowrap">
           
           <!-- 1. Makeup Mega Menu -->
@@ -2435,8 +2435,8 @@ body {
   <script type="module" src="./js/state.js?v=3.0.0"></script>
   <script type="module" src="./js/components.js?v=3.5.0"></script>
   <script type="module" src="./js/app.js?v=3.5.0"></script>
-  <script type="module" src="./js/ecommerce-store.js?v=3.6.0"></script>
-  <script type="module" src="./js/ecommerce-ui.js?v=3.6.0"></script>
+  <script type="module" src="./js/ecommerce-store.js?v=3.7.0"></script>
+  <script type="module" src="./js/ecommerce-ui.js?v=3.7.0"></script>
 
   <!-- Global Fixed Watermark: Made by Zynova -->
   <div id="zynova-watermark" class="zynova-global-watermark" aria-hidden="true">Made by Zynova</div>
