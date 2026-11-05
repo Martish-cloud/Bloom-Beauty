@@ -132,8 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Update indicators
         dots.forEach((d, i) => {
-          d.classList.toggle('bg-[#292329]', i === nextIdx);
-          d.classList.toggle('bg-gray-300', i !== nextIdx);
+          d.classList.toggle('bg-white', i === nextIdx);
+          d.classList.toggle('bg-white/40', i !== nextIdx);
           d.classList.toggle('w-7', i === nextIdx);
           d.classList.toggle('w-2.5', i !== nextIdx);
         });

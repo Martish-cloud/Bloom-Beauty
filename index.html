@@ -93,21 +93,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  line-height: 1.5;
-  width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -153,20 +145,24 @@ body {
 /* ========================================================
    HEADER & STICKY NAVIGATION
    ======================================================== */
+/* ========================================================
+   HEADER & STICKY NAVIGATION (COMPLETE HEADER STAYS STICKY)
+   ======================================================== */
 .sticky-header {
-  position: sticky;
-  top: 0;
-  z-index: 40;
-  background-color: rgba(255, 253, 249, 0.98);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  width: 100%;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 80 !important;
+  background-color: rgba(255, 253, 249, 0.98) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  box-shadow: 0 4px 20px -2px rgba(41, 35, 41, 0.08) !important;
+  width: 100% !important;
 }
 
 .sticky-header.scrolled {
-  box-shadow: 0 8px 24px -4px rgba(41, 35, 41, 0.08);
+  box-shadow: 0 10px 30px -4px rgba(41, 35, 41, 0.12) !important;
 }
 
 /* Mega Menu Dropdown with hover gap bridge */
@@ -606,11 +602,18 @@ body {
   }
 }
 
-/* Hero Carousel — Smooth Horizontal Leftward Sliding Transition with Subtle Depth */
+/* ========================================================
+   HERO CAROUSEL — FULL-WIDTH 16:9 EDGE-TO-EDGE LUXURY BANNER
+   (STRICTLY NO CARDS, NO BORDER RADIUS, NO CROPPING)
+   ======================================================== */
 #hero-carousel {
-  perspective: 1200px;
-  overflow: hidden;
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: 380px;
+  max-height: 760px;
+  overflow: hidden;
+  background-color: #1A151A;
 }
 
 .hero-slide {
@@ -619,66 +622,61 @@ body {
   width: 100%;
   height: 100%;
   opacity: 1; /* Strictly no fade-in/fade-out */
-  transform: translateX(100%) translateZ(-20px) scale(0.985);
-  transition: transform 700ms cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateX(100%);
+  transition: transform 650ms cubic-bezier(0.25, 1, 0.5, 1);
   pointer-events: none;
   visibility: hidden;
   will-change: transform;
 }
 
-/* Active Slide: Centered at full scale */
 .hero-slide.is-active {
-  transform: translateX(0) translateZ(0) scale(1);
+  transform: translateX(0);
   pointer-events: auto;
   visibility: visible;
   z-index: 2;
 }
 
-/* Slide Exiting / Parked to the Left */
 .hero-slide.slide-prev {
-  transform: translateX(-100%) translateZ(-20px) scale(0.985);
+  transform: translateX(-100%);
   pointer-events: none;
   visibility: hidden;
   z-index: 1;
 }
 
-/* Slide Queued / Parked to the Right */
 .hero-slide.slide-next {
-  transform: translateX(100%) translateZ(-20px) scale(0.985);
+  transform: translateX(100%);
   pointer-events: none;
   visibility: hidden;
   z-index: 1;
 }
 
-/* Full Model Visibility Containers */
-.hero-slide-content {
-  position: relative;
+/* Ambient 16:9 Background Extension (softly blurred copy to fill non-16:9 viewports gracefully) */
+.hero-slide-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  object-fit: cover;
+  filter: blur(32px);
+  transform: scale(1.15);
+  opacity: 0.40;
+  pointer-events: none;
 }
 
-.hero-model-container {
+/* Foreground 16:9 Image Layer — 100% UNTOUCHED, COMPLETE, UNMODIFIED & UNBOUNDED */
+.hero-slide-fg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-model-img {
-  max-height: 540px;
-  width: auto;
-  max-width: 100%;
   object-fit: contain !important;
-  object-position: center bottom;
-  border-radius: 16px;
-  box-shadow: 0 20px 40px -15px rgba(41, 35, 41, 0.2);
-}
-
-@media (max-width: 767px) {
-  .hero-model-img {
-    max-height: 280px;
-  }
+  object-position: center !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -806,7 +804,42 @@ body {
   }
 }
 
-  </style>
+  
+/* ========================================================
+   GLOBAL FIXED WATERMARK: MADE BY ZYNOVA
+   ======================================================== */
+.zynova-global-watermark {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 24px !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+  color: #000000 !important;
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  padding: 4px 10px !important;
+  border-radius: 6px !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  line-height: 1.4 !important;
+  white-space: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .zynova-global-watermark {
+    bottom: calc(68px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 16px !important;
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+}
+</style>
   <link rel="stylesheet" href="./css/styles.css" />
   <!-- Preload Critical Hero Slide 1 Image -->
   <link rel="preload" as="image" href="Header Images/one.png" type="image/png" />
@@ -1143,139 +1176,125 @@ body {
     </div>
   </header>
 
-    <!-- ========================================================
+      <!-- ========================================================
        3. HERO CAMPAIGN CAROUSEL (SECTION 4)
+       Full-Width 16:9 Edge-to-Edge Slideshow (Order: 1 -> 2 -> 3)
        ======================================================== -->
-  <section class="relative bg-[#FFFDF9] overflow-hidden" id="hero-carousel">
-    <div class="relative w-full h-[540px] sm:h-[580px] md:h-[620px] lg:h-[660px]">
+  <section class="relative bg-[#1A151A] overflow-hidden w-full" id="hero-carousel">
+    <div class="relative w-full h-full min-h-[380px] sm:min-h-[440px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px]">
       
-      <!-- Slide 1: Header Images/one.png (Velvet Lipstick Campaign) -->
-      <div class="hero-slide is-active" style="background: radial-gradient(circle at 75% 50%, rgba(179, 100, 67, 0.20) 0%, rgba(255, 253, 249, 0.98) 70%);">
-        <!-- Ambient blurred backdrop for seamless lighting -->
-        <img src="Header Images/one.png" aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-15 filter blur-3xl pointer-events-none" />
+      <!-- Slide 1: Header Images/1.png (Velvet Lipstick Campaign) -->
+      <div class="hero-slide is-active">
+        <!-- Ambient blurred backdrop -->
+        <img src="Header Images/1.png" aria-hidden="true" class="hero-slide-bg" />
+        <!-- Complete 16:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
+        <img src="Header Images/1.png" alt="Bloom Beauty Velvet Lipstick Campaign" class="hero-slide-fg" />
+        <!-- Subtle luxury gradient overlay for typography readability -->
+        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
 
-        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 items-center gap-6 sm:gap-8 z-10">
-          <!-- Left: Typography & CTAs -->
-          <div class="md:col-span-6 lg:col-span-7 flex flex-col justify-center py-6">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3.5 py-1 rounded-full mb-3.5 w-max">
+        <!-- Typography & CTAs (Left-aligned, zero obstruction of central visual) -->
+        <div class="relative z-20 max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex flex-col justify-end md:justify-center pb-14 md:pb-0 pointer-events-none">
+          <div class="max-w-xl pointer-events-auto py-4">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#E0AAB7] bg-black/40 backdrop-blur-md px-3.5 py-1 rounded-full mb-3 border border-white/15">
               New Launch Collection
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
-              The Art of <br/><span class="italic font-normal text-bloom-rose">Velvet Radiance</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.15] mb-3.5 drop-shadow-md">
+              The Art of <br/><span class="italic font-normal text-[#E0AAB7]">Velvet Radiance</span>
             </h2>
-            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6 max-w-lg">
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-6 max-w-lg drop-shadow-sm">
               Ultra-pigmented cushiony mattes infused with nourishing botanical oils for weightless, 12-hour comfortable all-day elegance.
             </p>
             <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
               <button type="button" 
-                      class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg"
+                      class="bg-white hover:bg-[#E0AAB7] text-[#292329] px-6 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg"
                       data-action="filter-category" 
                       data-category="Makeup">
                 Shop Lipsticks
               </button>
               <button type="button" 
-                      class="bg-white/90 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      class="bg-black/35 hover:bg-black/55 backdrop-blur-md text-white border border-white/30 px-6 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
                       data-action="view-details" 
                       data-id="prod-maybelline-ultimatte-crimson">
                 Discover Crimson Red
               </button>
             </div>
           </div>
-
-          <!-- Right: Full Model Display (Object-Contain: Zero Cropping of Head, Face, or Body) -->
-          <div class="md:col-span-6 lg:col-span-5 h-full flex items-center justify-center md:justify-end py-4 sm:py-6">
-            <div class="relative h-full max-h-[500px] sm:max-h-[540px] md:max-h-[580px] flex items-center justify-center">
-              <img src="Header Images/one.png" 
-                   alt="Bloom Beauty Velvet Lipstick Campaign Model" 
-                   class="hero-model-img" />
-            </div>
-          </div>
         </div>
       </div>
 
-      <!-- Slide 2: Header Images/three.png (Clinical Skincare Campaign) -->
-      <div class="hero-slide" style="background: radial-gradient(circle at 75% 50%, rgba(190, 190, 200, 0.22) 0%, rgba(255, 253, 249, 0.98) 70%);">
-        <!-- Ambient blurred backdrop for seamless lighting -->
-        <img src="Header Images/three.png" aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-15 filter blur-3xl pointer-events-none" />
+      <!-- Slide 2: Header Images/2.png (Clinical Skincare Campaign) -->
+      <div class="hero-slide">
+        <!-- Ambient blurred backdrop -->
+        <img src="Header Images/2.png" aria-hidden="true" class="hero-slide-bg" />
+        <!-- Complete 16:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
+        <img src="Header Images/2.png" alt="Bloom Beauty Clinical Skincare Campaign" class="hero-slide-fg" />
+        <!-- Subtle luxury gradient overlay for typography readability -->
+        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
 
-        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 items-center gap-6 sm:gap-8 z-10">
-          <!-- Left: Typography & CTAs -->
-          <div class="md:col-span-6 lg:col-span-7 flex flex-col justify-center py-6">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3.5 py-1 rounded-full mb-3.5 w-max">
+        <!-- Typography & CTAs (Left-aligned) -->
+        <div class="relative z-20 max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex flex-col justify-end md:justify-center pb-14 md:pb-0 pointer-events-none">
+          <div class="max-w-xl pointer-events-auto py-4">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#E0AAB7] bg-black/40 backdrop-blur-md px-3.5 py-1 rounded-full mb-3 border border-white/15">
               Clinical Formulations
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
-              Pure Actives, <br/><span class="italic font-normal text-bloom-rose">Luminous Skin</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.15] mb-3.5 drop-shadow-md">
+              Pure Actives, <br/><span class="italic font-normal text-[#E0AAB7]">Luminous Skin</span>
             </h2>
-            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6 max-w-lg">
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-6 max-w-lg drop-shadow-sm">
               Transformative barrier-repairing ceramides, high-potency niacinamide, and pure hyaluronic acid for radiant glass skin.
             </p>
             <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
               <button type="button" 
-                      class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md"
+                      class="bg-white hover:bg-[#E0AAB7] text-[#292329] px-6 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg"
                       data-action="filter-category" 
                       data-category="Skincare">
                 Explore Skincare
               </button>
               <button type="button" 
-                      class="bg-white/90 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      class="bg-black/35 hover:bg-black/55 backdrop-blur-md text-white border border-white/30 px-6 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
                       data-action="view-details" 
                       data-id="prod-bloom-radiance-glow-serum">
                 Discover Radiance Serum
               </button>
             </div>
           </div>
-
-          <!-- Right: Full Model Display (Object-Contain: Zero Cropping of Head, Face, or Body) -->
-          <div class="md:col-span-6 lg:col-span-5 h-full flex items-center justify-center md:justify-end py-4 sm:py-6">
-            <div class="relative h-full max-h-[500px] sm:max-h-[540px] md:max-h-[580px] flex items-center justify-center">
-              <img src="Header Images/three.png" 
-                   alt="Bloom Beauty Clinical Skincare Campaign Model" 
-                   class="hero-model-img" />
-            </div>
-          </div>
         </div>
       </div>
 
-      <!-- Slide 3: Header Images/two.png (Salon Haircare Campaign) -->
-      <div class="hero-slide" style="background: radial-gradient(circle at 75% 50%, rgba(50, 55, 55, 0.16) 0%, rgba(255, 253, 249, 0.98) 70%);">
-        <!-- Ambient blurred backdrop for seamless lighting -->
-        <img src="Header Images/two.png" aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-15 filter blur-3xl pointer-events-none" />
+      <!-- Slide 3: Header Images/3.png (Salon Haircare Campaign) -->
+      <div class="hero-slide">
+        <!-- Ambient blurred backdrop -->
+        <img src="Header Images/3.png" aria-hidden="true" class="hero-slide-bg" />
+        <!-- Complete 16:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
+        <img src="Header Images/3.png" alt="Bloom Beauty Salon Hair Care Campaign" class="hero-slide-fg" />
+        <!-- Subtle luxury gradient overlay for typography readability -->
+        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
 
-        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 items-center gap-6 sm:gap-8 z-10">
-          <!-- Left: Typography & CTAs -->
-          <div class="md:col-span-6 lg:col-span-7 flex flex-col justify-center py-6">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-gold bg-amber-50 px-3.5 py-1 rounded-full mb-3.5 w-max">
+        <!-- Typography & CTAs (Left-aligned) -->
+        <div class="relative z-20 max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex flex-col justify-end md:justify-center pb-14 md:pb-0 pointer-events-none">
+          <div class="max-w-xl pointer-events-auto py-4">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-[#E0AAB7] bg-black/40 backdrop-blur-md px-3.5 py-1 rounded-full mb-3 border border-white/15">
               Molecular Hair Bonding
             </span>
-            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
-              Salon Repair <br/><span class="italic font-normal text-bloom-rose">At Your Home</span>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white leading-[1.15] mb-3.5 drop-shadow-md">
+              Salon Repair <br/><span class="italic font-normal text-[#E0AAB7]">At Your Home</span>
             </h2>
-            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6 max-w-lg">
+            <p class="text-xs sm:text-sm text-white/90 leading-relaxed mb-6 max-w-lg drop-shadow-sm">
               Reverse years of heat and styling damage with active rosemary extracts, pure rice water sprays, and deep keratin nourishment.
             </p>
             <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
               <button type="button" 
-                      class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md"
+                      class="bg-white hover:bg-[#E0AAB7] text-[#292329] px-6 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg"
                       data-action="filter-category" 
                       data-category="Haircare">
                 Shop Hair Treatments
               </button>
               <button type="button" 
-                      class="bg-white/90 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      class="bg-black/35 hover:bg-black/55 backdrop-blur-md text-white border border-white/30 px-6 sm:px-7 py-3 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
                       data-action="view-details" 
                       data-id="prod-kronzam-rosemary-spray">
                 Discover Rosemary Spray
               </button>
-            </div>
-          </div>
-
-          <!-- Right: Full Model Display (Object-Contain: Zero Cropping of Head, Face, or Body) -->
-          <div class="md:col-span-6 lg:col-span-5 h-full flex items-center justify-center md:justify-end py-4 sm:py-6">
-            <div class="relative h-full max-h-[500px] sm:max-h-[540px] md:max-h-[580px] flex items-center justify-center">
-              <img src="Header Images/two.png" 
-                   alt="Bloom Beauty Salon Hair Repair Model" 
-                   class="hero-model-img" />
             </div>
           </div>
         </div>
@@ -1283,21 +1302,21 @@ body {
 
     </div>
 
-    <!-- Carousel Controls -->
-    <div class="absolute bottom-6 inset-x-0 z-20 max-w-7xl mx-auto px-6 flex items-center justify-between pointer-events-none">
+    <!-- Carousel Controls (Arrows and Indicators) -->
+    <div class="absolute bottom-5 inset-x-0 z-30 max-w-7xl mx-auto px-6 flex items-center justify-between pointer-events-none">
       <!-- Dots -->
       <div class="flex items-center gap-2 pointer-events-auto">
-        <button type="button" class="hero-dot w-7 h-2 rounded-full bg-[#292329] transition-all" aria-label="Slide 1"></button>
-        <button type="button" class="hero-dot w-2.5 h-2 rounded-full bg-gray-300 transition-all" aria-label="Slide 2"></button>
-        <button type="button" class="hero-dot w-2.5 h-2 rounded-full bg-gray-300 transition-all" aria-label="Slide 3"></button>
+        <button type="button" class="hero-dot w-7 h-2 rounded-full bg-white transition-all shadow-sm" aria-label="Slide 1"></button>
+        <button type="button" class="hero-dot w-2.5 h-2 rounded-full bg-white/40 transition-all" aria-label="Slide 2"></button>
+        <button type="button" class="hero-dot w-2.5 h-2 rounded-full bg-white/40 transition-all" aria-label="Slide 3"></button>
       </div>
 
       <!-- Arrow Buttons -->
       <div class="flex items-center gap-2 pointer-events-auto">
-        <button type="button" id="hero-prev" class="carousel-btn" aria-label="Previous Slide">
+        <button type="button" id="hero-prev" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all shadow-sm" aria-label="Previous Slide">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
         </button>
-        <button type="button" id="hero-next" class="carousel-btn" aria-label="Next Slide">
+        <button type="button" id="hero-next" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-md text-white border border-white/20 flex items-center justify-center transition-all shadow-sm" aria-label="Next Slide">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
         </button>
       </div>
@@ -2213,9 +2232,12 @@ body {
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Scripts -->
-  <script type="module" src="./js/data.js?v=2.5.0"></script>
-  <script type="module" src="./js/state.js?v=2.5.0"></script>
-  <script type="module" src="./js/components.js?v=2.5.0"></script>
-  <script type="module" src="./js/app.js?v=2.5.0"></script>
+  <script type="module" src="./js/data.js?v=3.0.0"></script>
+  <script type="module" src="./js/state.js?v=3.0.0"></script>
+  <script type="module" src="./js/components.js?v=3.0.0"></script>
+  <script type="module" src="./js/app.js?v=3.0.0"></script>
+
+  <!-- Global Fixed Watermark: Made by Zynova -->
+  <div id="zynova-watermark" class="zynova-global-watermark" aria-hidden="true">Made by Zynova</div>
 </body>
 </html>
