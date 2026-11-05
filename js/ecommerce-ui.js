@@ -150,6 +150,8 @@ const BloomEcommerceUI = {
     if (!wrapper || !btn || !menu) return;
 
     let isOpen = false;
+    let closeTimer = null;
+    let lastOpenTimestamp = 0;
     let lastToggleTimestamp = 0;
     let openScrollY = 0;
 
@@ -168,25 +170,47 @@ const BloomEcommerceUI = {
 
     // Helper: Open dropdown
     const openMenu = () => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
       isOpen = true;
       this._isAccountMenuOpen = true;
       lastToggleTimestamp = Date.now();
+      lastOpenTimestamp = Date.now();
       openScrollY = window.scrollY;
       this.updateAccountDropdownUI();
       setVisualState(true);
     };
 
-    // Helper: Close dropdown
-    const closeMenu = () => {
-      isOpen = false;
-      this._isAccountMenuOpen = false;
-      lastToggleTimestamp = Date.now();
-      setVisualState(false);
+    // Helper: Close dropdown (immediate or with natural tolerance delay)
+    const closeMenu = (immediate = false) => {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      if (immediate) {
+        isOpen = false;
+        this._isAccountMenuOpen = false;
+        lastToggleTimestamp = Date.now();
+        setVisualState(false);
+      } else {
+        closeTimer = setTimeout(() => {
+          isOpen = false;
+          this._isAccountMenuOpen = false;
+          lastToggleTimestamp = Date.now();
+          setVisualState(false);
+          closeTimer = null;
+        }, 220);
+      }
     };
 
     const toggleMenu = () => {
-      if (isOpen || menu.classList.contains('is-open')) {
-        closeMenu();
+      const now = Date.now();
+      // If it is open and was opened more than 300ms ago, toggle closed.
+      // If it was just opened by hover in the last 300ms, keep it open!
+      if ((isOpen || menu.classList.contains('is-open')) && (now - lastOpenTimestamp > 300)) {
+        closeMenu(true);
       } else {
         openMenu();
       }
@@ -194,48 +218,59 @@ const BloomEcommerceUI = {
 
     // Store references on instance
     this._openAccountMenu = openMenu;
-    this._closeAccountMenu = closeMenu;
+    this._closeAccountMenu = () => closeMenu(true);
     this._toggleAccountMenu = toggleMenu;
 
     // Ensure initial closed state on page load
-    closeMenu();
+    closeMenu(true);
 
-    // --- 1. PRIMARY INTERACTION: CLICK TO TOGGLE (Desktop, Mobile, Tablet) ---
+    // --- 1. DESKTOP HOVER: ONE CONTINUOUS HOVER INTERACTION AREA ---
+    // Moving pointer into wrapper (button OR menu panel) opens immediately and cancels any closing timer
+    wrapper.addEventListener('mouseenter', () => {
+      openMenu();
+    });
+
+    // Moving pointer completely outside wrapper closes after 220ms grace period
+    wrapper.addEventListener('mouseleave', () => {
+      closeMenu(false);
+    });
+
+    // --- 2. PRIMARY INTERACTION: CLICK TO TOGGLE (Desktop, Mobile, Tablet) ---
     btn.onclick = (e) => {
       this.toggleAccountDropdown(e);
     };
 
-    // --- 2. PREVENT CLICKS INSIDE THE DROPDOWN PANEL FROM CLOSING IT PREMATURELY ---
+    // --- 3. PREVENT CLICKS INSIDE THE DROPDOWN PANEL FROM CLOSING IT PREMATURELY ---
     menu.addEventListener('click', (e) => {
       e.stopPropagation();
     });
 
-    // --- 3. CLOSE ON CLICK/TAP OUTSIDE (Guarded against same-interaction clicks) ---
+    // --- 4. CLOSE ON CLICK/TAP OUTSIDE (Guarded against same-interaction clicks) ---
     const handleOutsideInteraction = (e) => {
       if (!isOpen && !menu.classList.contains('is-open')) return;
       // Prevent closing during the exact same interaction as opening
       if (Date.now() - lastToggleTimestamp < 220) return;
       // Ignore if clicked inside account wrapper
       if (e.target && e.target.closest && e.target.closest('#account-dropdown-wrapper')) return;
-      closeMenu();
+      closeMenu(true);
     };
 
     document.addEventListener('click', handleOutsideInteraction);
     document.addEventListener('touchend', handleOutsideInteraction, { passive: true });
 
-    // --- 4. CLOSE ON ESCAPE KEY ---
+    // --- 5. CLOSE ON ESCAPE KEY ---
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && (isOpen || menu.classList.contains('is-open'))) {
         e.preventDefault();
-        closeMenu();
+        closeMenu(true);
         btn.focus();
       }
     });
 
-    // --- 5. CLOSE ON MEANINGFUL PAGE SCROLL (> 60px) ---
+    // --- 6. CLOSE ON MEANINGFUL PAGE SCROLL (> 60px) ---
     window.addEventListener('scroll', () => {
       if ((isOpen || menu.classList.contains('is-open')) && Math.abs(window.scrollY - openScrollY) > 60) {
-        closeMenu();
+        closeMenu(true);
       }
     }, { passive: true });
 

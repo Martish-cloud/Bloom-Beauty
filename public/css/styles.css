@@ -142,7 +142,6 @@ body {
 }
 
 .account-dropdown-panel {
-  display: none !important;
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px);
@@ -156,7 +155,20 @@ body {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   transition: opacity 0.16s ease-out,
-              transform 0.16s ease-out;
+              transform 0.16s ease-out,
+              visibility 0.16s ease-out;
+}
+
+/* Seamless invisible hover bridge spanning physical gap between button and panel */
+.account-dropdown-panel::before {
+  content: "";
+  position: absolute;
+  top: -16px;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: transparent;
+  pointer-events: auto;
 }
 
 .account-dropdown-panel * {
@@ -164,8 +176,21 @@ body {
   -webkit-backdrop-filter: none !important;
 }
 
+/* Desktop Hover Interaction (Zero-latency instant preview on hover-capable devices) */
+@media (hover: hover) and (pointer: fine) {
+  #account-dropdown-wrapper:hover .account-dropdown-panel {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+  #account-dropdown-wrapper:hover #account-dropdown-chevron,
+  #account-dropdown-wrapper:hover svg.transition-transform {
+    transform: rotate(180deg) !important;
+  }
+}
+
 .account-dropdown-panel.is-open {
-  display: block !important;
   opacity: 1 !important;
   visibility: visible !important;
   transform: translateY(0) !important;
@@ -771,9 +796,52 @@ body {
   display: block;
 }
 
-@media (max-width: 1023px) {
-  .lipstick-video-wrapper {
-    max-height: 60vh;
+/* Bloom Beauty Exclusive Brand Emblem Overlay (100% Solid Opaque Badge Covering Veo Watermark) */
+.bloom-video-brand-badge {
+  position: absolute;
+  right: 2.08%;
+  bottom: 2.92%;
+  transform: translate(50%, 50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background-color: #241D24 !important;
+  background: #241D24 !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bloom-video-brand-icon {
+  width: 16px;
+  height: 16px;
+  color: #F8E9EC;
+}
+
+@media (max-width: 767px) {
+  .bloom-video-brand-badge {
+    width: 28px;
+    height: 28px;
+  }
+  .bloom-video-brand-icon {
+    width: 13px;
+    height: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bloom-video-brand-badge {
+    width: 24px;
+    height: 24px;
+  }
+  .bloom-video-brand-icon {
+    width: 11px;
+    height: 11px;
   }
 }
 
