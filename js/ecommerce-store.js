@@ -1043,3 +1043,4 @@ class BloomCommerceStore {
 
 // Export singleton instance globally
 window.bloomCommerce = new BloomCommerceStore();
+

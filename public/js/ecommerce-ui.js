@@ -37,6 +37,8 @@ const BloomEcommerceUI = {
   // --- Initialize Routing & Global Listeners ---
   init() {
     this.injectStyles();
+    this.setupStickyHeaderMetrics();
+    this.setupAccountDropdown();
     this.setupHashRouter();
     this.bindGlobalActions();
   },
@@ -47,10 +49,16 @@ const BloomEcommerceUI = {
     const style = document.createElement('style');
     style.id = 'bloom-ecommerce-styles';
     style.innerHTML = `
+      :root {
+        --bloom-header-height: 144px;
+      }
       .bloom-page-view {
         position: fixed;
-        inset: 0;
-        z-index: 250;
+        top: var(--bloom-header-height, 144px);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 150;
         background-color: #FFFDF9;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -111,6 +119,120 @@ const BloomEcommerceUI = {
       }
     `;
     document.head.appendChild(style);
+  },
+
+  // --- Sticky Header Metrics Calculator ---
+  setupStickyHeaderMetrics() {
+    const updateMetrics = () => {
+      const header = document.getElementById('global-sticky-header') || document.querySelector('.sticky-header');
+      if (header) {
+        const height = header.offsetHeight;
+        if (height > 0) {
+          document.documentElement.style.setProperty('--bloom-header-height', `${height}px`);
+        }
+      }
+    };
+    updateMetrics();
+    window.addEventListener('resize', updateMetrics, { passive: true });
+    window.addEventListener('orientationchange', updateMetrics, { passive: true });
+    window.addEventListener('load', updateMetrics);
+  },
+
+  // --- Account Dropdown Menu Interactions (Hover, Click/Touch, Outside Click, Escape) ---
+  setupAccountDropdown() {
+    const wrapper = document.getElementById('account-dropdown-wrapper');
+    const btn = document.getElementById('account-dropdown-btn');
+    const menu = document.getElementById('account-dropdown-menu');
+    if (!wrapper || !btn || !menu) return;
+
+    this.updateAccountDropdownUI();
+
+    // Click / Touch toggle
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = menu.classList.contains('is-open');
+      if (isOpen) {
+        this.closeAccountDropdown();
+      } else {
+        this.openAccountDropdown();
+      }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!wrapper.contains(e.target)) {
+        this.closeAccountDropdown();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeAccountDropdown();
+      }
+    });
+
+    // Menu item clicks
+    menu.querySelectorAll('.account-menu-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        const tab = item.dataset.tab;
+        if (tab) {
+          e.preventDefault();
+          this.closeAccountDropdown();
+          this.openAccount(tab);
+        } else if (item.id === 'account-dropdown-logout-btn') {
+          this.closeAccountDropdown();
+        }
+      });
+    });
+  },
+
+  openAccountDropdown() {
+    const btn = document.getElementById('account-dropdown-btn');
+    const menu = document.getElementById('account-dropdown-menu');
+    if (!menu) return;
+    this.updateAccountDropdownUI();
+    menu.classList.add('is-open');
+    btn?.setAttribute('aria-expanded', 'true');
+  },
+
+  closeAccountDropdown() {
+    const btn = document.getElementById('account-dropdown-btn');
+    const menu = document.getElementById('account-dropdown-menu');
+    if (!menu) return;
+    menu.classList.remove('is-open');
+    btn?.setAttribute('aria-expanded', 'false');
+  },
+
+  updateAccountDropdownUI() {
+    const profile = window.bloomCommerce ? window.bloomCommerce.getCustomerProfile() : null;
+    const headerGreeting = document.getElementById('header-user-greeting');
+    const nameEl = document.getElementById('account-dropdown-name');
+    const emailEl = document.getElementById('account-dropdown-email');
+    const avatarEl = document.getElementById('account-dropdown-avatar');
+    const badgeEl = document.getElementById('account-dropdown-badge');
+
+    if (profile && profile.name) {
+      const firstName = profile.name.split(' ')[0];
+      if (headerGreeting) headerGreeting.textContent = `Hello, ${firstName}`;
+      if (nameEl) nameEl.textContent = `Hello, ${profile.name}`;
+      if (emailEl) emailEl.textContent = profile.email || 'customer@bloombeauty.com';
+      if (avatarEl) avatarEl.textContent = profile.name.charAt(0).toUpperCase();
+      if (badgeEl) {
+        badgeEl.textContent = 'VIP Member';
+        badgeEl.className = 'text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full';
+      }
+    } else {
+      if (headerGreeting) headerGreeting.textContent = 'Hello, Sign In';
+      if (nameEl) nameEl.textContent = 'Hello, Sign In';
+      if (emailEl) emailEl.textContent = 'Sign in for personalized offers';
+      if (avatarEl) avatarEl.textContent = '?';
+      if (badgeEl) {
+        badgeEl.textContent = 'Guest';
+        badgeEl.className = 'text-[10px] font-semibold text-bloom-muted bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-full';
+      }
+    }
   },
 
   // --- URL Hash Router ---
@@ -1887,6 +2009,7 @@ const BloomEcommerceUI = {
       email: newEmail.trim(),
       phone: newPhone.trim()
     });
+    this.updateAccountDropdownUI();
     this.renderAccountDashboard('profile');
   },
 
@@ -2002,17 +2125,19 @@ const BloomEcommerceUI = {
 
   handleLogout() {
     window.bloomCommerce.logoutCustomer();
+    this.updateAccountDropdownUI();
     this.closeAccountPage();
+    this.closeAccountDropdown();
     window.BloomApp?.showToast('You have successfully logged out');
     window.location.hash = '#';
   },
 
   bindGlobalActions() {
-    // Intercept clicks on Account button in header
-    document.querySelectorAll('[data-action="track-order"], .open-account-btn').forEach(btn => {
+    // Intercept clicks on Track Order link in announcement bar
+    document.querySelectorAll('[data-action="track-order"]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        this.openAccount('profile');
+        this.openAccount('orders');
       });
     });
 

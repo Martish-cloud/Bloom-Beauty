@@ -9,10 +9,10 @@ window.formatINR = function(amount) {
 
 window.BloomData = {
   announcements: [
-    "✨ Discover Your Beauty, Your Way | Complimentary Deluxe Mini on Orders over ₹999",
+    "🌿 100% Authentic Products Sourced Directly from Global & Indian Brands.",
+    "✨ Complimentary Deluxe Mini on Orders over ₹999 | Free Express Delivery",
     "🌸 Free Express Shipping Across India on All Cosmetics & Skincare over ₹799",
-    "💄 Exclusive: Up to 40% Off Selected Luxury Fragrances, Lipsticks & Skincare",
-    "🌿 100% Authentic Products Sourced Directly from Global & Indian Brands"
+    "💄 Exclusive: Up to 40% Off Selected Luxury Fragrances, Lipsticks & Skincare"
   ],
 
   heroSlides: [
