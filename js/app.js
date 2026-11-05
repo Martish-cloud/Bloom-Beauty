@@ -61,51 +61,118 @@ document.addEventListener('DOMContentLoaded', () => {
       }, { passive: true });
     },
 
-    // --- Hero Carousel ---
+        // --- Hero Carousel (Smooth Horizontal Leftward Sliding with Subtle Depth) ---
     initHeroCarousel() {
       const slides = document.querySelectorAll('.hero-slide');
       const dots = document.querySelectorAll('.hero-dot');
       if (!slides.length) return;
 
-      const setSlide = (idx) => {
-        this.currentHeroSlide = (idx + slides.length) % slides.length;
-        slides.forEach((s, i) => {
-          s.classList.toggle('is-active', i === this.currentHeroSlide);
-        });
+      this.currentHeroSlide = 0;
+      this.isHeroTransitioning = false;
+
+      // Initialize initial slide positions without flash
+      slides.forEach((s, i) => {
+        s.classList.remove('is-active', 'slide-prev', 'slide-next');
+        if (i === 0) {
+          s.classList.add('is-active');
+        } else {
+          s.classList.add('slide-next');
+        }
+      });
+
+      const setSlide = (targetIdx, direction = null) => {
+        if (this.isHeroTransitioning) return;
+        const total = slides.length;
+        const nextIdx = (targetIdx + total) % total;
+        if (nextIdx === this.currentHeroSlide) return;
+
+        this.isHeroTransitioning = true;
+        const currentIdx = this.currentHeroSlide;
+        const currentSlide = slides[currentIdx];
+        const nextSlide = slides[nextIdx];
+
+        // Determine direction: default to forward (leftward slide)
+        let dir = direction;
+        if (!dir) {
+          if (currentIdx === total - 1 && nextIdx === 0) {
+            dir = 'next';
+          } else if (currentIdx === 0 && nextIdx === total - 1) {
+            dir = 'prev';
+          } else {
+            dir = nextIdx > currentIdx ? 'next' : 'prev';
+          }
+        }
+
+        if (dir === 'next') {
+          // Current slide moves LEFT
+          currentSlide.classList.remove('is-active', 'slide-next');
+          currentSlide.classList.add('slide-prev');
+
+          // Next slide enters from RIGHT
+          nextSlide.classList.remove('is-active', 'slide-prev');
+          nextSlide.classList.add('slide-next');
+          void nextSlide.offsetWidth; // Force synchronous reflow
+          nextSlide.classList.remove('slide-next');
+          nextSlide.classList.add('is-active');
+        } else {
+          // Current slide moves RIGHT
+          currentSlide.classList.remove('is-active', 'slide-prev');
+          currentSlide.classList.add('slide-next');
+
+          // Next slide enters from LEFT
+          nextSlide.classList.remove('is-active', 'slide-next');
+          nextSlide.classList.add('slide-prev');
+          void nextSlide.offsetWidth; // Force synchronous reflow
+          nextSlide.classList.remove('slide-prev');
+          nextSlide.classList.add('is-active');
+        }
+
+        this.currentHeroSlide = nextIdx;
+
+        // Update indicators
         dots.forEach((d, i) => {
-          d.classList.toggle('bg-[#292329]', i === this.currentHeroSlide);
-          d.classList.toggle('bg-gray-300', i !== this.currentHeroSlide);
-          d.classList.toggle('w-7', i === this.currentHeroSlide);
-          d.classList.toggle('w-2.5', i !== this.currentHeroSlide);
+          d.classList.toggle('bg-[#292329]', i === nextIdx);
+          d.classList.toggle('bg-gray-300', i !== nextIdx);
+          d.classList.toggle('w-7', i === nextIdx);
+          d.classList.toggle('w-2.5', i !== nextIdx);
         });
+
+        setTimeout(() => {
+          this.isHeroTransitioning = false;
+        }, 720);
       };
 
       const startAutoplay = () => {
+        if (this.heroTimer) clearInterval(this.heroTimer);
         this.heroTimer = setInterval(() => {
-          setSlide(this.currentHeroSlide + 1);
+          setSlide(this.currentHeroSlide + 1, 'next');
         }, 5500);
       };
 
       const pauseAutoplay = () => {
-        if (this.heroTimer) clearInterval(this.heroTimer);
+        if (this.heroTimer) {
+          clearInterval(this.heroTimer);
+          this.heroTimer = null;
+        }
       };
 
       document.getElementById('hero-prev')?.addEventListener('click', () => {
         pauseAutoplay();
-        setSlide(this.currentHeroSlide - 1);
+        setSlide(this.currentHeroSlide - 1, 'prev');
         startAutoplay();
       });
 
       document.getElementById('hero-next')?.addEventListener('click', () => {
         pauseAutoplay();
-        setSlide(this.currentHeroSlide + 1);
+        setSlide(this.currentHeroSlide + 1, 'next');
         startAutoplay();
       });
 
       dots.forEach((dot, idx) => {
         dot.addEventListener('click', () => {
           pauseAutoplay();
-          setSlide(idx);
+          const dir = idx > this.currentHeroSlide ? 'next' : 'prev';
+          setSlide(idx, dir);
           startAutoplay();
         });
       });

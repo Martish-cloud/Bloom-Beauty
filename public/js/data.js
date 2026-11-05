@@ -59,7 +59,7 @@ window.BloomData = {
       itemCount: "240+ Products",
       image: "Docs/Lipsticks/Luxury Red Lipstick Mood Board.png",
       subcategories: ["Lipsticks & Glosses", "Foundations & Concealers", "Eyeshadow & Mascara", "Blush & Highlighters", "Primers & Setting Sprays"],
-      popularBrands: ["Maybelline New York", "Praush Beauty", "Prime Matte", "L'Oréal Paris", "MAC Cosmetics", "Huda Beauty"]
+      popularBrands: ["Maybelline New York", "Praush Beauty", "Prime Matte", "L'Oréal Paris", "Praush Beauty", "Huda Beauty"]
     },
     {
       id: "skincare",
@@ -68,7 +68,7 @@ window.BloomData = {
       itemCount: "190+ Products",
       image: "Docs/Skincare/Radiant Serum Skincare Glow.png",
       subcategories: ["Cleansers & Toners", "Serums & Essences", "Moisturizers & Creams", "Sunscreen SPF 50+", "Face Masks & Peels"],
-      popularBrands: ["Bloom Beauty", "The Ordinary", "CeraVe", "Cetaphil", "Minimalist"]
+      popularBrands: ["Bloom Beauty", "Bloom Beauty", "CeraVe", "Cetaphil", "Minimalist"]
     },
     {
       id: "haircare",

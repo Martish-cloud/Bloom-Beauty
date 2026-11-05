@@ -606,18 +606,55 @@ body {
   }
 }
 
-/* Hero Carousel */
+/* Hero Carousel — Smooth Horizontal Leftward Sliding Transition with Subtle Depth */
+#hero-carousel {
+  perspective: 1200px;
+  overflow: hidden;
+  position: relative;
+}
+
 .hero-slide {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
+  width: 100%;
+  height: 100%;
+  opacity: 1; /* Strictly no fade-in/fade-out */
+  transform: translateX(100%) translateZ(-20px) scale(0.985);
+  transition: transform 700ms cubic-bezier(0.25, 1, 0.5, 1);
   pointer-events: none;
+  visibility: hidden;
+  will-change: transform;
 }
 
+/* Active Slide: Centered at full scale */
 .hero-slide.is-active {
-  opacity: 1;
+  transform: translateX(0) translateZ(0) scale(1);
   pointer-events: auto;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* Slide Exiting / Parked to the Left */
+.hero-slide.slide-prev {
+  transform: translateX(-100%) translateZ(-20px) scale(0.985);
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 1;
+}
+
+/* Slide Queued / Parked to the Right */
+.hero-slide.slide-next {
+  transform: translateX(100%) translateZ(-20px) scale(0.985);
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 /* Brand Grid Cards */
@@ -721,6 +758,8 @@ body {
 
   </style>
   <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Preload Critical Hero Slide 1 Image -->
+  <link rel="preload" as="image" href="Header Images/one.png" type="image/png" />
 </head>
 <body class="bg-bloom-bg text-bloom-text font-sans antialiased selection:bg-bloom-blush selection:text-bloom-text min-h-screen flex flex-col">
 
@@ -802,7 +841,7 @@ body {
             <div class="p-3 border-t border-bloom-border bg-[#FCFAFB] flex items-center justify-between text-[11px] text-bloom-muted">
               <span>Popular: 
                 <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-category" data-category="Makeup">Lipsticks</button>,
-                <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-brand" data-brand="The Ordinary">The Ordinary</button>,
+                <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-brand" data-brand="Bloom Beauty">Bloom Beauty</button>,
                 <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-category" data-category="Skincare">Serums</button>,
                 <button type="button" class="text-bloom-deepRose hover:underline font-semibold" data-action="filter-brand" data-brand="Olaplex">Olaplex</button>
               </span>
@@ -885,9 +924,9 @@ body {
                   <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Top Makeup Brands</h4>
                   <ul class="space-y-2 text-xs text-bloom-muted">
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Maybelline New York">Maybelline New York</a></li>
-                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="MAC Cosmetics">MAC Cosmetics</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Praush Beauty">Praush Beauty</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Huda Beauty">Huda Beauty</a></li>
-                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="NYX Professional Makeup">NYX Professional</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Prime Matte">Prime Matte</a></li>
                   </ul>
                 </div>
                 <!-- Spotlight Card -->
@@ -940,7 +979,7 @@ body {
                 <div>
                   <h4 class="font-bold text-xs uppercase tracking-wider text-bloom-rose mb-3">Skincare Brands</h4>
                   <ul class="space-y-2 text-xs text-bloom-muted">
-                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="The Ordinary">The Ordinary</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Bloom Beauty">Bloom Beauty</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="CeraVe">CeraVe</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Cetaphil">Cetaphil</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Minimalist">Minimalist</a></li>
@@ -989,7 +1028,7 @@ body {
                   <ul class="space-y-2 text-xs text-bloom-muted">
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Olaplex">Olaplex</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="L'Oréal Professionnel">L'Oréal Professionnel</a></li>
-                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Schwarzkopf">Schwarzkopf</a></li>
+                    <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="Kronzam">Kronzam</a></li>
                     <li><a href="#" class="hover:text-bloom-deepRose" data-action="filter-brand" data-brand="TRESemmé">TRESemmé</a></li>
                   </ul>
                 </div>
@@ -1063,7 +1102,7 @@ body {
       <!-- Slide 1: Makeup Velvet Lipsticks -->
       <div class="hero-slide is-active">
         <div class="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1920&q=85" 
+          <img src="Header Images/one.png" 
                alt="Velvet Lipstick Campaign" 
                class="w-full h-full object-cover object-right md:object-center" />
           <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
@@ -1100,7 +1139,7 @@ body {
       <!-- Slide 2: Clinical Skincare -->
       <div class="hero-slide">
         <div class="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1920&q=85" 
+          <img src="Header Images/three.png" 
                alt="Clinical Skincare Campaign" 
                class="w-full h-full object-cover object-right md:object-center" />
           <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
@@ -1137,7 +1176,7 @@ body {
       <!-- Slide 3: Salon Haircare -->
       <div class="hero-slide">
         <div class="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1920&q=85" 
+          <img src="Header Images/two.png" 
                alt="Hair Repair Campaign" 
                class="w-full h-full object-cover object-right md:object-center" />
           <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
@@ -1210,6 +1249,64 @@ body {
 
     <!-- Categories Grid -->
     <div id="category-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3.5 sm:gap-4"></div>
+  </section>
+
+  <!-- ========================================================
+       LIPSTICK ADVERTISEMENT VIDEO SECTION
+       (Positioned between Explore Your Beauty Essentials & More Beauty, Better Value)
+       ======================================================== -->
+  <section class="py-12 sm:py-16 bg-[#FFFDF9] border-t border-bloom-border w-full" id="lipstick-video-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+        <span class="text-xs uppercase font-bold tracking-[0.25em] text-bloom-deepRose block mb-2">Campaign Spotlight</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text leading-tight mb-3">
+          The Art of Velvet Elegance
+        </h2>
+        <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed">
+          Experience weightless luxury and saturated pigment with our signature velvet matte lipsticks.
+        </p>
+      </div>
+
+      <!-- Video Container: Natural in-flow layout, unrestricted scrolling, silent, responsive -->
+      <div class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg border border-bloom-border bg-black aspect-video">
+        <video 
+          id="lipstick-advertisement-video"
+          class="w-full h-full object-cover"
+          src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4"
+          poster="Docs/Lipsticks/Lipstick_advertisement_video_poster.jpg"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          controls
+          controlslist="nodownload"
+          aria-label="Bloom Beauty Velvet Lipstick Campaign Advertisement">
+          <source src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4" type="video/mp4" />
+          <source src="Docs/Lipsticks/Lipstick_advertisement_Video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      <!-- Call to Actions -->
+      <div class="flex items-center justify-center gap-4 mt-6">
+        <button type="button" 
+                class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-sm"
+                data-action="filter-category" 
+                data-category="Makeup">
+          Shop Lipstick Collection
+        </button>
+        <button type="button" 
+                class="bg-white hover:bg-bloom-soft text-bloom-text border border-bloom-border px-6 py-3 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                data-action="view-details" 
+                data-id="prod-maybelline-ultimatte-crimson">
+          View Crimson Red
+        </button>
+      </div>
+
+    </div>
   </section>
 
   <!-- ========================================================
