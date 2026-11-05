@@ -146,7 +146,7 @@ body {
   visibility: hidden;
   transform: translateY(6px);
   pointer-events: none;
-  z-index: 300 !important;
+  z-index: 500 !important;
   background-color: #FFFFFF !important;
   background: #FFFFFF !important;
   border: 1px solid var(--color-border, #EEE7E9) !important;
@@ -154,9 +154,9 @@ body {
   border-radius: 1rem !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  transition: opacity 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.16s ease-out,
+              transform 0.16s ease-out,
+              visibility 0.16s ease-out;
 }
 
 .account-dropdown-panel * {
@@ -173,15 +173,7 @@ body {
   right: 0;
   height: 14px;
   background: transparent;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .group\/account:hover .account-dropdown-panel {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
+  pointer-events: auto;
 }
 
 .account-dropdown-panel.is-open {
@@ -189,6 +181,10 @@ body {
   visibility: visible !important;
   transform: translateY(0) !important;
   pointer-events: auto !important;
+}
+
+#account-dropdown-btn[aria-expanded="true"] svg.transition-transform {
+  transform: rotate(180deg);
 }
 
 .sticky-header.scrolled {

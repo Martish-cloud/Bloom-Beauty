@@ -138,124 +138,117 @@ const BloomEcommerceUI = {
     window.addEventListener('load', updateMetrics);
   },
 
-  // --- Account Dropdown Menu Interactions (Hover, Click/Touch, Outside Click, Escape) ---
+  // --- Account Dropdown Menu Interactions (Hover, Click/Touch, Outside Click, Escape, Scroll) ---
   setupAccountDropdown() {
     const wrapper = document.getElementById('account-dropdown-wrapper');
     const btn = document.getElementById('account-dropdown-btn');
     const menu = document.getElementById('account-dropdown-menu');
     if (!wrapper || !btn || !menu) return;
 
+    // Ensure initial closed state
+    menu.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
     this.updateAccountDropdownUI();
 
     let closeTimer = null;
-    let isTouch = false;
+    let isOpen = false;
 
-    // Detect touch interactions
-    window.addEventListener('touchstart', () => { isTouch = true; }, { passive: true, once: true });
-
-    // Open dropdown helper
+    // Helper: Open dropdown
     const openMenu = () => {
       if (closeTimer) {
         clearTimeout(closeTimer);
         closeTimer = null;
       }
-      this.updateAccountDropdownUI();
+      isOpen = true;
       menu.classList.add('is-open');
       btn.setAttribute('aria-expanded', 'true');
+      this.updateAccountDropdownUI();
     };
 
-    // Close dropdown helper with optional delay
+    // Helper: Close dropdown (immediate or with natural tolerance delay)
     const closeMenu = (immediate = false) => {
       if (closeTimer) {
         clearTimeout(closeTimer);
         closeTimer = null;
       }
       if (immediate) {
+        isOpen = false;
         menu.classList.remove('is-open');
         btn.setAttribute('aria-expanded', 'false');
       } else {
-        // Intentional 220ms hover tolerance to prevent accidental closing when cursor transits
+        // Natural 160ms tolerance delay ensures smooth cursor movement between trigger and panel
         closeTimer = setTimeout(() => {
+          isOpen = false;
           menu.classList.remove('is-open');
           btn.setAttribute('aria-expanded', 'false');
           closeTimer = null;
-        }, 220);
+        }, 160);
       }
     };
 
     // --- 1. DESKTOP HOVER: ONE CONTINUOUS HOVER INTERACTION AREA ---
-    // Moving pointer into wrapper (button OR menu panel) opens immediately and cancels close timer
+    // Moving pointer into wrapper (button OR menu panel) opens immediately and cancels any closing timer
     wrapper.addEventListener('mouseenter', () => {
-      if (isTouch) return;
       openMenu();
     });
 
-    // Moving pointer out of the entire wrapper (both button and menu panel) closes automatically after tolerance delay
+    // Moving pointer completely outside wrapper (both button and menu panel) closes automatically after 160ms
     wrapper.addEventListener('mouseleave', () => {
-      if (isTouch) return;
       closeMenu(false);
     });
 
-    // Also support pointerenter and pointerleave for high-precision pointer devices
-    wrapper.addEventListener('pointerenter', (e) => {
-      if (e.pointerType === 'mouse') {
+    // --- 2. CLICK & TAP BEHAVIOUR (Desktop Click & Mobile Tap) ---
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (menu.classList.contains('is-open')) {
+        closeMenu(true);
+      } else {
         openMenu();
       }
     });
 
-    wrapper.addEventListener('pointerleave', (e) => {
-      if (e.pointerType === 'mouse') {
-        closeMenu(false);
-      }
+    // Prevent clicks inside the dropdown menu panel from bubbling to document and closing prematurely
+    menu.addEventListener('click', (e) => {
+      e.stopPropagation();
     });
 
-    // --- 2. CLICK & TAP BEHAVIOUR ---
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      // On touch devices or if hover isn't supported, tap toggles open/close
-      const isMobileTouch = isTouch || window.matchMedia('(hover: none)').matches;
-      if (isMobileTouch) {
-        e.stopPropagation();
-        if (menu.classList.contains('is-open')) {
-          closeMenu(true);
-        } else {
-          openMenu();
-        }
-      } else {
-        // Desktop: if already open, clicking toggles or re-opens
-        if (menu.classList.contains('is-open')) {
-          closeMenu(true);
-        } else {
-          openMenu();
-        }
-      }
-    });
-
-    // --- 3. CLOSE ON CLICK OUTSIDE ---
-    document.addEventListener('click', (e) => {
+    // --- 3. CLOSE ON INTERACTION OUTSIDE (Click & Pointerdown for iOS Safari & Mobile) ---
+    const handleOutsideDismiss = (e) => {
       if (!wrapper.contains(e.target)) {
+        closeMenu(true);
+      }
+    };
+
+    document.addEventListener('click', handleOutsideDismiss);
+    document.addEventListener('pointerdown', (e) => {
+      if (isOpen && !wrapper.contains(e.target)) {
         closeMenu(true);
       }
     });
 
-    // --- 4. KEYBOARD ACCESSIBILITY ---
+    // --- 4. CLOSE ON PAGE SCROLL ---
+    window.addEventListener('scroll', () => {
+      if (isOpen) {
+        closeMenu(true);
+      }
+    }, { passive: true });
+
+    // --- 5. KEYBOARD ACCESSIBILITY (Escape & Arrow Keys) ---
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        closeMenu(true);
+        btn.focus();
+      }
+    });
+
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
         e.preventDefault();
         openMenu();
         const firstItem = menu.querySelector('.account-menu-item');
         firstItem?.focus();
-      } else if (e.key === 'Escape') {
-        e.preventDefault();
-        closeMenu(true);
-      }
-    });
-
-    wrapper.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        closeMenu(true);
-        btn.focus();
       }
     });
 
@@ -275,7 +268,7 @@ const BloomEcommerceUI = {
       });
     });
 
-    // --- 5. MENU ITEM SELECTION & NAVIGATION ---
+    // --- 6. MENU ITEM SELECTION & NAVIGATION ---
     menuItems.forEach(item => {
       item.addEventListener('click', (e) => {
         const tab = item.dataset.tab;
@@ -352,9 +345,13 @@ const BloomEcommerceUI = {
 
   // --- URL Hash Router ---
   setupHashRouter() {
-    window.addEventListener('hashchange', () => {
+    const onRoute = () => {
+      this.closeAccountDropdown();
       this.handleRoute(window.location.hash);
-    });
+    };
+
+    window.addEventListener('hashchange', onRoute);
+    window.addEventListener('popstate', onRoute);
 
     // Check initial hash on load
     if (window.location.hash) {
@@ -365,6 +362,7 @@ const BloomEcommerceUI = {
   },
 
   handleRoute(hash) {
+    this.closeAccountDropdown();
     if (!hash || hash === '#' || hash === '#/') {
       this.closeAllPageViews();
       return;
@@ -878,6 +876,7 @@ const BloomEcommerceUI = {
   },
 
   closeAllPageViews() {
+    this.closeAccountDropdown();
     document.querySelectorAll('.bloom-page-view').forEach(el => {
       el.classList.remove('is-visible');
     });
