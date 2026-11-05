@@ -186,111 +186,99 @@ document.addEventListener('DOMContentLoaded', () => {
     },
 
     
-    // --- Lipstick Advertisement Video Custom Controls (Silent, No Mute/Volume Icon) ---
+    // --- Lipstick Advertisement Video Controller (Silent, Autoplay, Single Fullscreen Control) ---
     initLipstickVideoControls() {
       const container = document.getElementById('custom-video-container');
       const video = document.getElementById('lipstick-advertisement-video');
-      if (!container || !video) return;
-
-      const playPauseBtn = document.getElementById('video-play-pause-btn');
-      const centerPlayBtn = document.getElementById('video-center-play-btn');
-      const playIcon = document.getElementById('video-play-icon');
-      const pauseIcon = document.getElementById('video-pause-icon');
-      const timeline = document.getElementById('video-timeline');
-      const timeDisplay = document.getElementById('video-time-display');
-      const rewindBtn = document.getElementById('video-rewind-10');
-      const forwardBtn = document.getElementById('video-forward-10');
-      const speedSelect = document.getElementById('video-speed-select');
       const fullscreenBtn = document.getElementById('video-fullscreen-btn');
+      const enterIcon = document.getElementById('fullscreen-enter-icon');
+      const exitIcon = document.getElementById('fullscreen-exit-icon');
 
-      // Ensure video is strictly muted
+      if (!video) return;
+
+      // Strictly ensure video is muted and plays silently
       video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
 
-      const formatTime = (seconds) => {
-        const s = Math.floor(seconds || 0);
-        const m = Math.floor(s / 60);
-        const rem = s % 60;
-        return `${m}:${rem < 10 ? '0' : ''}${rem}`;
-      };
+      // Autoplay attempt with silent fallback
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was prevented by browser policy; user interaction will resume
+          const resumeOnInteract = () => {
+            video.muted = true;
+            video.play().catch(() => {});
+            window.removeEventListener('click', resumeOnInteract);
+            window.removeEventListener('scroll', resumeOnInteract);
+            window.removeEventListener('touchstart', resumeOnInteract);
+          };
+          window.addEventListener('click', resumeOnInteract, { once: true, passive: true });
+          window.addEventListener('scroll', resumeOnInteract, { once: true, passive: true });
+          window.addEventListener('touchstart', resumeOnInteract, { once: true, passive: true });
+        });
+      }
 
-      const updatePlayState = () => {
-        if (video.paused) {
-          container.classList.add('is-paused');
-          playIcon?.classList.remove('hidden');
-          pauseIcon?.classList.add('hidden');
+      // Fullscreen Toggle using standard Fullscreen API with vendor fallbacks
+      const updateFullscreenIcons = () => {
+        const isFS = document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.mozFullScreenElement || 
+                     document.msFullscreenElement;
+        if (isFS) {
+          enterIcon?.classList.add('hidden');
+          exitIcon?.classList.remove('hidden');
         } else {
-          container.classList.remove('is-paused');
-          playIcon?.classList.add('hidden');
-          pauseIcon?.classList.remove('hidden');
+          enterIcon?.classList.remove('hidden');
+          exitIcon?.classList.add('hidden');
         }
       };
 
-      const togglePlay = () => {
-        if (video.paused) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-        updatePlayState();
-      };
+      const toggleFullscreen = () => {
+        const targetEl = container || video;
+        const isFS = document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.mozFullScreenElement || 
+                     document.msFullscreenElement;
 
-      playPauseBtn?.addEventListener('click', togglePlay);
-      centerPlayBtn?.addEventListener('click', togglePlay);
-      video.addEventListener('click', togglePlay);
-      video.addEventListener('play', updatePlayState);
-      video.addEventListener('pause', updatePlayState);
-
-      // Timeline update & time display
-      video.addEventListener('timeupdate', () => {
-        if (!timeline || isNaN(video.duration)) return;
-        const percent = (video.currentTime / video.duration) * 100;
-        timeline.value = percent;
-        if (timeDisplay) {
-          timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
-        }
-      });
-
-      // Seeking
-      timeline?.addEventListener('input', (e) => {
-        if (isNaN(video.duration)) return;
-        const targetTime = (parseFloat(e.target.value) / 100) * video.duration;
-        video.currentTime = targetTime;
-      });
-
-      // Rewind 10s
-      rewindBtn?.addEventListener('click', () => {
-        video.currentTime = Math.max(0, video.currentTime - 10);
-      });
-
-      // Forward 10s
-      forwardBtn?.addEventListener('click', () => {
-        video.currentTime = Math.min(video.duration || 100, video.currentTime + 10);
-      });
-
-      // Playback speed selector
-      speedSelect?.addEventListener('change', (e) => {
-        const rate = parseFloat(e.target.value) || 1;
-        video.playbackRate = rate;
-      });
-
-      // Fullscreen toggle
-      fullscreenBtn?.addEventListener('click', () => {
-        if (!document.fullscreenElement) {
-          if (container.requestFullscreen) {
-            container.requestFullscreen();
-          } else if (container.webkitRequestFullscreen) {
-            container.webkitRequestFullscreen();
+        if (!isFS) {
+          if (targetEl.requestFullscreen) {
+            targetEl.requestFullscreen().catch(() => {});
+          } else if (targetEl.webkitRequestFullscreen) {
+            targetEl.webkitRequestFullscreen();
+          } else if (targetEl.mozRequestFullScreen) {
+            targetEl.mozRequestFullScreen();
+          } else if (targetEl.msRequestFullscreen) {
+            targetEl.msRequestFullscreen();
+          } else if (video.webkitEnterFullscreen) {
+            // iOS Safari video fullscreen fallback
+            video.webkitEnterFullscreen();
           }
         } else {
           if (document.exitFullscreen) {
-            document.exitFullscreen();
+            document.exitFullscreen().catch(() => {});
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
           }
         }
+      };
+
+      fullscreenBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleFullscreen();
       });
 
-      // Initialize initial play state
-      updatePlayState();
+      // Synchronize icons on fullscreen changes
+      ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(evt => {
+        document.addEventListener(evt, updateFullscreenIcons);
+      });
     },
+
     // --- Render All Homepage Sections ---
     renderAllSections() {
       // 1. Categories Grid

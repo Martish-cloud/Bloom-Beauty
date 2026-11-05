@@ -1557,13 +1557,12 @@ body {
        LIPSTICK ADVERTISEMENT VIDEO SECTION
        (Positioned between Explore Your Beauty Essentials & More Beauty, Better Value)
        ======================================================== -->
-  <section class="py-12 sm:py-16 bg-[#FFFDF9] border-t border-bloom-border w-full" id="lipstick-video-section">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="lipstick-campaign-section w-full bg-[#FFFDF9] border-t border-bloom-border flex flex-col justify-center items-center" id="lipstick-video-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
       
       <!-- Section Header -->
-      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-        <span class="text-xs uppercase font-bold tracking-[0.25em] text-bloom-deepRose block mb-2">Campaign Spotlight</span>
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text leading-tight mb-3">
+      <div class="text-center max-w-2xl mx-auto mb-3 sm:mb-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text leading-tight mb-1.5">
           The Art of Velvet Elegance
         </h2>
         <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed">
@@ -1571,102 +1570,47 @@ body {
         </p>
       </div>
 
-      <!-- Video Player Wrapper (Responsive 16:9, Unrestricted In-Flow Scrolling) -->
-      <div class="custom-video-wrapper relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-bloom-border aspect-video group" id="custom-video-container">
-        <!-- Silent Video Element (Muted with NO native audio tracks) -->
+      <!-- Video Player Wrapper (Enlarged, Centered, 16:9, Single Fullscreen Control) -->
+      <div class="lipstick-video-wrapper relative w-full mx-auto rounded-2xl overflow-hidden shadow-2xl border border-bloom-border bg-black group" id="custom-video-container">
+        <!-- Silent Video Element -->
         <video 
           id="lipstick-advertisement-video"
-          class="w-full h-full object-cover cursor-pointer"
+          class="w-full h-full object-cover block"
           src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4"
           poster="Docs/Lipsticks/Lipstick_advertisement_video_poster.jpg"
           autoplay
           muted
           loop
           playsinline
-          preload="metadata"
+          preload="auto"
           aria-label="Bloom Beauty Velvet Lipstick Campaign Advertisement">
           <source src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4" type="video/mp4" />
           <source src="Docs/Lipsticks/Lipstick_advertisement_Video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
-        <!-- Big Center Play Overlay Button (Visible when paused) -->
-        <button type="button" id="video-center-play-btn" class="absolute inset-0 m-auto w-16 h-16 rounded-full bg-black/60 hover:bg-[#A6536F] text-white flex items-center justify-center transition-all opacity-0 pointer-events-none group-[.is-paused]:opacity-100 group-[.is-paused]:pointer-events-auto shadow-2xl backdrop-blur-sm z-10" aria-label="Play Video">
-          <svg class="w-8 h-8 ml-1 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <!-- Minimal Fullscreen Button (Single Visible Control) -->
+        <button type="button" 
+                id="video-fullscreen-btn" 
+                class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-xs shadow-lg opacity-85 hover:opacity-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer" 
+                title="Toggle Fullscreen" 
+                aria-label="Toggle Fullscreen">
+          <svg id="fullscreen-enter-icon" class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+          </svg>
+          <svg id="fullscreen-exit-icon" class="w-4 h-4 sm:w-5 sm:h-5 text-white hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/>
+          </svg>
         </button>
-
-        <!-- Custom Video Control Bar (NO MUTE / SPEAKER ICON, NO VOLUME SLIDER) -->
-        <div class="video-controls-overlay absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 sm:p-4 flex flex-col gap-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300 z-20" id="video-controls-bar">
-          
-          <!-- Timeline Scrub Bar with Time Display -->
-          <div class="flex items-center gap-3">
-            <input type="range" id="video-timeline" min="0" max="100" value="0" step="0.1" 
-                   class="w-full h-1.5 bg-white/30 rounded-lg appearance-none cursor-pointer accent-[#C98498] hover:h-2 transition-all" 
-                   aria-label="Video Timeline Scrub Bar" />
-            <span id="video-time-display" class="text-[11px] font-mono text-white/90 whitespace-nowrap">0:00 / 0:08</span>
-          </div>
-
-          <!-- Controls Row: Play/Pause, Rewind -10s, Forward +10s, Speed Selector, Fullscreen -->
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2 sm:gap-3">
-              <!-- Play / Pause Toggle Button -->
-              <button type="button" id="video-play-pause-btn" class="text-white hover:text-[#E8AFBF] p-1.5 transition-colors" aria-label="Play / Pause">
-                <svg id="video-pause-icon" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                <svg id="video-play-icon" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-              </button>
-
-              <!-- Rewind 10 Seconds (-10s) -->
-              <button type="button" id="video-rewind-10" class="text-white/90 hover:text-white p-1 text-xs font-semibold flex items-center gap-0.5 hover:bg-white/10 rounded px-2 transition-colors" title="Rewind 10 seconds" aria-label="Rewind 10 seconds">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-                <span>-10s</span>
-              </button>
-
-              <!-- Fast Forward 10 Seconds (+10s) -->
-              <button type="button" id="video-forward-10" class="text-white/90 hover:text-white p-1 text-xs font-semibold flex items-center gap-0.5 hover:bg-white/10 rounded px-2 transition-colors" title="Forward 10 seconds" aria-label="Forward 10 seconds">
-                <span>+10s</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-              </button>
-            </div>
-
-            <!-- Right Controls: Speed Selector & Fullscreen (NO MUTE, NO VOLUME) -->
-            <div class="flex items-center gap-2 sm:gap-3">
-              <!-- Playback Speed Dropdown (0.5x, 0.75x, 1x, 1.25x, 1.5x, 2x) -->
-              <div class="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1 text-xs text-white transition-colors">
-                <span class="text-[10px] uppercase font-bold text-white/70 hidden sm:inline">Speed:</span>
-                <select id="video-speed-select" class="bg-transparent text-white font-semibold text-xs focus:outline-none cursor-pointer" aria-label="Playback Speed">
-                  <option value="0.5" class="bg-[#292329] text-white">0.5x</option>
-                  <option value="0.75" class="bg-[#292329] text-white">0.75x</option>
-                  <option value="1" class="bg-[#292329] text-white" selected>1x</option>
-                  <option value="1.25" class="bg-[#292329] text-white">1.25x</option>
-                  <option value="1.5" class="bg-[#292329] text-white">1.5x</option>
-                  <option value="2" class="bg-[#292329] text-white">2x</option>
-                </select>
-              </div>
-
-              <!-- Fullscreen Button -->
-              <button type="button" id="video-fullscreen-btn" class="text-white hover:text-[#E8AFBF] p-1.5 transition-colors" title="Fullscreen" aria-label="Fullscreen">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
-      <!-- Call to Actions -->
-      <div class="flex items-center justify-center gap-4 mt-6 flex-wrap">
+      <!-- Single Call to Action (Centred Underneath Video) -->
+      <div class="flex items-center justify-center mt-3 sm:mt-4">
         <button type="button" 
-                class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-sm"
+                class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-8 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-md active:scale-95 cursor-pointer"
                 data-action="filter-category" 
                 data-category="Makeup">
           Shop Lipstick Collection
-        </button>
-        <button type="button" 
-                class="bg-white hover:bg-bloom-soft text-bloom-text border border-bloom-border px-6 py-3 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
-                data-action="view-details" 
-                data-id="prod-maybelline-ultimatte-crimson">
-          View Crimson Red
         </button>
       </div>
 
@@ -2434,7 +2378,7 @@ body {
   <script type="module" src="./js/data.js?v=3.5.0"></script>
   <script type="module" src="./js/state.js?v=3.0.0"></script>
   <script type="module" src="./js/components.js?v=3.5.0"></script>
-  <script type="module" src="./js/app.js?v=3.5.0"></script>
+  <script type="module" src="./js/app.js?v=3.6.0"></script>
   <script type="module" src="./js/ecommerce-store.js?v=3.7.0"></script>
   <script type="module" src="./js/ecommerce-ui.js?v=3.7.0"></script>
 

@@ -748,3 +748,48 @@ body {
 }
 
 @media (max-width: 1023px) { .mega-menu-panel { display: none !important; } }
+
+/* ========================================================
+   LIPSTICK CAMPAIGN SECTION & ENLARGED VIDEO
+   Single Desktop Viewport Optimization: Fits 768px, 900px, 1080px heights
+   ======================================================== */
+.lipstick-campaign-section {
+  width: 100%;
+  background-color: #FFFDF9;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .lipstick-campaign-section {
+    min-height: calc(100vh - var(--bloom-header-height, 144px));
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.lipstick-video-wrapper {
+  max-width: 1100px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: calc(100vh - var(--bloom-header-height, 144px) - 175px);
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -10px rgba(41, 35, 41, 0.16);
+  border: 1px solid var(--color-border);
+  background-color: #000000;
+}
+
+@media (max-width: 1023px) {
+  .lipstick-video-wrapper {
+    max-height: 60vh;
+  }
+}
