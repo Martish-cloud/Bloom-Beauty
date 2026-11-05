@@ -650,11 +650,61 @@ body {
   z-index: 1;
 }
 
+/* Full Model Visibility Containers */
+.hero-slide-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.hero-model-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-model-img {
+  max-height: 540px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain !important;
+  object-position: center bottom;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px -15px rgba(41, 35, 41, 0.2);
+}
+
+@media (max-width: 767px) {
+  .hero-model-img {
+    max-height: 280px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-slide {
     transition: none !important;
     transform: none !important;
   }
+}
+
+/* Custom Video Controls (Silent Video - No Mute/Speaker Controls) */
+.custom-video-wrapper {
+  position: relative;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.video-controls-overlay {
+  transition: opacity 0.25s ease;
+}
+
+.custom-video-wrapper:hover .video-controls-overlay,
+.custom-video-wrapper.is-paused .video-controls-overlay,
+.custom-video-wrapper.is-active-controls .video-controls-overlay {
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 /* Brand Grid Cards */
@@ -1093,32 +1143,30 @@ body {
     </div>
   </header>
 
-  <!-- ========================================================
+    <!-- ========================================================
        3. HERO CAMPAIGN CAROUSEL (SECTION 4)
        ======================================================== -->
-  <section class="relative bg-bloom-soft overflow-hidden" id="hero-carousel">
-    <div class="relative w-full h-[480px] sm:h-[540px] md:h-[600px] lg:h-[640px]">
+  <section class="relative bg-[#FFFDF9] overflow-hidden" id="hero-carousel">
+    <div class="relative w-full h-[540px] sm:h-[580px] md:h-[620px] lg:h-[660px]">
       
-      <!-- Slide 1: Makeup Velvet Lipsticks -->
-      <div class="hero-slide is-active">
-        <div class="absolute inset-0">
-          <img src="Header Images/one.png" 
-               alt="Velvet Lipstick Campaign" 
-               class="w-full h-full object-cover object-right md:object-center" />
-          <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
-        </div>
-        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex items-center">
-          <div class="max-w-lg z-10">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3 py-1 rounded-full mb-3.5">
+      <!-- Slide 1: Header Images/one.png (Velvet Lipstick Campaign) -->
+      <div class="hero-slide is-active" style="background: radial-gradient(circle at 75% 50%, rgba(179, 100, 67, 0.20) 0%, rgba(255, 253, 249, 0.98) 70%);">
+        <!-- Ambient blurred backdrop for seamless lighting -->
+        <img src="Header Images/one.png" aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-15 filter blur-3xl pointer-events-none" />
+
+        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 items-center gap-6 sm:gap-8 z-10">
+          <!-- Left: Typography & CTAs -->
+          <div class="md:col-span-6 lg:col-span-7 flex flex-col justify-center py-6">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3.5 py-1 rounded-full mb-3.5 w-max">
               New Launch Collection
             </span>
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
               The Art of <br/><span class="italic font-normal text-bloom-rose">Velvet Radiance</span>
             </h2>
-            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6">
+            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6 max-w-lg">
               Ultra-pigmented cushiony mattes infused with nourishing botanical oils for weightless, 12-hour comfortable all-day elegance.
             </p>
-            <div class="flex items-center gap-3 sm:gap-4">
+            <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
               <button type="button" 
                       class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg"
                       data-action="filter-category" 
@@ -1126,36 +1174,43 @@ body {
                 Shop Lipsticks
               </button>
               <button type="button" 
-                      class="bg-white/80 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      class="bg-white/90 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
                       data-action="view-details" 
-                      data-id="prod-maybelline-burgundy-glow">
-                Discover Burgundy Glow
+                      data-id="prod-maybelline-ultimatte-crimson">
+                Discover Crimson Red
               </button>
+            </div>
+          </div>
+
+          <!-- Right: Full Model Display (Object-Contain: Zero Cropping of Head, Face, or Body) -->
+          <div class="md:col-span-6 lg:col-span-5 h-full flex items-center justify-center md:justify-end py-4 sm:py-6">
+            <div class="relative h-full max-h-[500px] sm:max-h-[540px] md:max-h-[580px] flex items-center justify-center">
+              <img src="Header Images/one.png" 
+                   alt="Bloom Beauty Velvet Lipstick Campaign Model" 
+                   class="hero-model-img" />
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 2: Clinical Skincare -->
-      <div class="hero-slide">
-        <div class="absolute inset-0">
-          <img src="Header Images/three.png" 
-               alt="Clinical Skincare Campaign" 
-               class="w-full h-full object-cover object-right md:object-center" />
-          <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
-        </div>
-        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex items-center">
-          <div class="max-w-lg z-10">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3 py-1 rounded-full mb-3.5">
+      <!-- Slide 2: Header Images/three.png (Clinical Skincare Campaign) -->
+      <div class="hero-slide" style="background: radial-gradient(circle at 75% 50%, rgba(190, 190, 200, 0.22) 0%, rgba(255, 253, 249, 0.98) 70%);">
+        <!-- Ambient blurred backdrop for seamless lighting -->
+        <img src="Header Images/three.png" aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-15 filter blur-3xl pointer-events-none" />
+
+        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 items-center gap-6 sm:gap-8 z-10">
+          <!-- Left: Typography & CTAs -->
+          <div class="md:col-span-6 lg:col-span-7 flex flex-col justify-center py-6">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-deepRose bg-bloom-blush/60 px-3.5 py-1 rounded-full mb-3.5 w-max">
               Clinical Formulations
             </span>
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
               Pure Actives, <br/><span class="italic font-normal text-bloom-rose">Luminous Skin</span>
             </h2>
-            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6">
+            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6 max-w-lg">
               Transformative barrier-repairing ceramides, high-potency niacinamide, and pure hyaluronic acid for radiant glass skin.
             </p>
-            <div class="flex items-center gap-3 sm:gap-4">
+            <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
               <button type="button" 
                       class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md"
                       data-action="filter-category" 
@@ -1163,36 +1218,43 @@ body {
                 Explore Skincare
               </button>
               <button type="button" 
-                      class="bg-white/80 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      class="bg-white/90 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
                       data-action="view-details" 
                       data-id="prod-bloom-radiance-glow-serum">
                 Discover Radiance Serum
               </button>
             </div>
           </div>
+
+          <!-- Right: Full Model Display (Object-Contain: Zero Cropping of Head, Face, or Body) -->
+          <div class="md:col-span-6 lg:col-span-5 h-full flex items-center justify-center md:justify-end py-4 sm:py-6">
+            <div class="relative h-full max-h-[500px] sm:max-h-[540px] md:max-h-[580px] flex items-center justify-center">
+              <img src="Header Images/three.png" 
+                   alt="Bloom Beauty Clinical Skincare Campaign Model" 
+                   class="hero-model-img" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Slide 3: Salon Haircare -->
-      <div class="hero-slide">
-        <div class="absolute inset-0">
-          <img src="Header Images/two.png" 
-               alt="Hair Repair Campaign" 
-               class="w-full h-full object-cover object-right md:object-center" />
-          <div class="absolute inset-0 bg-gradient-to-r from-[#FFFDF9] via-[#FFFDF9]/85 to-transparent max-w-2xl"></div>
-        </div>
-        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex items-center">
-          <div class="max-w-lg z-10">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-gold bg-amber-50 px-3 py-1 rounded-full mb-3.5">
+      <!-- Slide 3: Header Images/two.png (Salon Haircare Campaign) -->
+      <div class="hero-slide" style="background: radial-gradient(circle at 75% 50%, rgba(50, 55, 55, 0.16) 0%, rgba(255, 253, 249, 0.98) 70%);">
+        <!-- Ambient blurred backdrop for seamless lighting -->
+        <img src="Header Images/two.png" aria-hidden="true" class="absolute right-0 top-1/2 -translate-y-1/2 h-[120%] w-auto opacity-15 filter blur-3xl pointer-events-none" />
+
+        <div class="relative max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-12 items-center gap-6 sm:gap-8 z-10">
+          <!-- Left: Typography & CTAs -->
+          <div class="md:col-span-6 lg:col-span-7 flex flex-col justify-center py-6">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-[0.2em] text-bloom-gold bg-amber-50 px-3.5 py-1 rounded-full mb-3.5 w-max">
               Molecular Hair Bonding
             </span>
             <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-bloom-text leading-[1.15] mb-4">
               Salon Repair <br/><span class="italic font-normal text-bloom-rose">At Your Home</span>
             </h2>
-            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6">
-              Reverse years of heat and styling damage with patented bond multipliers and deep keratin nourishing rituals.
+            <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed mb-6 max-w-lg">
+              Reverse years of heat and styling damage with active rosemary extracts, pure rice water sprays, and deep keratin nourishment.
             </p>
-            <div class="flex items-center gap-3 sm:gap-4">
+            <div class="flex items-center gap-3 sm:gap-4 flex-wrap">
               <button type="button" 
                       class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md"
                       data-action="filter-category" 
@@ -1200,11 +1262,20 @@ body {
                 Shop Hair Treatments
               </button>
               <button type="button" 
-                      class="bg-white/80 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all"
-                      data-action="filter-brand" 
-                      data-brand="Olaplex">
-                Shop Olaplex
+                      class="bg-white/90 hover:bg-white text-bloom-text border border-bloom-border px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-xs"
+                      data-action="view-details" 
+                      data-id="prod-kronzam-rosemary-spray">
+                Discover Rosemary Spray
               </button>
+            </div>
+          </div>
+
+          <!-- Right: Full Model Display (Object-Contain: Zero Cropping of Head, Face, or Body) -->
+          <div class="md:col-span-6 lg:col-span-5 h-full flex items-center justify-center md:justify-end py-4 sm:py-6">
+            <div class="relative h-full max-h-[500px] sm:max-h-[540px] md:max-h-[580px] flex items-center justify-center">
+              <img src="Header Images/two.png" 
+                   alt="Bloom Beauty Salon Hair Repair Model" 
+                   class="hero-model-img" />
             </div>
           </div>
         </div>
@@ -1255,6 +1326,10 @@ body {
        LIPSTICK ADVERTISEMENT VIDEO SECTION
        (Positioned between Explore Your Beauty Essentials & More Beauty, Better Value)
        ======================================================== -->
+    <!-- ========================================================
+       LIPSTICK ADVERTISEMENT VIDEO SECTION
+       (Positioned between Explore Your Beauty Essentials & More Beauty, Better Value)
+       ======================================================== -->
   <section class="py-12 sm:py-16 bg-[#FFFDF9] border-t border-bloom-border w-full" id="lipstick-video-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -1269,11 +1344,12 @@ body {
         </p>
       </div>
 
-      <!-- Video Container: Natural in-flow layout, unrestricted scrolling, silent, responsive -->
-      <div class="relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg border border-bloom-border bg-black aspect-video">
+      <!-- Video Player Wrapper (Responsive 16:9, Unrestricted In-Flow Scrolling) -->
+      <div class="custom-video-wrapper relative max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-bloom-border aspect-video group" id="custom-video-container">
+        <!-- Silent Video Element (Muted with NO native audio tracks) -->
         <video 
           id="lipstick-advertisement-video"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover cursor-pointer"
           src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4"
           poster="Docs/Lipsticks/Lipstick_advertisement_video_poster.jpg"
           autoplay
@@ -1281,17 +1357,78 @@ body {
           loop
           playsinline
           preload="metadata"
-          controls
-          controlslist="nodownload"
           aria-label="Bloom Beauty Velvet Lipstick Campaign Advertisement">
           <source src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4" type="video/mp4" />
           <source src="Docs/Lipsticks/Lipstick_advertisement_Video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+
+        <!-- Big Center Play Overlay Button (Visible when paused) -->
+        <button type="button" id="video-center-play-btn" class="absolute inset-0 m-auto w-16 h-16 rounded-full bg-black/60 hover:bg-[#A6536F] text-white flex items-center justify-center transition-all opacity-0 pointer-events-none group-[.is-paused]:opacity-100 group-[.is-paused]:pointer-events-auto shadow-2xl backdrop-blur-sm z-10" aria-label="Play Video">
+          <svg class="w-8 h-8 ml-1 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+
+        <!-- Custom Video Control Bar (NO MUTE / SPEAKER ICON, NO VOLUME SLIDER) -->
+        <div class="video-controls-overlay absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-3 sm:p-4 flex flex-col gap-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300 z-20" id="video-controls-bar">
+          
+          <!-- Timeline Scrub Bar with Time Display -->
+          <div class="flex items-center gap-3">
+            <input type="range" id="video-timeline" min="0" max="100" value="0" step="0.1" 
+                   class="w-full h-1.5 bg-white/30 rounded-lg appearance-none cursor-pointer accent-[#C98498] hover:h-2 transition-all" 
+                   aria-label="Video Timeline Scrub Bar" />
+            <span id="video-time-display" class="text-[11px] font-mono text-white/90 whitespace-nowrap">0:00 / 0:08</span>
+          </div>
+
+          <!-- Controls Row: Play/Pause, Rewind -10s, Forward +10s, Speed Selector, Fullscreen -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2 sm:gap-3">
+              <!-- Play / Pause Toggle Button -->
+              <button type="button" id="video-play-pause-btn" class="text-white hover:text-[#E8AFBF] p-1.5 transition-colors" aria-label="Play / Pause">
+                <svg id="video-pause-icon" class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                <svg id="video-play-icon" class="w-5 h-5 fill-current hidden" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+
+              <!-- Rewind 10 Seconds (-10s) -->
+              <button type="button" id="video-rewind-10" class="text-white/90 hover:text-white p-1 text-xs font-semibold flex items-center gap-0.5 hover:bg-white/10 rounded px-2 transition-colors" title="Rewind 10 seconds" aria-label="Rewind 10 seconds">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                <span>-10s</span>
+              </button>
+
+              <!-- Fast Forward 10 Seconds (+10s) -->
+              <button type="button" id="video-forward-10" class="text-white/90 hover:text-white p-1 text-xs font-semibold flex items-center gap-0.5 hover:bg-white/10 rounded px-2 transition-colors" title="Forward 10 seconds" aria-label="Forward 10 seconds">
+                <span>+10s</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <!-- Right Controls: Speed Selector & Fullscreen (NO MUTE, NO VOLUME) -->
+            <div class="flex items-center gap-2 sm:gap-3">
+              <!-- Playback Speed Dropdown (0.5x, 0.75x, 1x, 1.25x, 1.5x, 2x) -->
+              <div class="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 rounded-lg px-2.5 py-1 text-xs text-white transition-colors">
+                <span class="text-[10px] uppercase font-bold text-white/70 hidden sm:inline">Speed:</span>
+                <select id="video-speed-select" class="bg-transparent text-white font-semibold text-xs focus:outline-none cursor-pointer" aria-label="Playback Speed">
+                  <option value="0.5" class="bg-[#292329] text-white">0.5x</option>
+                  <option value="0.75" class="bg-[#292329] text-white">0.75x</option>
+                  <option value="1" class="bg-[#292329] text-white" selected>1x</option>
+                  <option value="1.25" class="bg-[#292329] text-white">1.25x</option>
+                  <option value="1.5" class="bg-[#292329] text-white">1.5x</option>
+                  <option value="2" class="bg-[#292329] text-white">2x</option>
+                </select>
+              </div>
+
+              <!-- Fullscreen Button -->
+              <button type="button" id="video-fullscreen-btn" class="text-white hover:text-[#E8AFBF] p-1.5 transition-colors" title="Fullscreen" aria-label="Fullscreen">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Call to Actions -->
-      <div class="flex items-center justify-center gap-4 mt-6">
+      <div class="flex items-center justify-center gap-4 mt-6 flex-wrap">
         <button type="button" 
                 class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-sm"
                 data-action="filter-category" 

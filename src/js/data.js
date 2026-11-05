@@ -911,7 +911,8 @@ window.BloomData = {
       images: [
         "Docs/Lipsticks/Glossy Red Maybelline Lipstick Duo.png",
         "Docs/Lipsticks/Velvety Red Lips Macro Portrait.png",
-        "Docs/Lipsticks/Red Lips and Golden Glamour.png"
+        "Docs/Lipsticks/Red Lips and Golden Glamour.png",
+        "Docs/Lipsticks/Vivid Red Lips Macro Portrait (1).png"
       ],
       badge: "BESTSELLER",
       isBestseller: true,
@@ -971,6 +972,7 @@ window.BloomData = {
       reviewCount: 960,
       images: [
         "Docs/Lipsticks/Three Matte Lipsticks in Vibrant Swatches.png",
+      "Docs/Lipsticks/Winking Glossy Kiss Portrait.png",
         "Docs/Lipsticks/Split-Tone Matte Lipstick Comparison.png"
       ],
       badge: "LIMITED OFFER",
@@ -1001,7 +1003,8 @@ window.BloomData = {
       reviewCount: 2100,
       images: [
         "Docs/Lipsticks/Four Shades, One Signature Pout.png",
-        "Docs/Lipsticks/Glossy Curls and Crimson Lips.png"
+        "Docs/Lipsticks/Glossy Curls and Crimson Lips.png",
+        "Docs/Lipsticks/Velvet Burgundy Lips Close-Up.png"
       ],
       badge: "NEW LAUNCH",
       isBestseller: false,
@@ -1011,6 +1014,176 @@ window.BloomData = {
       keyBenefits: ["4 universally flattering couture lip shades", "Enriched with camellia seed oil and hyaluronic spheres", "Lightweight, feather-resistant all-day comfort"],
       ingredients: "Polyglyceryl-2 Triisostearate, Dimethicone, Camellia Japonica Seed Oil, Sodium Hyaluronate, CI 77491, CI 15850, CI 45410.",
       howToUse: "Wear individually or ombre two shades together for an editorial lip contour."
+    }
+  ,
+    {
+          "id": "prod-nail-cherry-glaze",
+          "name": "Cherry Glaze High-Shine UV Gel Nail Polish (15ml)",
+          "brand": "Nail Republic",
+          "category": "Nail Care",
+          "subcategory": "Gel Polish",
+          "price": 699,
+          "originalPrice": 899,
+          "discountPercent": 22,
+          "rating": 4.8,
+          "reviewCount": 1240,
+          "images": [
+                "Docs/Nail Care/Glossy Cherry Red Manicure Application.png",
+                "Docs/Nail Care/Emerald Gloss Nail Color Close-Up.png"
+          ],
+          "badge": "SALON GLOSS",
+          "isBestseller": true,
+          "isFeaturedValue": true,
+          "dealLabel": "Salon Red",
+          "description": "Ultra-pigmented salon gel polish delivering up to 21 days of chip-resistant, mirror-like red shine without UV lamp damage.",
+          "keyBenefits": [
+                "21-day chip-free high-gloss wear",
+                "Pro-glide curved brush for streak-free application",
+                "Strengthens natural nails with calcium and vitamin E"
+          ],
+          "ingredients": "Ethyl Acetate, Butyl Acetate, Nitrocellulose, Acetyl Tributyl Citrate, Isopropyl Alcohol, Calcium Pantothenate, Vitamin E Acetate.",
+          "howToUse": "Apply thin layer over base coat. Cure 60s under LED or air dry 2 minutes. Seal with high-shine top coat."
+    },
+    {
+          "id": "prod-nail-molten-bronze",
+          "name": "Molten Bronze Metallic Shimmer Nail Lacquer (12ml)",
+          "brand": "MI Fashion",
+          "category": "Nail Care",
+          "subcategory": "Metallic Polish",
+          "price": 649,
+          "originalPrice": 849,
+          "discountPercent": 24,
+          "rating": 4.7,
+          "reviewCount": 980,
+          "images": [
+                "Docs/Nail Care/Luxe Bronze Nail Polish Beauty Shot.png",
+                "Docs/Nail Care/Champagne Gold Nails and Filigree Ring.png"
+          ],
+          "badge": "METALLIC FOIL",
+          "isBestseller": false,
+          "isFeaturedValue": true,
+          "dealLabel": "Molten Foil",
+          "description": "Luminous foil metallic formula embedded with micro-fine pearl pigments for multidimensional chrome brilliance in two coats.",
+          "keyBenefits": [
+                "Liquid-metal metallic finish",
+                "Quick-drying 60-second formula",
+                "Toxin-free 10-Free formula safe for sensitive nails"
+          ],
+          "ingredients": "Butyl Acetate, Ethyl Acetate, Nitrocellulose, Mica (CI 77019), Iron Oxides (CI 77491), Titanium Dioxide, Dimethicone.",
+          "howToUse": "Roll bottle gently between palms. Apply two even coats over bare or prepped nails."
+    },
+    {
+          "id": "prod-nail-velvet-burgundy",
+          "name": "Velvet Burgundy Matte Fast-Dry Nail Enamel (12ml)",
+          "brand": "Rose & Lily",
+          "category": "Nail Care",
+          "subcategory": "Matte Polish",
+          "price": 749,
+          "originalPrice": 999,
+          "discountPercent": 25,
+          "rating": 4.8,
+          "reviewCount": 1150,
+          "images": [
+                "Docs/Nail Care/Luxury Matte Burgundy Nail Polish Close-Up.png",
+                "Docs/Nail Care/Rose & Lily Natural Glow Set.png"
+          ],
+          "badge": "MATTE LUXE",
+          "isBestseller": true,
+          "isSavingsDeal": true,
+          "dealLabel": "Deep Velvet",
+          "description": "Deep burgundy couture nail enamel that dries down instantly to a soft-touch suede matte finish with zero streaks.",
+          "keyBenefits": [
+                "Instant soft-touch velvet matte finish",
+                "Non-fading rich wine pigments",
+                "Enriched with argan oil to prevent nail brittleness"
+          ],
+          "ingredients": "Ethyl Acetate, Butyl Acetate, Silica, Nitrocellulose, Argania Spinosa Kernel Oil, Red 7 Lake (CI 15850).",
+          "howToUse": "Apply 2 thin coats onto clean nails. Do not use glossy topcoat to preserve the bespoke velvet matte texture."
+    },
+    {
+          "id": "prod-nail-midnight-sapphire",
+          "name": "Midnight Sapphire High-Gloss Pro Nail Lacquer (15ml)",
+          "brand": "MI Fashion",
+          "category": "Nail Care",
+          "subcategory": "Gel Lacquer",
+          "price": 689,
+          "originalPrice": 899,
+          "discountPercent": 23,
+          "rating": 4.8,
+          "reviewCount": 860,
+          "images": [
+                "Docs/Nail Care/Navy Gloss Nail Polish Beauty Shot.png",
+                "Docs/Nail Care/Silk Cat-Eye Teal Nail Ad.png"
+          ],
+          "badge": "DEEP SHINE",
+          "isBestseller": false,
+          "isFeaturedValue": true,
+          "dealLabel": "Sapphire Glow",
+          "description": "Intense midnight navy blue gel lacquer with high refractive index resins for gel-like plumping and deep jewel depth.",
+          "keyBenefits": [
+                "Plumping gel effect without a UV lamp",
+                "High-pigment single coat coverage",
+                "Anti-chip resin shields tips against wear"
+          ],
+          "ingredients": "Ethyl Acetate, Butyl Acetate, Adipic Acid Neopentyl Glycol Copolymer, Ferric Ammonium Ferrocyanide (CI 77510).",
+          "howToUse": "Apply one to two coats. Allow 90 seconds to set. Top with Gel Top Coat."
+    },
+    {
+          "id": "prod-makeup-velvet-mauve",
+          "name": "Velvet Cushion Lip Glaze & Liner in Petal Mauve",
+          "brand": "Prime Matte",
+          "category": "Makeup",
+          "subcategory": "Lip Glaze",
+          "price": 699,
+          "originalPrice": 949,
+          "discountPercent": 26,
+          "rating": 4.8,
+          "reviewCount": 1420,
+          "images": [
+                "Docs/Lipsticks/Mauve Gloss Beauty Close-Up.png",
+                "Docs/Lipsticks/Three Matte Lipsticks in Vibrant Swatches.png"
+          ],
+          "badge": "NEW SHADE",
+          "isBestseller": true,
+          "isSavingsDeal": true,
+          "dealLabel": "Cushion Mauve",
+          "description": "Cushiony non-sticky lip lacquer infused with jojoba butter and hyaluronic microspheres for juicy, plump mauve lips.",
+          "keyBenefits": [
+                "Non-sticky cushion glass shine",
+                "Hydrates and conditions dry lips for 8 hours",
+                "Flattering nude mauve tone suited for all Indian skin tones"
+          ],
+          "ingredients": "Polybutene, Hydrogenated Polyisobutene, Simmondsia Chinensis (Jojoba) Seed Oil, Sodium Hyaluronate, Tocopherol.",
+          "howToUse": "Glide doe-foot applicator across bare lips or layer over matte lipstick for added vinyl depth."
+    },
+    {
+          "id": "prod-makeup-joyful-berry",
+          "name": "Praush Beauty Weightless Matte Lipstick in Berry Wine",
+          "brand": "Praush Beauty",
+          "category": "Makeup",
+          "subcategory": "Matte Lipstick",
+          "price": 899,
+          "originalPrice": 1199,
+          "discountPercent": 25,
+          "rating": 4.9,
+          "reviewCount": 2120,
+          "images": [
+                "Docs/Lipsticks/Joyful Beauty Close-Up with Hand Gesture.png",
+                "Docs/Lipsticks/Rose-Gold Lipstick with Berry Pigment Swipe.png",
+                "Docs/Lipsticks/Velvety Berry Lips and Radiant Smile.png"
+          ],
+          "badge": "FAN FAVORITE",
+          "isBestseller": true,
+          "isFeaturedValue": true,
+          "dealLabel": "Berry Luxe",
+          "description": "Featherlight matte lipstick with intense berry wine payoff that hugs lips comfortably all day without cracking.",
+          "keyBenefits": [
+                "12-hour transfer-resistant matte formula",
+                "Enriched with sweet almond oil and shea butter",
+                "High pigment bullet with precision teardrop tip"
+          ],
+          "ingredients": "Dimethicone, Isononyl Isononanoate, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Butyrospermum Parkii (Shea) Butter.",
+          "howToUse": "Apply from center of Cupid's bow outward toward corners. Blot lightly with tissue for soft-focus blur."
     }
   ],
 

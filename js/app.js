@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     init() {
       this.renderAllSections();
       this.initHeroCarousel();
+      this.initLipstickVideoControls();
       this.initAnnouncementBar();
       this.initEventListeners();
       this.initStickyHeader();
@@ -184,6 +185,112 @@ document.addEventListener('DOMContentLoaded', () => {
       startAutoplay();
     },
 
+    
+    // --- Lipstick Advertisement Video Custom Controls (Silent, No Mute/Volume Icon) ---
+    initLipstickVideoControls() {
+      const container = document.getElementById('custom-video-container');
+      const video = document.getElementById('lipstick-advertisement-video');
+      if (!container || !video) return;
+
+      const playPauseBtn = document.getElementById('video-play-pause-btn');
+      const centerPlayBtn = document.getElementById('video-center-play-btn');
+      const playIcon = document.getElementById('video-play-icon');
+      const pauseIcon = document.getElementById('video-pause-icon');
+      const timeline = document.getElementById('video-timeline');
+      const timeDisplay = document.getElementById('video-time-display');
+      const rewindBtn = document.getElementById('video-rewind-10');
+      const forwardBtn = document.getElementById('video-forward-10');
+      const speedSelect = document.getElementById('video-speed-select');
+      const fullscreenBtn = document.getElementById('video-fullscreen-btn');
+
+      // Ensure video is strictly muted
+      video.muted = true;
+
+      const formatTime = (seconds) => {
+        const s = Math.floor(seconds || 0);
+        const m = Math.floor(s / 60);
+        const rem = s % 60;
+        return `${m}:${rem < 10 ? '0' : ''}${rem}`;
+      };
+
+      const updatePlayState = () => {
+        if (video.paused) {
+          container.classList.add('is-paused');
+          playIcon?.classList.remove('hidden');
+          pauseIcon?.classList.add('hidden');
+        } else {
+          container.classList.remove('is-paused');
+          playIcon?.classList.add('hidden');
+          pauseIcon?.classList.remove('hidden');
+        }
+      };
+
+      const togglePlay = () => {
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+        updatePlayState();
+      };
+
+      playPauseBtn?.addEventListener('click', togglePlay);
+      centerPlayBtn?.addEventListener('click', togglePlay);
+      video.addEventListener('click', togglePlay);
+      video.addEventListener('play', updatePlayState);
+      video.addEventListener('pause', updatePlayState);
+
+      // Timeline update & time display
+      video.addEventListener('timeupdate', () => {
+        if (!timeline || isNaN(video.duration)) return;
+        const percent = (video.currentTime / video.duration) * 100;
+        timeline.value = percent;
+        if (timeDisplay) {
+          timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+        }
+      });
+
+      // Seeking
+      timeline?.addEventListener('input', (e) => {
+        if (isNaN(video.duration)) return;
+        const targetTime = (parseFloat(e.target.value) / 100) * video.duration;
+        video.currentTime = targetTime;
+      });
+
+      // Rewind 10s
+      rewindBtn?.addEventListener('click', () => {
+        video.currentTime = Math.max(0, video.currentTime - 10);
+      });
+
+      // Forward 10s
+      forwardBtn?.addEventListener('click', () => {
+        video.currentTime = Math.min(video.duration || 100, video.currentTime + 10);
+      });
+
+      // Playback speed selector
+      speedSelect?.addEventListener('change', (e) => {
+        const rate = parseFloat(e.target.value) || 1;
+        video.playbackRate = rate;
+      });
+
+      // Fullscreen toggle
+      fullscreenBtn?.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+          if (container.requestFullscreen) {
+            container.requestFullscreen();
+          } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      // Initialize initial play state
+      updatePlayState();
+    },
     // --- Render All Homepage Sections ---
     renderAllSections() {
       // 1. Categories Grid
