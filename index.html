@@ -848,10 +848,59 @@ body {
 }
 @media (max-width: 1023px) { .mega-menu-panel { display: none !important; } }
 </style>
-  <link rel="stylesheet" href="./css/styles.css?v=4.0.0" />
+  <link rel="stylesheet" href="./css/styles.css?v=4.1.0" />
   <!-- Preload Critical Hero Slide 1 Image -->
   <link rel="preload" as="image" href="Header Images/one.png" type="image/png" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    // Immediate resilient fallback for Account Dropdown before ES modules finish loading
+    window.toggleAccountFallback = function(e) {
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (window.BloomEcommerceUI && typeof window.BloomEcommerceUI.toggleAccountDropdown === 'function') {
+        window.BloomEcommerceUI.toggleAccountDropdown(e);
+        return;
+      }
+      var menu = document.getElementById('account-dropdown-menu');
+      var btn = document.getElementById('account-dropdown-btn');
+      var chevron = document.getElementById('account-dropdown-chevron');
+      if (!menu) return;
+      var isOpen = menu.classList.contains('is-open');
+      if (isOpen) {
+        menu.classList.remove('is-open');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+      } else {
+        menu.classList.add('is-open');
+        if (btn) btn.setAttribute('aria-expanded', 'true');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      }
+    };
+
+    // Global listener for fallback menu dismissal on click outside or Escape
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.closest && e.target.closest('#account-dropdown-wrapper')) return;
+      var menu = document.getElementById('account-dropdown-menu');
+      var btn = document.getElementById('account-dropdown-btn');
+      var chevron = document.getElementById('account-dropdown-chevron');
+      if (menu && menu.classList.contains('is-open')) {
+        menu.classList.remove('is-open');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var menu = document.getElementById('account-dropdown-menu');
+        var btn = document.getElementById('account-dropdown-btn');
+        var chevron = document.getElementById('account-dropdown-chevron');
+        if (menu && menu.classList.contains('is-open')) {
+          menu.classList.remove('is-open');
+          if (btn) { btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+          if (chevron) chevron.style.transform = 'rotate(0deg)';
+        }
+      }
+    });
+  </script>
 </head>
 <body class="bg-bloom-bg text-bloom-text font-sans antialiased selection:bg-bloom-blush selection:text-bloom-text min-h-screen flex flex-col">
 
@@ -873,7 +922,7 @@ body {
 
         <!-- Quick Utility Links (Desktop) -->
         <div class="hidden md:flex items-center gap-5 text-[11px] text-[#DDD6DE] shrink-0">
-          <button type="button" class="hover:text-white transition-colors cursor-pointer" onclick="window.BloomEcommerceUI ? window.BloomEcommerceUI.openAccount('orders') : (window.location.hash='#account/orders')" title="Track Order Status">Track Order</button>
+          <button type="button" class="hover:text-white transition-colors cursor-pointer" onclick="window.BloomEcommerceUI ? window.BloomEcommerceUI.openAccount('track') : (window.location.hash='#account/track')" title="Track Order Status">Track Order</button>
           <span class="text-gray-600">|</span>
           <a href="#footer" class="hover:text-white transition-colors">Help & FAQ</a>
           <span class="text-gray-600">|</span>
@@ -947,7 +996,8 @@ body {
             <!-- Trigger Button -->
             <button type="button" 
                     id="account-dropdown-btn"
-                    class="flex items-center gap-1.5 sm:gap-2 p-2 rounded-xl hover:bg-bloom-soft text-bloom-text transition-all focus:outline-none focus:ring-2 focus:ring-bloom-rose/40"
+                    onclick="(window.BloomEcommerceUI?.toggleAccountDropdown || window.toggleAccountFallback)?.(event)"
+                    class="flex items-center gap-1.5 sm:gap-2 p-2 rounded-xl hover:bg-bloom-soft text-bloom-text transition-all focus:outline-none focus:ring-2 focus:ring-bloom-rose/40 cursor-pointer"
                     aria-haspopup="true"
                     aria-expanded="false"
                     aria-label="User Account Menu"
@@ -1015,7 +1065,7 @@ body {
 
                   <!-- 2. My Orders -->
                   <a href="#account/orders" 
-                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
                      role="menuitem"
                      data-tab="orders">
                     <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
@@ -1033,9 +1083,29 @@ body {
                     <svg class="w-3.5 h-3.5 text-bloom-muted group-hover:text-bloom-deepRose transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                   </a>
 
-                  <!-- 3. Coupons -->
+                  <!-- 3. Track Order -->
+                  <a href="#account/track" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
+                     role="menuitem"
+                     data-tab="track">
+                    <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25H6.75A2.25 2.25 0 004.5 9.75v6.75h12v-6.75a2.25 2.25 0 00-2.25-2.25z"/>
+                      </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="text-xs font-bold text-bloom-text group-hover:text-bloom-deepRose flex items-center gap-2">
+                        Track Order
+                        <span class="text-[9px] bg-blue-50 text-blue-700 border border-blue-200 px-1.5 py-0.2 rounded-full font-bold">Live</span>
+                      </div>
+                      <div class="text-[10px] text-bloom-muted truncate">Real-time courier & dispatch tracking</div>
+                    </div>
+                    <svg class="w-3.5 h-3.5 text-bloom-muted group-hover:text-bloom-deepRose transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+                  </a>
+
+                  <!-- 4. Coupons -->
                   <a href="#account/coupons" 
-                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
                      role="menuitem"
                      data-tab="coupons">
                     <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
@@ -1053,9 +1123,9 @@ body {
                     <svg class="w-3.5 h-3.5 text-bloom-muted group-hover:text-bloom-deepRose transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                   </a>
 
-                  <!-- 4. Saved Cards & Wallets -->
+                  <!-- 5. Saved Cards & Wallets -->
                   <a href="#account/cards" 
-                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
                      role="menuitem"
                      data-tab="cards">
                     <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
@@ -1073,9 +1143,9 @@ body {
 
                 <!-- Secondary Preferences & Settings -->
                 <div class="space-y-0.5 py-2">
-                  <!-- 5. Saved Addresses -->
+                  <!-- 6. Saved Addresses -->
                   <a href="#account/addresses" 
-                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
                      role="menuitem"
                      data-tab="addresses">
                     <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
@@ -1091,9 +1161,9 @@ body {
                     <svg class="w-3.5 h-3.5 text-bloom-muted group-hover:text-bloom-deepRose transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                   </a>
 
-                  <!-- 6. Wishlist -->
+                  <!-- 7. Wishlist -->
                   <a href="#account/wishlist" 
-                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
                      role="menuitem"
                      data-tab="wishlist">
                     <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
@@ -1108,9 +1178,9 @@ body {
                     <svg class="w-3.5 h-3.5 text-bloom-muted group-hover:text-bloom-deepRose transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
                   </a>
 
-                  <!-- 7. Gift Cards -->
+                  <!-- 8. Gift Cards -->
                   <a href="#account/giftcards" 
-                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group" 
+                     class="account-menu-item flex items-center gap-3 px-3 py-2.5 rounded-xl text-bloom-text hover:bg-bloom-soft/70 hover:text-bloom-deepRose transition-colors group cursor-pointer" 
                      role="menuitem"
                      data-tab="giftcards">
                     <div class="w-8 h-8 rounded-lg bg-bloom-soft/50 text-bloom-rose flex items-center justify-center group-hover:bg-bloom-rose group-hover:text-white transition-colors shrink-0">
@@ -1128,7 +1198,7 @@ body {
 
                 <!-- Logout Action -->
                 <div class="pt-1.5">
-                  <!-- 8. Logout -->
+                  <!-- 9. Logout -->
                   <button type="button" 
                           id="account-dropdown-logout-btn"
                           onclick="window.BloomEcommerceUI ? window.BloomEcommerceUI.handleLogout() : null" 
@@ -2346,6 +2416,7 @@ body {
       <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft" data-action="filter-category" data-category="Beauty Tools" onclick="BloomApp.closeMobileDrawer()">🪞 Beauty Tools</button>
       <a href="#brands-section" class="block py-2.5 px-3 rounded hover:bg-bloom-soft" onclick="BloomApp.closeMobileDrawer()">🏷️ Popular Brands</a>
       <a href="#savings-section" class="block py-2.5 px-3 rounded text-bloom-deepRose font-bold hover:bg-bloom-soft" onclick="BloomApp.closeMobileDrawer()">🔥 Offers & Deals</a>
+      <button type="button" class="w-full text-left py-2.5 px-3 rounded hover:bg-bloom-soft text-bloom-deepRose font-bold" onclick="BloomApp.closeMobileDrawer(); (window.BloomEcommerceUI?.openAccount || function(t){ window.location.hash = '#account/' + t; })('profile')">👤 My Account & Orders</button>
     </div>
 
     <div class="p-4 border-t border-bloom-border text-xs text-bloom-muted bg-[#FAF6F7]">
@@ -2391,7 +2462,16 @@ body {
   <script type="module" src="./js/components.js?v=3.5.0"></script>
   <script type="module" src="./js/app.js?v=3.6.0"></script>
   <script type="module" src="./js/ecommerce-store.js?v=3.7.0"></script>
-  <script type="module" src="./js/ecommerce-ui.js?v=4.0.0"></script>
+  <script type="module" src="./js/ecommerce-ui.js?v=4.1.0"></script>
+
+  <script>
+    // Safeguard: Ensure BloomEcommerceUI is initialized as soon as scripts load
+    window.addEventListener('load', function() {
+      if (window.BloomEcommerceUI && !window.BloomEcommerceUI._isInitialized) {
+        window.BloomEcommerceUI.init();
+      }
+    });
+  </script>
 
   <!-- Global Fixed Watermark: Made by Zynova -->
   <div id="zynova-watermark" class="zynova-global-watermark" aria-hidden="true">Made by Zynova</div>

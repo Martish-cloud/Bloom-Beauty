@@ -33,9 +33,12 @@ const BloomEcommerceUI = {
 
   activeAccountTab: 'profile',
   selectedTrackingOrderId: null,
+  _isInitialized: false,
 
   // --- Initialize Routing & Global Listeners ---
   init() {
+    if (this._isInitialized) return;
+    this._isInitialized = true;
     this.injectStyles();
     this.setupStickyHeaderMetrics();
     this.setupAccountDropdown();
@@ -139,7 +142,6 @@ const BloomEcommerceUI = {
   },
 
   // --- Account Dropdown Menu Interactions (Strict Click-To-Toggle for Desktop & Mobile) ---
-  // --- Account Dropdown Menu Interactions (Strict Click-To-Toggle for Desktop & Mobile) ---
   setupAccountDropdown() {
     const wrapper = document.getElementById('account-dropdown-wrapper');
     const btn = document.getElementById('account-dropdown-btn');
@@ -151,7 +153,7 @@ const BloomEcommerceUI = {
     let lastToggleTimestamp = 0;
     let openScrollY = 0;
 
-    // Helper: explicitly synchronize chevron arrow
+    // Helper: explicitly synchronize chevron arrow and aria attributes
     const setVisualState = (open) => {
       if (open) {
         menu.classList.add('is-open');
@@ -167,6 +169,7 @@ const BloomEcommerceUI = {
     // Helper: Open dropdown
     const openMenu = () => {
       isOpen = true;
+      this._isAccountMenuOpen = true;
       lastToggleTimestamp = Date.now();
       openScrollY = window.scrollY;
       this.updateAccountDropdownUI();
@@ -176,23 +179,31 @@ const BloomEcommerceUI = {
     // Helper: Close dropdown
     const closeMenu = () => {
       isOpen = false;
+      this._isAccountMenuOpen = false;
       lastToggleTimestamp = Date.now();
       setVisualState(false);
     };
+
+    const toggleMenu = () => {
+      if (isOpen || menu.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+
+    // Store references on instance
+    this._openAccountMenu = openMenu;
+    this._closeAccountMenu = closeMenu;
+    this._toggleAccountMenu = toggleMenu;
 
     // Ensure initial closed state on page load
     closeMenu();
 
     // --- 1. PRIMARY INTERACTION: CLICK TO TOGGLE (Desktop, Mobile, Tablet) ---
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (isOpen) {
-        closeMenu();
-      } else {
-        openMenu();
-      }
-    });
+    btn.onclick = (e) => {
+      this.toggleAccountDropdown(e);
+    };
 
     // --- 2. PREVENT CLICKS INSIDE THE DROPDOWN PANEL FROM CLOSING IT PREMATURELY ---
     menu.addEventListener('click', (e) => {
@@ -201,7 +212,7 @@ const BloomEcommerceUI = {
 
     // --- 3. CLOSE ON CLICK/TAP OUTSIDE (Guarded against same-interaction clicks) ---
     const handleOutsideInteraction = (e) => {
-      if (!isOpen) return;
+      if (!isOpen && !menu.classList.contains('is-open')) return;
       // Prevent closing during the exact same interaction as opening
       if (Date.now() - lastToggleTimestamp < 220) return;
       // Ignore if clicked inside account wrapper
@@ -214,7 +225,7 @@ const BloomEcommerceUI = {
 
     // --- 4. CLOSE ON ESCAPE KEY ---
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === 'Escape' && (isOpen || menu.classList.contains('is-open'))) {
         e.preventDefault();
         closeMenu();
         btn.focus();
@@ -223,7 +234,7 @@ const BloomEcommerceUI = {
 
     // --- 5. CLOSE ON MEANINGFUL PAGE SCROLL (> 60px) ---
     window.addEventListener('scroll', () => {
-      if (isOpen && Math.abs(window.scrollY - openScrollY) > 60) {
+      if ((isOpen || menu.classList.contains('is-open')) && Math.abs(window.scrollY - openScrollY) > 60) {
         closeMenu();
       }
     }, { passive: true });
@@ -260,7 +271,7 @@ const BloomEcommerceUI = {
     // Keyboard support on the trigger button
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
-        if (!isOpen) {
+        if (!isOpen && !menu.classList.contains('is-open')) {
           e.preventDefault();
           openMenu();
           const firstItem = menu.querySelector('.account-menu-item');
@@ -268,10 +279,46 @@ const BloomEcommerceUI = {
         }
       }
     });
+  },
 
-    // Store references on instance
-    this._openAccountMenu = openMenu;
-    this._closeAccountMenu = closeMenu;
+  toggleAccountDropdown(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const now = Date.now();
+    if (this._lastToggle && (now - this._lastToggle < 120)) {
+      return;
+    }
+    this._lastToggle = now;
+
+    if (!this._isInitialized) {
+      this.init();
+    }
+
+    if (this._toggleAccountMenu) {
+      this._toggleAccountMenu();
+      return;
+    }
+
+    const menu = document.getElementById('account-dropdown-menu');
+    const btn = document.getElementById('account-dropdown-btn');
+    const chevron = document.getElementById('account-dropdown-chevron') || btn?.querySelector('svg.transition-transform');
+    if (!menu) return;
+
+    const isOpen = menu.classList.contains('is-open');
+    if (isOpen) {
+      menu.classList.remove('is-open');
+      btn?.setAttribute('aria-expanded', 'false');
+      if (chevron) chevron.style.transform = 'rotate(0deg)';
+      this._isAccountMenuOpen = false;
+    } else {
+      this.updateAccountDropdownUI();
+      menu.classList.add('is-open');
+      btn?.setAttribute('aria-expanded', 'true');
+      if (chevron) chevron.style.transform = 'rotate(180deg)';
+      this._isAccountMenuOpen = true;
+    }
   },
 
   openAccountDropdown() {
@@ -280,22 +327,28 @@ const BloomEcommerceUI = {
     } else {
       const btn = document.getElementById('account-dropdown-btn');
       const menu = document.getElementById('account-dropdown-menu');
+      const chevron = document.getElementById('account-dropdown-chevron') || btn?.querySelector('svg.transition-transform');
       if (!menu) return;
       this.updateAccountDropdownUI();
       menu.classList.add('is-open');
       btn?.setAttribute('aria-expanded', 'true');
+      if (chevron) chevron.style.transform = 'rotate(180deg)';
+      this._isAccountMenuOpen = true;
     }
   },
 
   closeAccountDropdown() {
     if (this._closeAccountMenu) {
-      this._closeAccountMenu(true);
+      this._closeAccountMenu();
     } else {
       const btn = document.getElementById('account-dropdown-btn');
       const menu = document.getElementById('account-dropdown-menu');
+      const chevron = document.getElementById('account-dropdown-chevron') || btn?.querySelector('svg.transition-transform');
       if (!menu) return;
       menu.classList.remove('is-open');
       btn?.setAttribute('aria-expanded', 'false');
+      if (chevron) chevron.style.transform = 'rotate(0deg)';
+      this._isAccountMenuOpen = false;
     }
   },
 
@@ -2237,7 +2290,7 @@ const BloomEcommerceUI = {
     document.querySelectorAll('[data-action="track-order"]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        this.openAccount('orders');
+        this.openAccount('track');
       });
     });
 
@@ -2251,3 +2304,14 @@ const BloomEcommerceUI = {
 };
 
 window.BloomEcommerceUI = BloomEcommerceUI;
+
+// Auto-initialize BloomEcommerceUI when DOM is ready
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      BloomEcommerceUI.init();
+    });
+  } else {
+    BloomEcommerceUI.init();
+  }
+}
