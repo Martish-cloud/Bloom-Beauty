@@ -1,5 +1,5 @@
 // ========================================================
-// BLOOM BEAUTY — APPLICATION STATE & PERSISTENCE
+// BLOOM BEAUTY — CLIENT-SIDE STATE MANAGEMENT (INR ₹)
 // ========================================================
 
 class BloomStore {
@@ -7,42 +7,44 @@ class BloomStore {
     this.cart = this.loadCart();
     this.wishlist = this.loadWishlist();
     this.promoCode = localStorage.getItem('bloom_promo') || null;
-    this.promoDiscountPercent = this.promoCode === 'GLOW20' ? 20 : this.promoCode === 'BLOOM10' ? 10 : 0;
+    this.promoDiscountPercent = this.promoCode === 'GLOW20' ? 20 : (this.promoCode === 'BLOOM10' ? 10 : 0);
     this.subscribers = [];
   }
 
+  // --- Persistence ---
   loadCart() {
     try {
-      const data = localStorage.getItem('bloom_cart_v1');
+      const data = localStorage.getItem('bloom_cart');
       return data ? JSON.parse(data) : [];
-    } catch (e) {
+    } catch {
       return [];
     }
   }
 
   saveCart() {
     try {
-      localStorage.setItem('bloom_cart_v1', JSON.stringify(this.cart));
-    } catch (e) {}
+      localStorage.setItem('bloom_cart', JSON.stringify(this.cart));
+    } catch {}
     this.notify();
   }
 
   loadWishlist() {
     try {
-      const data = localStorage.getItem('bloom_wishlist_v1');
+      const data = localStorage.getItem('bloom_wishlist');
       return data ? JSON.parse(data) : [];
-    } catch (e) {
+    } catch {
       return [];
     }
   }
 
   saveWishlist() {
     try {
-      localStorage.setItem('bloom_wishlist_v1', JSON.stringify(this.wishlist));
-    } catch (e) {}
+      localStorage.setItem('bloom_wishlist', JSON.stringify(this.wishlist));
+    } catch {}
     this.notify();
   }
 
+  // --- Pub/Sub ---
   subscribe(callback) {
     this.subscribers.push(callback);
     return () => {
@@ -114,13 +116,13 @@ class BloomStore {
 
   getDiscount() {
     const subtotal = this.getSubtotal();
-    return (subtotal * this.promoDiscountPercent) / 100;
+    return Math.round((subtotal * this.promoDiscountPercent) / 100);
   }
 
   getShipping() {
     const subtotal = this.getSubtotal();
     if (subtotal === 0) return 0;
-    return subtotal >= 35 ? 0 : 5.99;
+    return subtotal >= 799 ? 0 : 99;
   }
 
   getTotal() {

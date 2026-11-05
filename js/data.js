@@ -1,13 +1,18 @@
 // ========================================================
-// BLOOM BEAUTY — PRODUCT CATALOG & BRAND DATA
+// BLOOM BEAUTY — PRODUCT CATALOG & BRAND DATA (INR ₹)
 // ========================================================
+
+window.formatINR = function(amount) {
+  if (typeof amount !== 'number') amount = Number(amount) || 0;
+  return '₹' + Math.round(amount).toLocaleString('en-IN');
+};
 
 window.BloomData = {
   announcements: [
-    "✨ Discover Your Beauty, Your Way | Complimentary Deluxe Sample on Orders over $45",
-    "🌸 Free Express Shipping on All Cosmetics & Skincare over $35",
-    "💄 Exclusive: Up to 40% Off Selected Luxury Cosmetics & Fragrances",
-    "🌿 100% Authentic Products Sourced Directly from Global Brands"
+    "✨ Discover Your Beauty, Your Way | Complimentary Deluxe Mini on Orders over ₹999",
+    "🌸 Free Express Shipping Across India on All Cosmetics & Skincare over ₹799",
+    "💄 Exclusive: Up to 40% Off Selected Luxury Fragrances, Lipsticks & Skincare",
+    "🌿 100% Authentic Products Sourced Directly from Global & Indian Brands"
   ],
 
   heroSlides: [
@@ -15,11 +20,11 @@ window.BloomData = {
       id: 1,
       badge: "NEW LAUNCH COLLECTION",
       title: "The Art of Velvet Radiance",
-      subtitle: "Ultra-pigmented cushiony mattes infused with nourishing botanical oils for weightless, 12-hour all-day comfort.",
+      subtitle: "Ultra-pigmented cushiony mattes infused with nourishing botanical oils for weightless, 12-hour comfortable all-day elegance.",
       ctaPrimary: "Shop Lipsticks",
       ctaSecondary: "Explore Shades",
       category: "Makeup",
-      image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=1600&q=85",
+      image: "Docs/Lipsticks/Luxury Red Lipstick Mood Board.png",
       accentColor: "#C98498"
     },
     {
@@ -30,18 +35,18 @@ window.BloomData = {
       ctaPrimary: "Shop Skincare",
       ctaSecondary: "Build Routine",
       category: "Skincare",
-      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1600&q=85",
+      image: "Docs/Skincare/Radiant Serum Skincare Glow.png",
       accentColor: "#DDA6B3"
     },
     {
       id: 3,
       badge: "HAIR REVOLUTION",
       title: "Salon Molecular Repair at Home",
-      subtitle: "Patented bond-building technologies and keratin smoothing treatments to reverse years of styling damage.",
+      subtitle: "Patented bond-building technologies and rosemary rice water treatments for silky, strong, voluminous hair.",
       ctaPrimary: "Shop Haircare",
       ctaSecondary: "View Treatments",
       category: "Haircare",
-      image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1600&q=85",
+      image: "Docs/Haircare/Voluminous Waves Beauty Portrait.png",
       accentColor: "#C5A880"
     }
   ],
@@ -52,900 +57,1042 @@ window.BloomData = {
       name: "Makeup",
       tagline: "Lipsticks, Foundations, Eyes & Blushes",
       itemCount: "240+ Products",
-      image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Lipsticks/Luxury Red Lipstick Mood Board.png",
       subcategories: ["Lipsticks & Glosses", "Foundations & Concealers", "Eyeshadow & Mascara", "Blush & Highlighters", "Primers & Setting Sprays"],
-      popularBrands: ["Maybelline New York", "L'Oréal Paris", "MAC Cosmetics", "Huda Beauty", "NYX Professional"]
+      popularBrands: ["Maybelline New York", "Praush Beauty", "Prime Matte", "L'Oréal Paris", "MAC Cosmetics", "Huda Beauty"]
     },
     {
       id: "skincare",
       name: "Skincare",
       tagline: "Serums, Cleansers, SPF & Moisturizers",
       itemCount: "190+ Products",
-      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Skincare/Radiant Serum Skincare Glow.png",
       subcategories: ["Cleansers & Toners", "Serums & Essences", "Moisturizers & Creams", "Sunscreen SPF 50+", "Face Masks & Peels"],
-      popularBrands: ["The Ordinary", "CeraVe", "Cetaphil", "Minimalist", "Dot & Key"]
+      popularBrands: ["Bloom Beauty", "The Ordinary", "CeraVe", "Cetaphil", "Minimalist"]
     },
     {
       id: "haircare",
       name: "Haircare",
       tagline: "Bond Repair, Shampoos & Masks",
       itemCount: "150+ Products",
-      image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Haircare/Voluminous Waves Beauty Portrait.png",
       subcategories: ["Bond Repair & Masks", "Shampoos & Conditioners", "Hair Oils & Serums", "Scalp Care & Scrubs", "Styling & Heat Protect"],
-      popularBrands: ["Olaplex", "L'Oréal Professionnel", "Schwarzkopf", "TRESemmé", "Matrix"]
+      popularBrands: ["Kronzam", "L'Oréal Paris", "Maheorthe", "Olaplex", "TRESemmé"]
     },
     {
       id: "bath-body",
       name: "Bath & Body",
       tagline: "Body Butters, Scrubs & Shower Gels",
       itemCount: "95+ Products",
-      image: "https://images.unsplash.com/photo-1556228722-d0b5d033a7f8?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Bath & Body/Lavender Body & Earth Gift Set.png",
       subcategories: ["Body Butters & Lotions", "Shower Gels & Washes", "Body Scrubs & Exfoliators", "Hand & Foot Care", "Bath Salts & Soaks"],
-      popularBrands: ["Bloom Beauty", "Cetaphil", "Plum", "Mamaearth"]
+      popularBrands: ["Bath & Body Works", "Body & Earth", "American Girl", "Bloom Beauty"]
     },
     {
       id: "fragrance",
       name: "Fragrance",
       tagline: "Eau de Parfum, Mists & Travel Sets",
       itemCount: "80+ Products",
-      image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png",
       subcategories: ["Eau de Parfum", "Eau de Toilette", "Body Mists & Sprays", "Perfume Oils", "Discovery Sets"],
-      popularBrands: ["Bloom Beauty Atelier", "Luxe Paris", "Rose & Amber Co."]
+      popularBrands: ["Chanel Paris", "Lunair", "SKINN by Titan", "Arabian Aroma", "Bloom Beauty"]
     },
     {
       id: "nail-care",
       name: "Nail Care",
       tagline: "Gel Polish, Cuticle Oils & Sets",
       itemCount: "65+ Products",
-      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Nail Care/MII Fashion Metallic Pink Nail Polish.png",
       subcategories: ["Gel Finish Polish", "Nail Treatments", "Cuticle Oils & Creams", "Base & Top Coats", "Nail Tools"],
-      popularBrands: ["Bloom Beauty Nails", "Colorbar", "Kay Beauty"]
+      popularBrands: ["Rose & Lily", "MI Fashion", "Nail Republic", "Miss Nails", "Bloom Beauty Nails"]
     },
     {
       id: "beauty-tools",
       name: "Beauty Tools",
       tagline: "Rollers, Gua Sha & Brushes",
       itemCount: "75+ Products",
-      image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
+      image: "Docs/Nail Care/Professional Nail Care Tools Flat Lay.png",
       subcategories: ["Facial Rollers & Gua Sha", "Makeup Brushes & Sponges", "Eyelash Curlers", "Cleansing Brushes", "Vanity Organizers"],
       popularBrands: ["Bloom Beauty Studio", "Swiss Beauty", "Kay Beauty"]
     }
   ],
 
   brands: [
-    // Makeup
+    { id: "chanel-paris", name: "Chanel Paris", category: "Fragrance", tag: "HAUTE LUXE", desc: "Timeless Parisian elegance and iconic perfumery" },
     { id: "maybelline", name: "Maybelline New York", category: "Makeup", tag: "ICONIC", desc: "Trendsetting global cosmetics" },
-    { id: "loreal-paris", name: "L'Oréal Paris", category: "Makeup", tag: "GLOBAL BEST", desc: "Because you're worth it" },
-    { id: "mac", name: "MAC Cosmetics", category: "Makeup", tag: "PRO ARTISTRY", desc: "All ages, all races, all genders" },
-    { id: "huda-beauty", name: "Huda Beauty", category: "Makeup", tag: "TRENDING", desc: "Award-winning glam formulas" },
-    { id: "nyx", name: "NYX Professional Makeup", category: "Makeup", tag: "POPULAR", desc: "Pro pigments accessible to all" },
-    { id: "lakme", name: "Lakmé", category: "Makeup", tag: "CLASSIC", desc: "Runway-inspired beauty looks" },
-    { id: "colorbar", name: "Colorbar", category: "Makeup", tag: "CLEAN", desc: "Gender-neutral cruelty-free cosmetics" },
-    { id: "swiss-beauty", name: "Swiss Beauty", category: "Makeup", tag: "VALUE", desc: "High-definition velvet finish" },
-    { id: "kay-beauty", name: "Kay Beauty", category: "Makeup", tag: "LOVED", desc: "Care-infused makeup essentials" },
-    { id: "elf", name: "e.l.f. Cosmetics", category: "Makeup", tag: "VIRAL", desc: "100% clean & vegan favorites" },
-
-    // Skincare
-    { id: "the-ordinary", name: "The Ordinary", category: "Skincare", tag: "HOLY GRAIL", desc: "Clinical formulations with integrity" },
-    { id: "cetaphil", name: "Cetaphil", category: "Skincare", tag: "DERM PICK", desc: "Gentle skin barrier defence" },
-    { id: "neutrogena", name: "Neutrogena", category: "Skincare", tag: "HYDRO BOOST", desc: "Dermatologist recommended" },
-    { id: "cerave", name: "CeraVe", category: "Skincare", tag: "CERAMIDES", desc: "Restores protective skin barrier" },
-    { id: "minimalist", name: "Minimalist", category: "Skincare", tag: "TRANSPARENT", desc: "Active-led science-backed care" },
-    { id: "mamaearth", name: "Mamaearth", category: "Skincare", tag: "PLANT-BASED", desc: "Gentle toxin-free ingredients" },
-    { id: "dot-and-key", name: "Dot & Key", category: "Skincare", tag: "FRUIT ACTIVES", desc: "Skin barrier repair formulas" },
-    { id: "plum", name: "Plum", category: "Skincare", tag: "100% VEGAN", desc: "Goodness that delivers glow" },
-    { id: "the-derma-co", name: "The Derma Co.", category: "Skincare", tag: "CLINICAL", desc: "Designed by dermatologists" },
-
-    // Haircare
-    { id: "loreal-prof", name: "L'Oréal Professionnel", category: "Haircare", tag: "SALON GRADE", desc: "Molecular hair transformation" },
-    { id: "schwarzkopf", name: "Schwarzkopf", category: "Haircare", tag: "BOND RESCUE", desc: "German hair technology" },
-    { id: "tresemme", name: "TRESemmé", category: "Haircare", tag: "RUNWAY", desc: "Salon quality smooth hair" },
-    { id: "matrix", name: "Matrix", category: "Haircare", tag: "SMOOTHPROOF", desc: "Biolage botanical science" },
-    { id: "olaplex", name: "Olaplex", category: "Haircare", tag: "PATENTED", desc: "Complete bond repair" }
+    { id: "bloom-beauty", name: "Bloom Beauty", category: "Skincare", tag: "CLEAN CLINICAL", desc: "Dermatologically tested biocompatible skincare" },
+    { id: "bath-body-works", name: "Bath & Body Works", category: "Bath & Body", tag: "FAN FAVORITE", desc: "Signature fine mists and decadent body care" },
+    { id: "kronzam", name: "Kronzam", category: "Haircare", tag: "BOTANICAL", desc: "Active rosemary & rice water hair wellness" },
+    { id: "loreal-paris", name: "L'Oréal Paris", category: "Haircare", tag: "GLOBAL BEST", desc: "Advanced haircare formulas engineered for results" },
+    { id: "praush-beauty", name: "Praush Beauty", category: "Makeup", tag: "PRO PIGMENT", desc: "High-impact velvety rose-gold lip artistry" },
+    { id: "rose-lily", name: "Rose & Lily", category: "Nail Care", tag: "SALON CARE", desc: "Intensive nail strengthening and cuticle therapy" },
+    { id: "body-earth", name: "Body & Earth", category: "Bath & Body", tag: "AROMATHERAPY", desc: "Calming French lavender spa collections" },
+    { id: "lunair", name: "Lunair", category: "Fragrance", tag: "EXTRAIT DE LUXE", desc: "Artisanal long-wearing luxury extrait fragrances" },
+    { id: "titan-skinn", name: "SKINN by Titan", category: "Fragrance", tag: "FINE ART", desc: "Crafted in France, celebrated across India" },
+    { id: "nail-republic", name: "Nail Republic", category: "Nail Care", tag: "GEL SYSTEM", desc: "Professional cat-eye and UV salon finishes" },
+    { id: "prime-matte", name: "Prime Matte", category: "Makeup", tag: "ALL DAY MATTE", desc: "Featherlight full-coverage matte lipsticks" },
+    { id: "maheorthe", name: "Maheorthe", category: "Haircare", tag: "AYURVEDIC HERBAL", desc: "Pure coconut and red hibiscus hair remedies" },
+    { id: "miss-nails", name: "Miss Nails", category: "Nail Care", tag: "HIGH SHINE", desc: "Quick-drying chip-resistant mini lacquers" },
+    { id: "american-girl", name: "Bath & Body Works x American Girl", category: "Bath & Body", tag: "COLLABORATION", desc: "Vibrant vitamin-infused body splashes" }
   ],
 
   products: [
-    // 1. Maybelline Ultimatte Lipstick
+    // ------------------------------------------------------------------------
+    // SECTION 1: FRAGRANCE (Range: ₹2,000 – ₹5,000)
+    // ------------------------------------------------------------------------
+    {
+      id: "prod-chanel-coco-mademoiselle",
+      name: "Coco Mademoiselle Eau De Parfum Intense",
+      brand: "Chanel Paris",
+      category: "Fragrance",
+      subcategory: "Eau de Parfum",
+      price: 4899,
+      originalPrice: 5800,
+      discountPercent: 16,
+      rating: 4.9,
+      reviewCount: 3820,
+      images: [
+        "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png",
+        "Docs/Fragance/chanel-coco-mademoiselle-cp77-duo-fragrance-02.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Top Iconic Scent",
+      description: "An intense, woody and ambery oriental fragrance with a full-bodied character. Sensual notes of patchouli warmed by an amber accord of vanilla extract and tonka bean.",
+      keyBenefits: ["Eau de Parfum Intense concentration", "Lasts 14+ hours on skin", "Luxurious faceted glass bottle"],
+      ingredients: "Alcohol, Parfum (Fragrance), Aqua (Water), Linalool, Limonene, Benzyl Salicylate, Coumarin, Citronellol, Geraniol.",
+      howToUse: "Mist onto pulse points including wrists, inner elbows, and base of the neck for an all-day captivating sillage."
+    },
+    {
+      id: "prod-lunair-her-aura",
+      name: "Her Aura Luxury Extrait De Parfum (25% Parfum)",
+      brand: "Lunair",
+      category: "Fragrance",
+      subcategory: "Extrait de Parfum",
+      price: 3499,
+      originalPrice: 4200,
+      discountPercent: 17,
+      rating: 4.8,
+      reviewCount: 1640,
+      images: [
+        "Docs/Fragance/Her Aura Luxury Perfume Ad.png",
+        "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      dealLabel: "Save ₹701",
+      description: "Crafted with 25% pure parfum oils imported from France and Switzerland. Non-irritant, IFRA certified with up to 12 hours of projection and intoxicating floral amber warmth.",
+      keyBenefits: ["25% Parfum Concentration", "Up to 12 Hours Long Lasting", "IFRA Certified Skin-Safe Formula"],
+      ingredients: "Perfume Oils (France/Switzerland), Organic Alcohol Denat, Purified Aqua, Hedione, Amber Core, Rose Absolute.",
+      howToUse: "Spray on clean, moisturized skin. Focus on collarbones, behind ears, and hair ends."
+    },
+    {
+      id: "prod-chanel-cp77-duo",
+      name: "Coco Mademoiselle & CP-77 Extrait De Parfum Luxury Duo (60ml)",
+      brand: "Chanel Paris & CP-77",
+      category: "Fragrance",
+      subcategory: "Perfume Set",
+      price: 3999,
+      originalPrice: 4800,
+      discountPercent: 17,
+      rating: 4.7,
+      reviewCount: 940,
+      images: [
+        "Docs/Fragance/chanel-coco-mademoiselle-cp77-duo-fragrance-02.png",
+        "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png"
+      ],
+      badge: "LIMITED OFFER",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save ₹801",
+      description: "The ultimate twin fragrance pairing: full-size Chanel Coco Mademoiselle Eau De Parfum paired with the concentrated CP-77 Extrait de Parfum (60ml).",
+      keyBenefits: ["Two iconic fragrance silhouettes in one curated set", "Layerable for day-to-night transitions", "Collector edition bottles"],
+      ingredients: "Alcohol Denat., Parfum, Aqua, Linalool, Alpha-Isomethyl Ionone, Eugenol, Benzyl Benzoate.",
+      howToUse: "Layer CP-77 as a base note on pulse points, followed by a mist of Coco Mademoiselle over garments."
+    },
+    {
+      id: "prod-titan-skinn-nude",
+      name: "SKINN Nude Eau De Parfum Pour Femme (50ml Gift Box)",
+      brand: "SKINN by Titan",
+      category: "Fragrance",
+      subcategory: "Eau de Parfum",
+      price: 2499,
+      originalPrice: 2995,
+      discountPercent: 17,
+      rating: 4.8,
+      reviewCount: 2210,
+      images: [
+        "Docs/Fragance/titan-skinn-nude-eau-de-parfum-fragrance-01.png",
+        "Docs/Fragance/Her Aura Luxury Perfume Ad.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Top Seller",
+      description: "Created by master French perfumers for Titan. Opening with luscious lychee and raspberry, blossoming into rose petals and peach, drying down to velvety sandalwood and tonka bean.",
+      keyBenefits: ["Fine French perfumery crafted for Indian climates", "Comes in a presentation luxury rigid box", "Faceted diamond-cut crystal cap"],
+      ingredients: "Ethyl Alcohol (95% v/v), Fragrance, Aqua, Butylated Hydroxytoluene, Diethyl Phthalate.",
+      howToUse: "Apply onto pulse points after a shower. Allow to settle naturally without rubbing wrists together."
+    },
+    {
+      id: "prod-arabian-aroma-flora",
+      name: "Flora Extrait De Parfum Floral Seduction (50ml)",
+      brand: "Arabian Aroma",
+      category: "Fragrance",
+      subcategory: "Extrait de Parfum",
+      price: 2199,
+      originalPrice: 2750,
+      discountPercent: 20,
+      rating: 4.6,
+      reviewCount: 880,
+      images: [
+        "Docs/Fragance/arabian-aroma-flora-extrait-fragrance-03.png",
+        "Docs/Fragance/titan-skinn-nude-eau-de-parfum-fragrance-01.png"
+      ],
+      badge: "HOT DEAL",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save 20%",
+      description: "An opulent floral tribute featuring velvety gardenia, sun-drenched jasmine sambac, and warm pear nectar over a golden sandalwood base.",
+      keyBenefits: ["High concentration Extrait de Parfum", "Long-lasting vintage botanical aroma", "Artisan floral illustrated bottle"],
+      ingredients: "Pure Perfume Oil, Alcohol Denat, Fragrance, Aqua, Benzyl Alcohol, Benzyl Salicylate.",
+      howToUse: "Spray on pulse points or in the air and walk through the fragrant cloud."
+    },
+
+    // ------------------------------------------------------------------------
+    // SECTION 2: BATH & BODY (Range: ₹800 – ₹1,400)
+    // ------------------------------------------------------------------------
+    {
+      id: "prod-body-earth-lavender-set",
+      name: "Lavender Relaxing Spa Bath & Body 6-Piece Gift Set",
+      brand: "Body & Earth",
+      category: "Bath & Body",
+      subcategory: "Spa Gift Set",
+      price: 1399,
+      originalPrice: 1899,
+      discountPercent: 26,
+      rating: 4.9,
+      reviewCount: 2950,
+      images: [
+        "Docs/Bath & Body/Lavender Body & Earth Gift Set.png",
+        "Docs/Bath & Body/Lavender Mother’s Day Gift Display.png",
+        "Docs/Bath & Body/Lavender Spa Skincare Collection.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Deluxe Spa Box",
+      description: "Indulge in a tranquil French lavender spa ritual. Complete 6-piece boxed set contains Shower Gel (184ml), Bubble Bath (184ml), Body Lotion (55ml), Hand Cream (55ml), Lavender Face Cream (50ml), and Artisan Bar Soap (100g) tied with satin ribbon.",
+      keyBenefits: ["Complete 6-piece aromatherapy spa regimen", "Infused with pure natural lavender essential oils", "Ready-to-gift keepsake presentation box with ribbon"],
+      ingredients: "Lavandula Angustifolia (Lavender) Oil, Shea Butter, Sunflower Seed Oil, Vitamin E, Glycerin, Aloe Barbadensis Leaf Extract.",
+      howToUse: "Cleanse with Shower Gel or Bubble Bath, then massage Body Lotion and Hand Cream into towel-dried skin."
+    },
+    {
+      id: "prod-bbw-always-fleur-duo",
+      name: "Always Fleur & Eau de Coconut Fine Fragrance Mist Duo (236ml x 2)",
+      brand: "Bath & Body Works",
+      category: "Bath & Body",
+      subcategory: "Body Mist",
+      price: 1299,
+      originalPrice: 1700,
+      discountPercent: 24,
+      rating: 4.8,
+      reviewCount: 1410,
+      images: [
+        "Docs/Bath & Body/Always Fleur and Eau de Coconut Duo.png",
+        "Docs/Bath & Body/Salted Shorelines Fragrance Mist.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      dealLabel: "Save ₹401",
+      description: "Dermatologist-tested luxury twin pack. Always Fleur delivers crisp sparkling pink florals, while Eau de Coconut envelopes you in sun-warmed coconut milk, creamy vanilla, and solar amber.",
+      keyBenefits: ["Two full-sized 236ml (8 fl oz) faceted bottles", "Dermatologist tested with conditioning aloe", "Day and night tropical layering harmony"],
+      ingredients: "Alcohol Denat., Water (Aqua, Eau), Fragrance (Parfum), Aloe Barbadensis Leaf Extract, Propylene Glycol, Ethylhexyl Methoxycinnamate.",
+      howToUse: "Generously mist over chest, arms, and hair throughout the day for an instant refresh."
+    },
+    {
+      id: "prod-bbw-pink-obsessed-duo",
+      name: "Pink Obsessed Fragrance Mist & Ultimate Hydration Body Cream Duo",
+      brand: "Bath & Body Works",
+      category: "Bath & Body",
+      subcategory: "Body Care Duo",
+      price: 1249,
+      originalPrice: 1650,
+      discountPercent: 24,
+      rating: 4.8,
+      reviewCount: 1780,
+      images: [
+        "Docs/Bath & Body/Pink Obsessed Fragrance Duo.png",
+        "Docs/Bath & Body/bbw-pink-obsessed-duo-alt-bath-body-04.png",
+        "Docs/Bath & Body/bbw-pink-obsessed-body-wash-bath-body-02.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Viral Duo",
+      description: "The viral fragrance phenomenon. Includes full-sized Fine Fragrance Mist (236ml) and 48-Hour Ultimate Hydration Body Cream (226g) packed with rich shea butter and plumping hyaluronic acid.",
+      keyBenefits: ["48-Hour clinically tested moisture lock", "Ultra-nourishing shea butter + hyaluronic acid cream", "Long-lasting warm spun-sugar & velvet berry sillage"],
+      ingredients: "Water (Aqua), Glycerin, Caprylic/Capric Triglyceride, Glyceryl Stearate, Butyrospermum Parkii (Shea) Butter, Hyaluronic Acid, Fragrance.",
+      howToUse: "Smooth body cream over clean skin after bathing, then seal in the aroma with fine fragrance mist."
+    },
+    {
+      id: "prod-bbw-touch-of-gold-wash",
+      name: "Touch of Gold Shea Butter Moisturizing Body Wash (295ml)",
+      brand: "Bath & Body Works",
+      category: "Bath & Body",
+      subcategory: "Shower Gel",
+      price: 899,
+      originalPrice: 1199,
+      discountPercent: 25,
+      rating: 4.7,
+      reviewCount: 820,
+      images: [
+        "Docs/Bath & Body/bbw-touch-of-gold-body-wash-bath-body-01.png",
+        "Docs/Bath & Body/bbw-pink-obsessed-body-wash-bath-body-02.png"
+      ],
+      badge: "LIMITED OFFER",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save 25%",
+      description: "Moisturizes after one single shower. Formulated with rich African shea butter and conditioning coconut oil, wrapping your skin in warm golden amber and shimmering sparkles.",
+      keyBenefits: ["Clinically moisturizes in just one shower", "Infused with pure shea butter for all-day softness", "Rich, cushiony lather with warm amber fragrance"],
+      ingredients: "Water (Aqua), Sodium Cocoyl Isethionate, Cocamidopropyl Betaine, Butyrospermum Parkii (Shea) Butter, Fragrance, Tocopherol.",
+      howToUse: "Lather into damp skin using hands or a shower puff, then rinse thoroughly."
+    },
+    {
+      id: "prod-bbw-pink-obsessed-wash",
+      name: "Pink Obsessed Pro-Vitamin B5 & Aloe Body Wash (295ml)",
+      brand: "Bath & Body Works",
+      category: "Bath & Body",
+      subcategory: "Shower Gel",
+      price: 849,
+      originalPrice: 1099,
+      discountPercent: 23,
+      rating: 4.7,
+      reviewCount: 910,
+      images: [
+        "Docs/Bath & Body/bbw-pink-obsessed-body-wash-bath-body-02.png",
+        "Docs/Bath & Body/Pink Obsessed Fragrance Duo.png"
+      ],
+      badge: "POPULAR",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save ₹250",
+      description: "Gentle yet deeply refreshing daily cleanser formulated with soothing Aloe Vera and Pro-Vitamin B5. Housed in a faceted ruby jewel-toned collectible bottle.",
+      keyBenefits: ["Infused with soothing Pro-Vitamin B5 & Aloe", "Gentle, non-drying foaming cleanser", "Signature Pink Obsessed sweet berry scent"],
+      ingredients: "Water (Aqua), Sodium Laureth Sulfate, Aloe Barbadensis Leaf Juice, Panthenol (Pro-Vitamin B5), Fragrance, Citric Acid.",
+      howToUse: "Dispense into wet palm, work into rich bubbles, and cleanse entire body."
+    },
+    {
+      id: "prod-ag-totally-tropical-duo",
+      name: "American Girl Real Beauty Totally Tropical Lotion & Splash Duo",
+      brand: "Bath & Body Works x American Girl",
+      category: "Bath & Body",
+      subcategory: "Body Care Duo",
+      price: 1099,
+      originalPrice: 1450,
+      discountPercent: 24,
+      rating: 4.8,
+      reviewCount: 670,
+      images: [
+        "Docs/Bath & Body/Retro Tropical Body Care Duo.png",
+        "Docs/Bath & Body/American Girl Take Your Vitamins Lotion.png"
+      ],
+      badge: "LIMITED OFFER",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save 24%",
+      description: "A joyful burst of island sunshine! Includes Take Your Vitamins Daily Body Lotion (236ml) and Get Scent, Go Fragrance Splash (236ml) with uplifting tropical passionfruit and guava extracts.",
+      keyBenefits: ["Vitamin-rich nourishing lotion + matching fragrance splash", "Infused with botanical fruit vitamins", "Fun retro striped collectible packaging"],
+      ingredients: "Aqua, Mineral Oil, Glyceryl Stearate, Fragrance, Passionfruit Extract, Vitamin E Acetate, Retinyl Palmitate.",
+      howToUse: "Apply lotion all over body, followed by a mist of fragrance splash."
+    },
+    {
+      id: "prod-ag-vitamins-lotion",
+      name: "American Girl Take Your Vitamins Daily Body Lotion in Fresh Flowers (236ml)",
+      brand: "Bath & Body Works x American Girl",
+      category: "Bath & Body",
+      subcategory: "Body Lotion",
+      price: 829,
+      originalPrice: 1050,
+      discountPercent: 21,
+      rating: 4.7,
+      reviewCount: 540,
+      images: [
+        "Docs/Bath & Body/American Girl Take Your Vitamins Lotion.png",
+        "Docs/Bath & Body/Retro Tropical Body Care Duo.png"
+      ],
+      badge: "POPULAR",
+      isBestseller: false,
+      isFeaturedValue: false,
+      dealLabel: "Save 21%",
+      description: "Delivers lightweight, fast-absorbing daily moisture. Scented with fresh spring flower petals and enriched with essential multivitamins to keep skin silky and supple.",
+      keyBenefits: ["Fast-absorbing non-greasy texture", "Fresh bouquet floral aroma", "Enriched with essential daily multivitamins"],
+      ingredients: "Water, Cetyl Alcohol, Stearic Acid, Fragrance, Flower Extracts, Niacinamide, Panthenol, Glycerin.",
+      howToUse: "Massage daily onto arms, legs, and dry areas."
+    },
+    {
+      id: "prod-bbw-salted-shorelines",
+      name: "Salted Shorelines Dermatologist Tested Fine Fragrance Mist (236ml)",
+      brand: "Bath & Body Works",
+      category: "Bath & Body",
+      subcategory: "Body Mist",
+      price: 899,
+      originalPrice: 1199,
+      discountPercent: 25,
+      rating: 4.6,
+      reviewCount: 480,
+      images: [
+        "Docs/Bath & Body/Salted Shorelines Fragrance Mist.png",
+        "Docs/Bath & Body/Always Fleur and Eau de Coconut Duo.png"
+      ],
+      badge: "POPULAR",
+      isBestseller: false,
+      isFeaturedValue: false,
+      dealLabel: "Save ₹300",
+      description: "Breathe in the crisp sea breeze! A captivating aquatic mist combining sea salt crystals, sunlit coastal citrus, and driftwood cedar in a multifaceted aquamarine bottle.",
+      keyBenefits: ["Crisp aquatic ocean scent with coastal citrus", "Dermatologist tested with conditioning aloe", "Ultra-fine continuous mist nozzle"],
+      ingredients: "Alcohol Denat., Water, Fragrance, Sea Salt Extract, Aloe Vera Leaf Extract, Benzyl Salicylate.",
+      howToUse: "Spritz all over body for an invigorating burst of fresh ocean energy."
+    },
+
+    // ------------------------------------------------------------------------
+    // SECTION 3: HAIR CARE (Range: ₹450 – ₹1,150)
+    // ------------------------------------------------------------------------
+    {
+      id: "prod-kronzam-rosemary-spray",
+      name: "Kronzam Rosemary & Rice Water Hair Re-Growth Spray (Pack of 2, 100ml each)",
+      brand: "Kronzam",
+      category: "Haircare",
+      subcategory: "Hair Treatment",
+      price: 899,
+      originalPrice: 1199,
+      discountPercent: 25,
+      rating: 4.9,
+      reviewCount: 3120,
+      images: [
+        "Docs/Haircare/Rosemary & Rice Water Spray Duo.png",
+        "Docs/Haircare/Glossy Haircare Spray Beauty Portrait.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      isNewArrival: true,
+      dealLabel: "Twin Pack 25% Off",
+      description: "Clinically proven hair re-growth treatment. Dual water-based spray pack harnesses pure steam-distilled rosemary leaf extract and fermented rice water to reactivate dormant hair follicles.",
+      keyBenefits: ["Strengthens hair roots & stimulates active follicle growth", "100% natural water-based formula: non-greasy, non-sticky", "Free from parabens, sulfates, silicones, and alcohol"],
+      ingredients: "Fermented Oryza Sativa (Rice) Water, Rosmarinus Officinalis (Rosemary) Extract, Biotin, Caffeine, Niacinamide, Glycerin.",
+      howToUse: "Spray directly onto clean scalp morning and evening. Gently massage with fingertips for 2 minutes. Do not rinse."
+    },
+    {
+      id: "prod-loreal-total-repair-1l",
+      name: "Total Repair 5 Keratinxs Repairing Shampoo (1 Litre Mega Size)",
+      brand: "L'Oréal Paris",
+      category: "Haircare",
+      subcategory: "Shampoo",
+      price: 949,
+      originalPrice: 1250,
+      discountPercent: 24,
+      rating: 4.8,
+      reviewCount: 4560,
+      images: [
+        "Docs/Haircare/L’Oréal Total Repair Shampoo 1L.png",
+        "Docs/Haircare/Glossy Chocolate Waves Studio Portrait.png"
+      ],
+      badge: "MEGA VALUE",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Mega 1L Pack",
+      description: "Mega salon-sized 1 Litre bottle with convenient pump dispenser. Powered by 4% Repair Concentrate with Keratinxs to target the 5 signs of damaged hair: hairfall, dryness, roughness, dullness, and split ends.",
+      keyBenefits: ["Enriched with 4% Keratinxs micro-protein complex", "Mega 1000ml value pack with salon pump dispenser", "Reduces hair breakage by up to 98%"],
+      ingredients: "Aqua, Sodium Laureth Sulfate, Coco-Betaine, Dimethicone, Glycol Distearate, Hydrolyzed Keratin, Citric Acid, Arginine, Salicylic Acid.",
+      howToUse: "Apply pump onto wet hair, massage into a dense lather from roots to ends, then rinse thoroughly."
+    },
+    {
+      id: "prod-maheorthe-hibiscus-duo",
+      name: "Maheorthe Natural Hibiscus Hair Oil (100ml) & Coconut Shampoo (300ml) Duo",
+      brand: "Maheorthe",
+      category: "Haircare",
+      subcategory: "Hair Care Set",
+      price: 799,
+      originalPrice: 1050,
+      discountPercent: 24,
+      rating: 4.7,
+      reviewCount: 1180,
+      images: [
+        "Docs/Haircare/Hibiscus Hair Care Duo with Coconuts.png",
+        "Docs/Haircare/Glossy Espresso Hair Cascade.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      dealLabel: "Special 24% Off",
+      description: "Complete Ayurvedic hair strengthening ritual. Pure Hibiscus Hair Oil deeply conditions the scalp and promotes thick hair growth, while Coconut Hibiscus Shampoo cleanses gently without stripping moisture.",
+      keyBenefits: ["100% natural botanicals with real red hibiscus petals", "Sulfate-free and paraben-free cleansing", "Imparts deep natural glossy bounce to dry hair"],
+      ingredients: "Cold-Pressed Coconut Oil, Hibiscus Rosa-Sinensis Flower Extract, Bhringraj, Amla, Almond Oil, Vitamin E.",
+      howToUse: "Massage Hibiscus Hair Oil into scalp 1 hour before wash. Follow with Coconut Hibiscus Shampoo and rinse clean."
+    },
+    {
+      id: "prod-olaplex-no3",
+      name: "No. 3 Hair Perfector Patented Bond Building Treatment",
+      brand: "Olaplex",
+      category: "Haircare",
+      subcategory: "Bond Repair",
+      price: 1149,
+      originalPrice: 1500,
+      discountPercent: 23,
+      rating: 4.9,
+      reviewCount: 5200,
+      images: [
+        "Docs/Haircare/Voluminous Waves Beauty Portrait.png",
+        "Docs/Haircare/Serene Waves Beauty Portrait.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Salon Treatment",
+      description: "The global benchmark in hair repair. Patented Bis-Aminopropyl Diglycol Dimaleate permanently links broken disulfide bonds caused by bleaching, heat styling, and chemical treatments.",
+      keyBenefits: ["Patented single active ingredient restores broken bonds", "Visible results after just one 10-minute application", "Suitable for all hair textures and color-treated hair"],
+      ingredients: "Water (Aqua), Bis-Aminopropyl Diglycol Dimaleate, Propylene Glycol, Cetearyl Alcohol, Behentrimonium Methosulfate, Phenoxyethanol.",
+      howToUse: "Apply damp from roots to ends before shampooing. Leave on for 10-20 minutes, then shampoo and condition."
+    },
+    {
+      id: "prod-tresemme-keratin-mask",
+      name: "Keratin Smooth Deep Smoothing Anti-Frizz Treatment Mask",
+      brand: "TRESemmé",
+      category: "Haircare",
+      subcategory: "Hair Mask",
+      price: 499,
+      originalPrice: 650,
+      discountPercent: 23,
+      rating: 4.6,
+      reviewCount: 1890,
+      images: [
+        "Docs/Haircare/Glossy Waves in Profile.png",
+        "Docs/Haircare/Serene Satin Robe Portrait.png"
+      ],
+      badge: "LIMITED OFFER",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save ₹151",
+      description: "Infused with salon-grade Keratin and precious Marula Oil. Delivers 5 benefits in 1 wash: up to 72 hours of frizz control, detangling, radiant shine, soft feel, and flyaway tame.",
+      keyBenefits: ["Controls frizz for up to 72 continuous hours", "Infused with nourishing African Marula Oil", "Salon silkiness at home"],
+      ingredients: "Aqua, Cetearyl Alcohol, Stearamidopropyl Dimethylamine, Keratin, Sclerocarya Birrea (Marula) Seed Oil, Behentrimonium Chloride.",
+      howToUse: "Apply through mid-lengths and ends after shampooing. Leave for 3 to 5 minutes, then rinse."
+    },
+
+    // ------------------------------------------------------------------------
+    // SECTION 4: SKIN CARE (Range: ₹1,100 – ₹1,800) — ALL 6 PAIRED WITH MODEL PHOTOS
+    // ------------------------------------------------------------------------
+    {
+      id: "prod-bloom-ceramide-barrier-cream",
+      name: "Ceramide Barrier Defense Deep Hydrating Face Cream (50ml)",
+      brand: "Bloom Beauty",
+      category: "Skincare",
+      subcategory: "Moisturizer",
+      price: 1399,
+      originalPrice: 1799,
+      discountPercent: 22,
+      rating: 4.9,
+      reviewCount: 1890,
+      images: [
+        "Docs/Skincare/ceramide-barrier-cream-skincare-01.png",
+        "Docs/Skincare/Freckled Skincare Cream Portrait.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      isNewArrival: true,
+      dealLabel: "Barrier Shield",
+      description: "Intensive barrier restoration cream enriched with 5 essential ceramides, plant squalane, and oat colloidal extract. Plumps dehydrated skin and restores moisture barrier balance.",
+      keyBenefits: ["5 essential biomimetic ceramides (EOP, NP, AP, AS, NS)", "Deep non-greasy 24-hour hydration lock", "Soothes redness, flaking, and sensitivity"],
+      ingredients: "Aqua, Ceramide NP, Ceramide AP, Ceramide EOP, Phytosphingosine, Squalane, Cholesterol, Sodium Hyaluronate, Avena Sativa (Oat) Kernel Flour.",
+      howToUse: "Smooth a hazelnut-sized amount over face and neck morning and night following serums."
+    },
+    {
+      id: "prod-bloom-mineral-clay-mask",
+      name: "Purifying Mineral Clay & Matcha Detox Face Mask (100ml)",
+      brand: "Bloom Beauty",
+      category: "Skincare",
+      subcategory: "Face Mask",
+      price: 1199,
+      originalPrice: 1499,
+      discountPercent: 20,
+      rating: 4.8,
+      reviewCount: 1420,
+      images: [
+        "Docs/Skincare/mineral-clay-mask-skincare-02.png",
+        "Docs/Skincare/Glowing Clay Mask Skincare Portrait.png"
+      ],
+      badge: "LIMITED OFFER",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Pore Detox",
+      description: "Formulated with ultra-fine French Kaolin Clay, antioxidant-rich ceremonial Japanese Matcha, and Salicylic Acid (BHA). Draws out pore congestion without stripping natural moisture.",
+      keyBenefits: ["Unclogs enlarged pores and reduces excess sebum", "Non-drying creamy clay texture with soothing matcha", "Smooths skin texture in 10 minutes"],
+      ingredients: "Kaolin Clay, Bentonite, Camellia Sinensis (Matcha) Leaf Extract, Salicylic Acid, Glycerin, Allantoin, Aloe Barbadensis Leaf Juice.",
+      howToUse: "Apply an even layer to clean, dry skin. Relax for 10-15 minutes until set, then gently rinse with warm water."
+    },
+    {
+      id: "prod-bloom-radiance-glow-serum",
+      name: "10% Niacinamide & Vitamin C Radiance Booster Serum (30ml)",
+      brand: "Bloom Beauty",
+      category: "Skincare",
+      subcategory: "Face Serum",
+      price: 1499,
+      originalPrice: 1899,
+      discountPercent: 21,
+      rating: 4.9,
+      reviewCount: 3410,
+      images: [
+        "Docs/Skincare/radiance-glow-serum-skincare-03.png",
+        "Docs/Skincare/Radiant Serum Skincare Close-Up.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      isNewArrival: true,
+      dealLabel: "Save ₹400",
+      description: "Dual-action brightening booster combining 10% pure Niacinamide with stabilized Ethyl Ascorbic Acid (Vitamin C). Fades dark spots, evens discoloration, and imparts an ethereal glass glow.",
+      keyBenefits: ["10% High-potency Niacinamide for refined pores", "Stabilized Vitamin C fades post-acne marks and hyperpigmentation", "Lightweight, fast-absorbing amber elixir with zero tackiness"],
+      ingredients: "Aqua, Niacinamide, 3-O-Ethyl Ascorbic Acid, Zinc PCA, Centella Asiatica Extract, Sodium Hyaluronate, Ferulic Acid.",
+      howToUse: "Apply 3-4 drops directly to cleansed face morning and evening before heavier creams."
+    },
+    {
+      id: "prod-bloom-hyaluronic-serum",
+      name: "2% Pure Hyaluronic Acid & Ceramide Deep Hydration Plumping Serum (30ml)",
+      brand: "Bloom Beauty",
+      category: "Skincare",
+      subcategory: "Face Serum",
+      price: 1599,
+      originalPrice: 1999,
+      discountPercent: 20,
+      rating: 4.9,
+      reviewCount: 2840,
+      images: [
+        "Docs/Skincare/hyaluronic-hydration-serum-skincare-04.png",
+        "Docs/Skincare/Radiant Serum Skincare Glow.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Glass Skin Serum",
+      description: "Multi-molecular weight hyaluronic acid complex that penetrates deep epidermal layers. Infuses skin with instant dewy plumping bounce and binds 1000x its weight in water.",
+      keyBenefits: ["Multi-molecular 2% Hyaluronic Acid delivers multi-depth moisture", "Infused with Vitamin B5 (Panthenol) for barrier repair", "Instant dewy plumping effect for smooth, bouncy glass skin"],
+      ingredients: "Aqua, Sodium Hyaluronate, Hydrolyzed Hyaluronic Acid, Sodium Acetylated Hyaluronate, Panthenol, Glycerin, Ahnfeltia Concinna Extract.",
+      howToUse: "Smooth 3-5 drops onto damp skin immediately after cleansing or toning to lock in maximum hydration."
+    },
+    {
+      id: "prod-bloom-peptide-lotion",
+      name: "Multi-Peptide & Squalane Restorative Daily Radiance Lotion (75ml)",
+      brand: "Bloom Beauty",
+      category: "Skincare",
+      subcategory: "Face Lotion",
+      price: 1699,
+      originalPrice: 2199,
+      discountPercent: 23,
+      rating: 4.8,
+      reviewCount: 1530,
+      images: [
+        "Docs/Skincare/peptide-radiance-lotion-skincare-05.png",
+        "Docs/Skincare/Radiant Skincare Glow.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Award Winner",
+      description: "A weightless anti-aging peptide lotion that fortifies skin firmness and bounce. Combines copper tripeptide-1, matrixyl 3000, and bio-squalane for a silky luminous veil.",
+      keyBenefits: ["Matrixyl 3000 & Copper Tripeptides promote collagen density", "Featherlight lotion absorbs instantly under makeup", "Leaves a luminous, dewy satin finish with 0 shine"],
+      ingredients: "Aqua, Squalane, Palmitoyl Tripeptide-1, Palmitoyl Tetrapeptide-7, Niacinamide, Glycerin, Sodium Hyaluronate, Jojoba Esters.",
+      howToUse: "Dispense 1-2 pumps onto fingertips and gently smooth over face and neck with upward motions."
+    },
+    {
+      id: "prod-bloom-glass-skin-essence",
+      name: "Centella & Green Tea Calming Dewy Glass Skin Essence (120ml)",
+      brand: "Bloom Beauty",
+      category: "Skincare",
+      subcategory: "Essence & Toner",
+      price: 1299,
+      originalPrice: 1650,
+      discountPercent: 21,
+      rating: 4.8,
+      reviewCount: 970,
+      images: [
+        "Docs/Skincare/calming-glass-skin-essence-skincare-06.png",
+        "Docs/Skincare/Serene Skincare Portrait with Gold Ear Piercings.png"
+      ],
+      badge: "NEW ARRIVAL",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isNewArrival: true,
+      dealLabel: "Calming Dew",
+      description: "Formulated with 85% Centella Asiatica Leaf Water and fermented Jeju Green Tea. Rapidly calms redness, soothes post-acne irritation, and drenches skin in dewy moisture.",
+      keyBenefits: ["85% Centella Asiatica calms sensitivity and redness", "Fermented Green Tea provides potent antioxidant shield", "Prepares skin to absorb serums and moisturizers deeply"],
+      ingredients: "Centella Asiatica Leaf Water, Camellia Sinensis (Green Tea) Leaf Extract, Glycerin, Butylene Glycol, Panthenol, Madecassoside, Asiaticoside.",
+      howToUse: "Pour a few drops into palms and gently pat into face until fully absorbed."
+    },
+
+    // ------------------------------------------------------------------------
+    // SECTION 5: NAIL CARE (Range: ₹600 – ₹1,400)
+    // ------------------------------------------------------------------------
+    {
+      id: "prod-rose-lily-nail-set",
+      name: "Rose & Lily Natural Glow Nail Strengthener & Cuticle Repair Oil",
+      brand: "Rose & Lily",
+      category: "Nail Care",
+      subcategory: "Nail Treatment",
+      price: 899,
+      originalPrice: 1150,
+      discountPercent: 22,
+      rating: 4.9,
+      reviewCount: 1650,
+      images: [
+        "Docs/Nail Care/Rose & Lily Natural Glow Set.png",
+        "Docs/Nail Care/Glossy Nude Manicure Product Flat Lay.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: false,
+      dealLabel: "Strengthening Oil",
+      description: "Professional glass-pipette elixir enriched with sweet almond oil, jojoba seed, and biotin. Rescues weak, brittle, peeling nails and conditions cuticles to healthy perfection.",
+      keyBenefits: ["Reinforces thin, fragile nails in 7 days", "Deeply softens and conditions dry cuticles", "Imparts a high-gloss natural healthy sheen"],
+      ingredients: "Prunus Amygdalus Dulcis (Sweet Almond) Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Tocopherol (Vitamin E), Biotin, Keratin.",
+      howToUse: "Apply one drop to each nail bed and cuticle nightly. Massage gently in circular motions."
+    },
+    {
+      id: "prod-mii-metallic-pink",
+      name: "MI Fashion High Shine Metallic Pink Nail Polish (Vernis à Ongles)",
+      brand: "MI Fashion",
+      category: "Nail Care",
+      subcategory: "Nail Polish",
+      price: 649,
+      originalPrice: 850,
+      discountPercent: 24,
+      rating: 4.8,
+      reviewCount: 1420,
+      images: [
+        "Docs/Nail Care/MII Fashion Metallic Pink Nail Polish.png",
+        "Docs/Nail Care/Champagne Gold Nails and Filigree Ring.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      dealLabel: "High Shine",
+      description: "Mirror-finish metallic rose pink lacquer with micro-shimmer pigments. Glides on smoothly with a wide fan brush for opaque, chip-resistant salon luster lasting up to 8 days.",
+      keyBenefits: ["High-impact metallic chrome reflection", "Chip-resistant wear up to 8 days without UV lamp", "Precision wide-curve applicator brush"],
+      ingredients: "Butyl Acetate, Ethyl Acetate, Nitrocellulose, Acetyl Tributyl Citrate, Isopropyl Alcohol, Synthetic Mica (CI 77019), CI 77891, CI 15850.",
+      howToUse: "Apply two thin coats over base coat. Allow 2 minutes drying between coats, then seal with glossy top coat."
+    },
+    {
+      id: "prod-nail-republic-cat-eye",
+      name: "Silk Cat-Eye UV/LED Gel Polish in Shimmering Teal",
+      brand: "Nail Republic",
+      category: "Nail Care",
+      subcategory: "Gel Polish",
+      price: 749,
+      originalPrice: 999,
+      discountPercent: 25,
+      rating: 4.8,
+      reviewCount: 980,
+      images: [
+        "Docs/Nail Care/Silk Cat-Eye Teal Nail Ad.png",
+        "Docs/Nail Care/Emerald Gloss Nail Color Close-Up.png"
+      ],
+      badge: "LIMITED OFFER",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "25% Off",
+      description: "Mesmerizing magnetic cat-eye gel polish. High-density magnetic particles create a luminous dimensional velvet silk light bar that shimmers in ocean teal under lighting.",
+      keyBenefits: ["Dynamic magnetic 3D velvet light effect", "Salon wear for 21+ days without chipping or peeling", "Cures in 60 seconds under standard UV/LED lamp"],
+      ingredients: "Acrylates Copolymer, Hydroxypropyl Methacrylate, Trimethylbenzoyl Diphenylphosphine Oxide, Magnetic Iron Oxide, Mica, CI 77288.",
+      howToUse: "Apply gel layer, hover magnetic wand 2mm over wet coat for 5 seconds to form cat-eye line, then cure under UV/LED."
+    },
+    {
+      id: "prod-pro-manicure-kit",
+      name: "Professional Stainless Steel Manicure & Pedicure Nail Tool Kit (14-Piece)",
+      brand: "Bloom Beauty Studio",
+      category: "Beauty Tools",
+      subcategory: "Nail Tools",
+      price: 1299,
+      originalPrice: 1699,
+      discountPercent: 24,
+      rating: 4.9,
+      reviewCount: 2190,
+      images: [
+        "Docs/Nail Care/Professional Nail Care Tools Flat Lay.png",
+        "Docs/Nail Care/Pink Polish Cleanup Tutorial.png"
+      ],
+      badge: "PRO SET",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "14-Piece Kit",
+      description: "Surgical-grade stainless steel manicure and pedicure suite. Includes precision cuticle nipper, dual nail clippers, curved nail scissors, sapphire file, 4-way buffer block, dual-ended cuticle pushers, and cleanup tools.",
+      keyBenefits: ["14 professional grade salon tools in luxury layout", "Surgical stainless steel: rust-resistant and sterilizable", "Ultra-sharp hand-sharpened cutting blades for clean trims"],
+      ingredients: "100% Medical Grade Stainless Steel & High Density EVA Buffing Block.",
+      howToUse: "Use clippers straight across, file smoothly in one direction, and gently push cuticles after a warm soak."
+    },
+    {
+      id: "prod-bloom-nail-trio",
+      name: "Vitamin Cuticle Elixir, Strengthening Base Coat & Hand Soufflé Trio",
+      brand: "Bloom Beauty Nails",
+      category: "Nail Care",
+      subcategory: "Nail Care Trio",
+      price: 1149,
+      originalPrice: 1499,
+      discountPercent: 23,
+      rating: 4.8,
+      reviewCount: 780,
+      images: [
+        "Docs/Nail Care/Glossy Nude Manicure Product Flat Lay.png",
+        "Docs/Nail Care/Rose & Lily Natural Glow Set.png"
+      ],
+      badge: "BEST VALUE",
+      isBestseller: false,
+      isFeaturedValue: true,
+      dealLabel: "Complete Trio",
+      description: "Everything for a salon-grade natural nude manicure at home. Complete 3-piece set includes Vitamin-Rich Cuticle Elixir, Strengthening Base Coat, and Hydrating Hand Soufflé with shea butter and aloe.",
+      keyBenefits: ["3-in-1 complete hand and nail renewal ritual", "Strengthens nail beds while hydrating dry knuckles and cuticles", "Delivers elegant high-gloss natural manicure glow"],
+      ingredients: "Shea Butter, Vitamin E, Keratin Protein, Sweet Almond Oil, Aloe Vera, Calcium Pantothenate.",
+      howToUse: "Massage Hand Soufflé into hands, apply Cuticle Elixir to nail contours, and finish with Strengthening Base Coat."
+    },
+    {
+      id: "prod-miss-nails-sage",
+      name: "Miss Nails Minis Pastel Sage High-Gloss Polish",
+      brand: "Miss Nails",
+      category: "Nail Care",
+      subcategory: "Nail Polish",
+      price: 619,
+      originalPrice: 799,
+      discountPercent: 23,
+      rating: 4.7,
+      reviewCount: 620,
+      images: [
+        "Docs/Nail Care/Glossy Sage Nails and Mini Polish.png",
+        "Docs/Nail Care/Emerald Nail Gel Close-Up.png"
+      ],
+      badge: "HOT DEAL",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "Save ₹180",
+      description: "Chic muted pastel sage green lacquer with mirror shine. Quick-drying 5-free formula that glides effortlessly on natural nails.",
+      keyBenefits: ["Trend-forward pastel sage green cream finish", "Fast-drying formula ready in under 60 seconds", "Toxin-free 5-free healthy lacquer"],
+      ingredients: "Ethyl Acetate, Butyl Acetate, Nitrocellulose, Acetyl Tributyl Citrate, Isopropyl Alcohol, CI 77891, CI 77288.",
+      howToUse: "Apply 2 coats over base coat and finish with clear top coat."
+    },
+
+    // ------------------------------------------------------------------------
+    // SECTION 6: MAKEUP & LIPSTICKS (Reasonable INR: ₹799 – ₹1,499)
+    // ------------------------------------------------------------------------
     {
       id: "prod-maybelline-burgundy-glow",
-      name: "Color Sensational Ultimatte Luxe Lipstick",
+      name: "Color Sensational Ultimatte Luxe Crimson Red Lipstick",
       brand: "Maybelline New York",
       category: "Makeup",
       subcategory: "Lipstick",
-      price: 14.99,
-      originalPrice: 19.99,
+      price: 799,
+      originalPrice: 999,
+      discountPercent: 20,
+      rating: 4.8,
+      reviewCount: 3820,
+      images: [
+        "Docs/Lipsticks/Glossy Red Maybelline Lipstick Duo.png",
+        "Docs/Lipsticks/Velvety Red Lips Macro Portrait.png",
+        "Docs/Lipsticks/Red Lips and Golden Glamour.png"
+      ],
+      badge: "BESTSELLER",
+      isBestseller: true,
+      isFeaturedValue: true,
+      dealLabel: "Flat 20% Off",
+      description: "A cushiony, lightweight matte finish infused with nourishing jojoba oil and high-impact pigments. Delivers up to 12 hours of velvet softness without drying.",
+      keyBenefits: ["Non-drying airy matte formula", "Enriched with vitamin E & jojoba oil", "Ultra-pigmented single swipe coverage"],
+      ingredients: "Dimethicone, Bis-Diglyceryl Polyacyladipate-2, Hydrogenated Polyisobutene, Phenyl Trimethicone, Jojoba Seed Oil, Tocopheryl Acetate, Red 7 Lake (CI 15850).",
+      howToUse: "Apply lipstick starting in the center of your upper lip and glide along contours to the corners.",
+      shades: [
+        { name: "Crimson Red", hex: "#B81424" },
+        { name: "Burgundy Velvet", hex: "#6B1D2F" },
+        { name: "Berry Plum", hex: "#8A244B" },
+        { name: "Rose Nude", hex: "#C47B89" }
+      ]
+    },
+    {
+      id: "prod-praush-rosegold-plum",
+      name: "Praush Beauty Rose-Gold Luxury Matte Lipstick in Plum Berry",
+      brand: "Praush Beauty",
+      category: "Makeup",
+      subcategory: "Matte Lipstick",
+      price: 899,
+      originalPrice: 1199,
       discountPercent: 25,
       rating: 4.8,
       reviewCount: 1420,
       images: [
-        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isFeaturedValue: true,
-      dealLabel: "Flat 25% Off",
-      description: "A cushiony, lightweight matte finish infused with nourishing jojoba oil and high-impact pigments. Delivers up to 12 hours of velvet softness without drying.",
-      keyBenefits: ["Non-drying airy matte formula", "Enriched with vitamin E & jojoba oil", "Ultra-pigmented single swipe coverage"],
-      ingredients: "Dimethicone, Bis-Diglyceryl Polyacyladipate-2, Diisostearyl Malate, Hydrogenated Polyisobutene, Phenyl Trimethicone, Kaolin, HDI/Trimethylol Hexyllactone Crosspolymer, Isostearyl Isostearate, Polyethylene, Vinyl Dimethicone/Methicone Silsesquioxane Crosspolymer, Nylon-12, Pentylene Glycol, Caprylyl Glycol, Ethylhexylglycerin.",
-      howToUse: "Step 1: Apply lipstick in the center of your upper lip and follow the contours of your mouth. Step 2: Glide the lipstick across the entire bottom lip.",
-      shades: [
-        { name: "Burgundy Glow", hex: "#681B2B" },
-        { name: "Berry Velvet", hex: "#872545" },
-        { name: "Warm Rosewood", hex: "#9E4B5B" },
-        { name: "Classic Scarlet", hex: "#B51A2B" },
-        { name: "Nude Petal", hex: "#C28383" },
-        { name: "Mocha Dream", hex: "#6E433C" }
-      ],
-      inStock: true
-    },
-
-    // 2. The Ordinary Niacinamide Serum
-    {
-      id: "prod-ordinary-niacinamide",
-      name: "Niacinamide 10% + Zinc 1% Blemish & Pore Serum",
-      brand: "The Ordinary",
-      category: "Skincare",
-      subcategory: "Serums",
-      price: 11.20,
-      originalPrice: 14.00,
-      discountPercent: 20,
-      rating: 4.9,
-      reviewCount: 3820,
-      images: [
-        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1608248597359-2911b3ef30b8?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isFeaturedValue: true,
-      dealLabel: "Save 20%",
-      description: "A high-strength vitamin and mineral blemish formula designed to reduce the appearance of skin blemishes, congestion, and sebum activity.",
-      keyBenefits: ["Visibly reduces pore size", "Balances oil and sebum production", "Smoothes textural irregularities"],
-      ingredients: "Aqua (Water), Niacinamide, Pentylene Glycol, Zinc PCA, Dimethyl Isosorbide, Tamarindus Indica Seed Gum, Xanthan Gum, Isoceteth-20, Ethoxydiglycol, Phenoxyethanol, Chlorphenesin.",
-      howToUse: "Apply to entire face morning and evening before heavier creams. Do not combine with pure Vitamin C in the same routine.",
-      sizes: ["30ml", "60ml"],
-      inStock: true
-    },
-
-    // 3. Olaplex No. 3 Hair Perfector
-    {
-      id: "prod-olaplex-no3",
-      name: "No. 3 Hair Perfector Bond Repair Treatment",
-      brand: "Olaplex",
-      category: "Haircare",
-      subcategory: "Hair Treatments",
-      price: 24.00,
-      originalPrice: 30.00,
-      discountPercent: 20,
-      rating: 4.9,
-      reviewCount: 2740,
-      images: [
-        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isFeaturedValue: true,
-      dealLabel: "Special $6 Off",
-      description: "The global holy-grail at-home hair bond builder that repairs broken bonds caused by heat styling, chemical coloring, and environmental damage.",
-      keyBenefits: ["Repairs damaged and compromised hair", "Strengthens and protects hair structure", "Restores healthy appearance and texture"],
-      ingredients: "Water (Aqua/Eau), Bis-Aminopropyl Diglycol Dimaleate, Propylene Glycol, Cetearyl Alcohol, Behentrimonium Methosulfate, Cetyl Alcohol, Phenoxyethanol, Glycerin, Hydroxyethyl Ethylcellulose.",
-      howToUse: "Apply generously to damp hair from roots to ends. Leave on for 10-20 minutes before shampooing and conditioning.",
-      sizes: ["100ml", "250ml"],
-      inStock: true
-    },
-
-    // 4. MAC Studio Fix Powder Plus Foundation
-    {
-      id: "prod-mac-studio-fix",
-      name: "Studio Fix Powder Plus Foundation",
-      brand: "MAC Cosmetics",
-      category: "Makeup",
-      subcategory: "Foundation",
-      price: 33.60,
-      originalPrice: 42.00,
-      discountPercent: 20,
-      rating: 4.8,
-      reviewCount: 1890,
-      images: [
-        "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80"
+        "Docs/Lipsticks/Rose-Gold Lipstick Beauty Shot.png",
+        "Docs/Lipsticks/Rose-Gold Lipstick with Berry Pigment Swipe.png",
+        "Docs/Lipsticks/Rose-Gold Lipstick with Dusty Rose Swatch.png"
       ],
       badge: "BEST VALUE",
-      isFeaturedValue: true,
-      dealLabel: "Save $8.40",
-      description: "A one-step powder and foundation that gives skin a smooth, flawless, all-matte finish with medium-to-full buildable coverage and 24hr wear.",
-      keyBenefits: ["Long-wearing, 24 hours", "Controls oil and shine", "Non-caking, non-settling, non-streaking"],
-      ingredients: "Talc, Silica, Isostearyl Neopentanoate, Octyldodecyl Stearoyl Stearate, Pentaerythrityl Tetraisostearate, Dimethicone, Tocopheryl Acetate, Triethoxycaprylylsilane, Caprylyl Glycol.",
-      howToUse: "Apply to well-moisturized skin with a fluffy brush for light coverage or the included sponge for fuller coverage.",
-      shades: [
-        { name: "NC15 Fair Warm", hex: "#F3DEC9" },
-        { name: "NC25 Light Warm", hex: "#E6CCA8" },
-        { name: "NC35 Medium Warm", hex: "#D2AF85" },
-        { name: "NC42 Tan Warm", hex: "#BA9265" },
-        { name: "NW45 Deep Neutral", hex: "#8C5A3E" }
-      ],
-      inStock: true
-    },
-
-    // 5. CeraVe Hydrating Facial Cleanser
-    {
-      id: "prod-cerave-hydrating-cleanser",
-      name: "Hydrating Facial Cleanser with Ceramides & Hyaluronic Acid",
-      brand: "CeraVe",
-      category: "Skincare",
-      subcategory: "Cleansers",
-      price: 13.50,
-      originalPrice: 18.00,
-      discountPercent: 25,
-      rating: 4.9,
-      reviewCount: 4120,
-      images: [
-        "https://images.unsplash.com/photo-1556228722-d0b5d033a7f8?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isSavingsDeal: true,
-      dealLabel: "Limited 25% Off",
-      description: "Developed with dermatologists, this gentle face wash cleanses, hydrates, and helps restore the protective skin barrier with 3 essential ceramides.",
-      keyBenefits: ["Cleanses without stripping moisture", "Contains Ceramides 1, 3, 6-II", "Fragrance-free & non-comedogenic"],
-      ingredients: "Aqua/Water/Eau, Glycerin, Cetearyl Alcohol, PEG-40 Stearate, Stearyl Alcohol, Potassium Phosphate, Ceramide NP, Ceramide AP, Ceramide EOP, Carbomer, Glyceryl Stearate.",
-      howToUse: "Wet skin with lukewarm water. Massage cleanser into skin in a gentle, circular motion. Rinse well and pat dry.",
-      sizes: ["236ml", "473ml"],
-      inStock: true
-    },
-
-    // 6. Huda Beauty Liquid Matte Lipstick
-    {
-      id: "prod-huda-liquid-matte",
-      name: "Liquid Matte Ultra-Comfort Transfer-Proof Lipstick",
-      brand: "Huda Beauty",
-      category: "Makeup",
-      subcategory: "Lipstick",
-      price: 21.60,
-      originalPrice: 27.00,
-      discountPercent: 20,
-      rating: 4.8,
-      reviewCount: 1650,
-      images: [
-        "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isSavingsDeal: true,
-      dealLabel: "Save $5.40",
-      description: "Infused with the exclusive L.O.V.E. complex for an ultra-thin, velvety finish that wears for 8 hours without transfer.",
-      keyBenefits: ["Weightless veil comfort", "100% transfer-proof wear", "Enriched with antioxidants"],
-      ingredients: "Isododecane, Cyclopentasiloxane, Synthetic Beeswax, Trimethylsiloxysilicate, Polypropylsilsesquioxane, Octyldodecanol, Disteardimonium Hectorite, Mica, Alcohol, Ethyl Vanillin.",
-      howToUse: "Define lip edges with the precision applicator tip, then fill in with a smooth single coat. Allow 30 seconds to dry down.",
-      shades: [
-        { name: "Bombshell Blush Nude", hex: "#BA7A73" },
-        { name: "Venus Soft Terracotta", hex: "#B86558" },
-        { name: "Icon Spiced Rose", hex: "#9E444B" },
-        { name: "Cheerleader Rich Berry", hex: "#7E2A3B" }
-      ],
-      inStock: true
-    },
-
-    // 7. Minimalist 2% Salicylic Acid Serum
-    {
-      id: "prod-minimalist-salicylic",
-      name: "Salicylic Acid 2% Face Serum for Blackheads & Sebum",
-      brand: "Minimalist",
-      category: "Skincare",
-      subcategory: "Serums",
-      price: 9.60,
-      originalPrice: 12.00,
-      discountPercent: 20,
-      rating: 4.7,
-      reviewCount: 1530,
-      images: [
-        "https://images.unsplash.com/photo-1608248597359-2911b3ef30b8?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BEST VALUE",
-      isFeaturedValue: true,
-      dealLabel: "Special Value",
-      description: "An oil-soluble BHA daily exfoliating serum that penetrates deep inside pores to clear trapped dirt, blackheads, and excess oils while soothing inflammation.",
-      keyBenefits: ["Unclogs pores and prevents blackheads", "Formulated with Aloe Vera extract", "Fragrance-free and hypoallergenic"],
-      ingredients: "Aloe Barbadensis Leaf Juice, Dimethyl Isosorbide, Propylene Glycol, Salicylic Acid, Ethoxydiglycol, Hydroxyethylcellulose, Phenoxyethanol, Ethylhexylglycerin.",
-      howToUse: "Apply 2-3 drops after cleansing in the evening. Gently pat onto dry face until absorbed. Follow with moisturizer.",
-      sizes: ["30ml"],
-      inStock: true
-    },
-
-    // 8. L'Oréal Paris Revitalift Hyaluronic Acid Serum
-    {
-      id: "prod-loreal-revitalift-ha",
-      name: "Revitalift 1.5% Pure Hyaluronic Acid Plumping Serum",
-      brand: "L'Oréal Paris",
-      category: "Skincare",
-      subcategory: "Serums",
-      price: 19.99,
-      originalPrice: 28.99,
-      discountPercent: 31,
-      rating: 4.8,
-      reviewCount: 3200,
-      images: [
-        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isSavingsDeal: true,
-      dealLabel: "Save 31% Off",
-      description: "Formulated with high and low molecular weight hyaluronic acid to immediately plump skin, replenish lost moisture, and visibly reduce fine lines.",
-      keyBenefits: ["Replenishes 100% moisture retention", "Visibly plumps fine lines in 1 week", "Fast-absorbing non-sticky texture"],
-      ingredients: "Aqua / Water, Glycerin, Hydroxyethylpiperazine Ethane Sulfonic Acid, Sodium Hyaluronate, PEG-60 Hydrogenated Castor Oil, Secale Cereale Seed Extract, Calcium Pantothenate.",
-      howToUse: "Smooth 2-3 drops over cleansed face and neck every morning and evening. Pair with Revitalift cream.",
-      sizes: ["30ml", "50ml"],
-      inStock: true
-    },
-
-    // 9. L'Oréal Professionnel Absolut Repair Molecular
-    {
-      id: "prod-loreal-prof-absolut",
-      name: "Absolut Repair Molecular Leave-In Mask & Serum",
-      brand: "L'Oréal Professionnel",
-      category: "Haircare",
-      subcategory: "Hair Treatments",
-      price: 31.50,
-      originalPrice: 42.00,
-      discountPercent: 25,
-      rating: 4.9,
-      reviewCount: 940,
-      images: [
-        "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "NEW ARRIVAL",
-      isNewArrival: true,
-      isFeaturedValue: true,
-      dealLabel: "Save 25% Today",
-      description: "Deconstructs peptides to inject their components separately into the hair fiber, restoring strength, elasticity, and movement from the inside out.",
-      keyBenefits: ["Repairs 2 years of hair damage in 1 use", "Deep molecular penetration", "Heat protection up to 230°C/450°F"],
-      ingredients: "Aqua / Water / Eau, Isopropyl Myristate, Dimethicone, Amodimethicone, Triethanolamine, Phenoxyethanol, Carbomer, Polyquaternium-4, Potato Starch Modified.",
-      howToUse: "Towel-dry hair, detangle, divide into 2 sections. Press one pump per section. Distribute evenly from lengths to ends.",
-      sizes: ["100ml", "250ml"],
-      inStock: true
-    },
-
-    // 10. NYX Professional Butter Gloss
-    {
-      id: "prod-nyx-butter-gloss",
-      name: "Butter Gloss Non-Sticky Nourishing Lip Gloss",
-      brand: "NYX Professional Makeup",
-      category: "Makeup",
-      subcategory: "Lipstick",
-      price: 6.30,
-      originalPrice: 9.00,
-      discountPercent: 30,
-      rating: 4.8,
-      reviewCount: 4890,
-      images: [
-        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isSavingsDeal: true,
-      dealLabel: "Hot Deal 30% Off",
-      description: "America's #1 Lip Gloss delivers silky smooth sheer-to-medium coverage that melts onto lips. Never sticky, perfectly soft and kissable.",
-      keyBenefits: ["Buttery soft texture with brilliant shine", "Leaves lips supple and conditioned", "Delicious sweet scent"],
-      ingredients: "Polybutene, Mineral Oil/Paraffinum Liquidum/Huile Minérale, Hydrogenated Polyisobutene, Diisostearyl Malate, Silica Dimethyl Silylate, Tocopheryl Acetate, Fragrance/Parfum.",
-      howToUse: "Swipe on using the soft wand applicator. Layer over your favourite lipstick for high-shine dimension.",
-      shades: [
-        { name: "Crème Brûlée Pink Nude", hex: "#D7948E" },
-        { name: "Madeleine Warm Brown Nude", hex: "#BD7A6F" },
-        { name: "Praline Deep Nude", hex: "#94584E" },
-        { name: "Angel Food Cake Mauve", hex: "#A35D6E" },
-        { name: "Red Velvet Vibrant Berry", hex: "#A8253B" }
-      ],
-      inStock: true
-    },
-
-    // 11. Dot & Key Barrier Repair Ceramides Cream
-    {
-      id: "prod-dot-key-ceramides",
-      name: "Ceramides & Hyaluronic Acid Skin Barrier Hydrating Moisturizer",
-      brand: "Dot & Key",
-      category: "Skincare",
-      subcategory: "Moisturizers",
-      price: 12.75,
-      originalPrice: 17.00,
-      discountPercent: 25,
-      rating: 4.8,
-      reviewCount: 1120,
-      images: [
-        "https://images.unsplash.com/photo-1608248597359-2911b3ef30b8?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1556228722-d0b5d033a7f8?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "NEW ARRIVAL",
-      isNewArrival: true,
-      isFeaturedValue: true,
-      dealLabel: "Flat 25% Off",
-      description: "An intensely soothing daily cream with 5 essential ceramides and Japanese rice water that shields against dryness and accelerates moisture retention.",
-      keyBenefits: ["Repairs damaged skin barrier in 24 hours", "Balances microbiome with probiotics", "Velvety smooth, non-greasy absorption"],
-      ingredients: "Aqua, Glycerin, Ceramide NP, Ceramide AP, Ceramide EOP, Phytosphingosine, Cholesterol, Oryza Sativa (Rice) Bran Water, Sodium Hyaluronate, Tocopherol.",
-      howToUse: "Dot evenly across face and neck after cleansing and serum application. Gently massage until fully absorbed.",
-      sizes: ["100g"],
-      inStock: true
-    },
-
-    // 12. Kay Beauty 9-in-1 Palette
-    {
-      id: "prod-kay-beauty-palette",
-      name: "Eyeshadow Palette with 9 Luxe Pigments & Mattes",
-      brand: "Kay Beauty",
-      category: "Makeup",
-      subcategory: "Eyeshadow",
-      price: 19.50,
-      originalPrice: 26.00,
-      discountPercent: 25,
-      rating: 4.8,
-      reviewCount: 880,
-      images: [
-        "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "NEW ARRIVAL",
-      isNewArrival: true,
-      dealLabel: "New Launch 25% Off",
-      description: "A curated palette of velvety smooth, ultra-blendable mattes, shimmering metallics, and sparkling toppers infused with macadamia oil.",
-      keyBenefits: ["One-swipe color intensity", "Zero fallout creamy powder formula", "Versatile day-to-night transitions"],
-      ingredients: "Mica, Talc, Zinc Stearate, Dimethicone, Ethylhexyl Palmitate, Polybutene, Macadamia Ternifolia Seed Oil, Phenoxyethanol, Tocopheryl Acetate.",
-      howToUse: "Use a fluffy blending brush to sweep transition shade across crease. Pat metallic shades onto eyelid using fingertip for maximum shimmer.",
-      inStock: true
-    },
-
-    // 13. e.l.f. Power Grip Primer
-    {
-      id: "prod-elf-power-grip",
-      name: "Power Grip Primer with 4% Niacinamide & Hyaluronic Acid",
-      brand: "e.l.f. Cosmetics",
-      category: "Makeup",
-      subcategory: "Primer",
-      price: 8.50,
-      originalPrice: 10.00,
-      discountPercent: 15,
-      rating: 4.9,
-      reviewCount: 3670,
-      images: [
-        "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isSavingsDeal: true,
-      dealLabel: "Viral Favorite",
-      description: "A gel-based primer that grips your makeup like a magnet while visibly smoothing skin and evens out tone with 4% niacinamide.",
-      keyBenefits: ["Sticky gel formula grips foundation for all-day wear", "Dewy glowing skin finish", "Enriched with skin-loving niacinamide"],
-      ingredients: "Water (Aqua), Butylene Glycol, Glycerin, Niacinamide, PEG-150 Distearate, Polysorbate 80, Tocopherol, Sodium Ascorbyl Phosphate, Sodium Hyaluronate.",
-      howToUse: "Apply evenly to face before makeup using fingertips. Allow 30 seconds to set before applying foundation.",
-      inStock: true
-    },
-
-    // 14. Cetaphil Moisturizing Cream
-    {
-      id: "prod-cetaphil-moisturizing-cream",
-      name: "Moisturizing Cream for Very Dry & Sensitive Skin",
-      brand: "Cetaphil",
-      category: "Skincare",
-      subcategory: "Moisturizers",
-      price: 15.99,
-      originalPrice: 21.99,
-      discountPercent: 27,
-      rating: 4.9,
-      reviewCount: 2980,
-      images: [
-        "https://images.unsplash.com/photo-1556228722-d0b5d033a7f8?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1608248597359-2911b3ef30b8?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BEST VALUE",
-      isFeaturedValue: true,
-      dealLabel: "Save 27%",
-      description: "Clinically proven to provide immediate and lasting 48-hour relief from dry to very dry, sensitive skin. Enriched with sweet almond oil, niacinamide, and panthenol.",
-      keyBenefits: ["Locks in 48-hour moisture", "Restores skin moisture barrier in 1 week", "Hypoallergenic and fragrance free"],
-      ingredients: "Water, Glycerin, Petrolatum, Dicaprylyl Ether, Dimethicone, Glyceryl Stearate, Cetyl Alcohol, Helianthus Annuus (Sunflower) Seed Oil, PEG-30 Stearate, Panthenol, Niacinamide.",
-      howToUse: "Smooth generously over body and face daily or as often as needed for soothing hydration.",
-      sizes: ["250g", "500g"],
-      inStock: true
-    },
-
-    // 15. TRESemmé Keratin Smooth Mask
-    {
-      id: "prod-tresemme-keratin-mask",
-      name: "Keratin Smooth Deep Smoothing Anti-Frizz Hair Mask",
-      brand: "TRESemmé",
-      category: "Haircare",
-      subcategory: "Hair Treatments",
-      price: 9.80,
-      originalPrice: 14.00,
-      discountPercent: 30,
-      rating: 4.7,
-      reviewCount: 1340,
-      images: [
-        "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "LIMITED OFFER",
-      isSavingsDeal: true,
-      dealLabel: "30% Off Deal",
-      description: "Specially formulated with keratin protein and marula oil to deliver 72 hours of frizz control, radiant shine, and silky salon-smooth softness.",
-      keyBenefits: ["72-hour humidity & frizz control", "Detangles and seals split ends", "Ultra-luxurious salon shine"],
-      ingredients: "Water (Aqua), Cetearyl Alcohol, Stearamidopropyl Dimethylamine, Behentrimonium Chloride, Sclerocarya Birrea (Marula) Seed Oil, Hydrolyzed Keratin, Dimethicone.",
-      howToUse: "Apply evenly from mid-shaft to ends of wet hair. Leave for 3 to 5 minutes, then rinse thoroughly.",
-      sizes: ["300ml"],
-      inStock: true
-    },
-
-    // 16. Plum Green Tea Pore Cleansing Face Wash
-    {
-      id: "prod-plum-green-tea",
-      name: "Green Tea Pore Cleansing Face Wash with Glycolic Acid",
-      brand: "Plum",
-      category: "Skincare",
-      subcategory: "Cleansers",
-      price: 8.90,
-      originalPrice: 11.50,
-      discountPercent: 23,
-      rating: 4.6,
-      reviewCount: 910,
-      images: [
-        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "NEW ARRIVAL",
-      isNewArrival: true,
-      dealLabel: "Save 23%",
-      description: "Soap-free, non-drying foaming cleanser with real green tea extracts and soft cellulose beads that gently buff away dead cells without irritating acne.",
-      keyBenefits: ["Antioxidant-rich green tea reduces blemishes", "Gentle glycolic acid clarifies pores", "Cruelty-free & 100% vegan"],
-      ingredients: "Aqua, Camellia Sinensis (Green Tea) Leaf Extract, Glycolic Acid, Sodium Laureth Sulfate, Cocamidopropyl Betaine, Glycerin, Cellulose Beads, Phenoxyethanol, Fragrance.",
-      howToUse: "Take coin-sized amount on wet palms, lather and gently massage in upward circular motions on damp face. Rinse thoroughly.",
-      sizes: ["100ml", "200ml"],
-      inStock: true
-    },
-
-    // 17. Swiss Beauty Real Makeup Base Highlighter
-    {
-      id: "prod-swiss-beauty-highlighter",
-      name: "Real Makeup Base Highlighting Primer",
-      brand: "Swiss Beauty",
-      category: "Makeup",
-      subcategory: "Primer",
-      price: 7.20,
-      originalPrice: 9.99,
-      discountPercent: 28,
-      rating: 4.7,
-      reviewCount: 1040,
-      images: [
-        "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BEST VALUE",
-      isFeaturedValue: true,
-      dealLabel: "28% Off",
-      description: "An illuminating primer that doubles as a liquid highlighter, giving skin a radiant glass-skin sheen while blurring pores and holding makeup.",
-      keyBenefits: ["Glass-skin instant glow", "Lightweight hydrating formula", "Can be worn alone or mixed with foundation"],
-      ingredients: "Water, Mica, Propylene Glycol, Dimethicone, Ethylhexyl Palmitate, Caprylic/Capric Triglyceride, Phenoxyethanol, Ethylhexylglycerin.",
-      howToUse: "Wear underneath makeup for an all-over glow, or dab onto cheekbones, brow bones, and Cupid bow as a liquid highlighter.",
-      shades: [
-        { name: "01 Natural Glow", hex: "#F0D5C3" },
-        { name: "02 Golden Hour", hex: "#DEB592" },
-        { name: "03 Rosy Tint", hex: "#E7B8B8" }
-      ],
-      inStock: true
-    },
-
-    // 18. Schwarzkopf BC Bonacure Peptide Repair
-    {
-      id: "prod-schwarzkopf-bonacure",
-      name: "BC Bonacure Peptide Repair Rescue Deep Treatment Mask",
-      brand: "Schwarzkopf",
-      category: "Haircare",
-      subcategory: "Hair Treatments",
-      price: 22.00,
-      originalPrice: 28.00,
-      discountPercent: 21,
-      rating: 4.8,
-      reviewCount: 780,
-      images: [
-        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "LIMITED OFFER",
-      isSavingsDeal: true,
-      dealLabel: "Limited Offer",
-      description: "Intensively reconstructs the inner and outer hair structure with Cell Equalizer technology and peptides to reverse 3 years of hair damage.",
-      keyBenefits: ["Restores inner hair elasticity up to 95%", "Smooths porous surface cuticle", "Provides lasting moisture and shine"],
-      ingredients: "Aqua (Water, Eau), Cetearyl Alcohol, Isopropyl Myristate, Behentrimonium Chloride, Distearoylethyl Hydroxyethylmonium Methosulfate, Stearamidopropyl Dimethylamine.",
-      howToUse: "Work through clean damp hair. Leave for 5-10 minutes. Rinse thoroughly. Use 1-2 times weekly.",
-      sizes: ["200ml", "500ml"],
-      inStock: true
-    },
-
-    // 19. The Derma Co 1% Hyaluronic Sunscreen Aqua Gel
-    {
-      id: "prod-derma-co-sunscreen",
-      name: "1% Hyaluronic Sunscreen Aqua Gel SPF 50 PA++++",
-      brand: "The Derma Co.",
-      category: "Skincare",
-      subcategory: "Sunscreen",
-      price: 11.90,
-      originalPrice: 15.90,
-      discountPercent: 25,
-      rating: 4.9,
-      reviewCount: 3450,
-      images: [
-        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isSavingsDeal: true,
-      dealLabel: "Save 25%",
-      description: "Ultra-lightweight gel sunscreen that absorbs like water with zero white cast. Infused with hyaluronic acid and vitamin E for deep hydration and broad-spectrum UV protection.",
-      keyBenefits: ["Zero white cast, non-greasy finish", "Broad spectrum UVA/UVB + Blue light defense", "Hydrates with 1% Pure Hyaluronic Acid"],
-      ingredients: "Aqua, Ethylhexyl Methoxycinnamate, Butyl Methoxydibenzoylmethane, Benzophenone-3, Phospholipids, 1,3-Butylene Glycol, Sodium Hyaluronate, Tocopheryl Acetate.",
-      howToUse: "Take 2 finger lengths and apply evenly over face, neck, and exposed skin 15 minutes before sun exposure. Reapply every 2 hours.",
-      sizes: ["50g", "80g"],
-      inStock: true
-    },
-
-    // 20. Matrix Biolage Smoothproof Treatment
-    {
-      id: "prod-matrix-biolage",
-      name: "Biolage Smoothproof Deep Smoothing Hair Treatment Pack",
-      brand: "Matrix",
-      category: "Haircare",
-      subcategory: "Hair Treatments",
-      price: 14.40,
-      originalPrice: 18.00,
-      discountPercent: 20,
-      rating: 4.7,
-      reviewCount: 650,
-      images: [
-        "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "NEW ARRIVAL",
-      isNewArrival: true,
-      dealLabel: "Save 20%",
-      description: "Inspired by natures water-resistant camellia, this paraben-free treatment polishes frizz and encapsulates hair with silky moisture.",
-      keyBenefits: ["Controls rebellious humidity frizz", "Provides 8x more smoothness", "Formulated with Camellia flower seed extract"],
-      ingredients: "Aqua / Water / Eau, Cetearyl Alcohol, Behentrimonium Chloride, Amodimethicone, Candelilla Cera / Candelilla Wax, Cetyl Esters, Glycerin, Camellia Oleifera Seed Oil.",
-      howToUse: "Apply to wet hair after shampooing. Leave on for 3 to 5 minutes for salon-fresh hydration. Rinse thoroughly.",
-      sizes: ["100ml", "500ml"],
-      inStock: true
-    },
-
-    // 21. Luxury Rose & Oud Eau de Parfum
-    {
-      id: "prod-bloom-rose-oud",
-      name: "Velvet Rose & Smoked Oud Eau de Parfum",
-      brand: "Bloom Beauty",
-      category: "Fragrance",
-      subcategory: "Perfume",
-      price: 52.00,
-      originalPrice: 65.00,
-      discountPercent: 20,
-      rating: 4.9,
-      reviewCount: 420,
-      images: [
-        "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BESTSELLER",
-      isBestseller: true,
-      isFeaturedValue: true,
-      dealLabel: "Signature Scent",
-      description: "An intoxicating blend of Damask rose petals, warm amber, and smoked oud wood wrapped in creamy vanilla and white musk. An unforgettable feminine presence.",
-      keyBenefits: ["Up to 14 hours lasting sillage", "Crafted in Grasse, France", "Cruelty-free & phthalate-free"],
-      ingredients: "Alcohol Denat., Parfum (Fragrance), Aqua (Water), Ethylhexyl Methoxycinnamate, Butyl Methoxydibenzoylmethane, Limonene, Linalool, Citronellol, Geraniol, Coumarin.",
-      howToUse: "Spritz onto pulse points: wrists, collarbone, behind ears, and inside elbows. Do not rub wrists together.",
-      sizes: ["50ml", "100ml"],
-      inStock: true
-    },
-
-    // 22. Rose Quartz Facial Sculpting Roller & Gua Sha Set
-    {
-      id: "prod-rose-quartz-roller",
-      name: "Pure Rose Quartz Facial Sculpting Roller & Gua Sha Set",
-      brand: "Bloom Beauty",
-      category: "Beauty Tools",
-      subcategory: "Face Tools",
-      price: 22.50,
-      originalPrice: 30.00,
-      discountPercent: 25,
-      rating: 4.9,
-      reviewCount: 680,
-      images: [
-        "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "BEST VALUE",
+      isBestseller: false,
       isFeaturedValue: true,
       dealLabel: "Save 25%",
-      description: "Hand-carved from 100% natural Brazilian rose quartz crystal. Boosts lymphatic drainage, depuffs morning eyes, and enhances absorption of facial oils.",
-      keyBenefits: ["Cooling natural crystal relieves facial tension", "Sculpts jawline and cheekbones", "Enhances serum penetration"],
-      ingredients: "100% Authentic Brazilian Rose Quartz, Zinc Alloy Gold-tone Frame with silent silicone bumper.",
-      howToUse: "Apply 3-4 drops of facial oil. Glide roller or gua sha gently upwards from jawline to ear and forehead to hairline.",
-      inStock: true
+      description: "Housed in a bespoke octagonal rose-gold metallic casing. Highly saturated matte bullet lipstick that glides like silk, wrapping lips in rich plum berry pigment.",
+      keyBenefits: ["Bespoke weighted rose-gold metal packaging", "Intense one-stroke color payoff", "Transfer-resistant velvety comfort finish"],
+      ingredients: "Octyldodecanol, Candelilla Wax, Cera Microcristallina, Caprylic/Capric Triglyceride, Vitamin E, Iron Oxides (CI 77491, CI 77492, CI 77499).",
+      howToUse: "Glide directly from the bullet onto lips, starting at the cupid's bow and working outward.",
+      shades: [
+        { name: "Plum Berry", hex: "#8B1E41" },
+        { name: "Dusty Rose", hex: "#C76E78" },
+        { name: "Velvet Mauve", hex: "#9E4760" }
+      ]
     },
-
-    // 23. Whipped Rose & Shea Butter Body Cream
     {
-      id: "prod-whipped-body-butter",
-      name: "Whipped French Rose & Organic Shea Body Soufflé",
-      brand: "Bloom Beauty",
-      category: "Bath & Body",
-      subcategory: "Body Cream",
-      price: 18.00,
-      originalPrice: 24.00,
-      discountPercent: 25,
+      id: "prod-prime-matte-trio",
+      name: "Prime Matte Velvet Long-Wear Lipstick Trio (Mauve, Crimson & Nude)",
+      brand: "Prime Matte",
+      category: "Makeup",
+      subcategory: "Lipstick Set",
+      price: 1299,
+      originalPrice: 1699,
+      discountPercent: 24,
       rating: 4.8,
-      reviewCount: 510,
+      reviewCount: 960,
       images: [
-        "https://images.unsplash.com/photo-1556228722-d0b5d033a7f8?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1608248597359-2911b3ef30b8?auto=format&fit=crop&w=800&q=80"
-      ],
-      badge: "NEW ARRIVAL",
-      isNewArrival: true,
-      dealLabel: "25% Off",
-      description: "Air-whipped to cloud-like perfection with raw organic shea butter, French rose water, and cold-pressed sweet almond oil for 24-hour hydration without stickiness.",
-      keyBenefits: ["Melts instantly into dry skin", "Subtle romantic floral scent", "Leaves skin velvet-smooth"],
-      ingredients: "Butyrospermum Parkii (Shea) Butter, Aqua, Rosa Damascena Flower Water, Prunus Amygdalus Dulcis (Sweet Almond) Oil, Simmondsia Chinensis (Jojoba) Seed Oil, Glycerin.",
-      howToUse: "Smooth generously over entire body after shower or bath while skin is slightly damp.",
-      sizes: ["200ml"],
-      inStock: true
-    },
-
-    // 24. Gel Couture Longwear Nail Polish
-    {
-      id: "prod-gel-nail-polish",
-      name: "Gel Couture High-Gloss Salon Finish Nail Polish",
-      brand: "Bloom Beauty",
-      category: "Nail Care",
-      subcategory: "Nail Polish",
-      price: 9.00,
-      originalPrice: 12.00,
-      discountPercent: 25,
-      rating: 4.8,
-      reviewCount: 390,
-      images: [
-        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80"
+        "Docs/Lipsticks/Three Matte Lipsticks in Vibrant Swatches.png",
+        "Docs/Lipsticks/Split-Tone Matte Lipstick Comparison.png"
       ],
       badge: "LIMITED OFFER",
-      dealLabel: "Save 25%",
-      description: "2-step gel-like manicure system that provides up to 14 days of chip-resistant, cushiony gel shine without any UV lamp required.",
-      keyBenefits: ["Flawless salon gel shine without UV lamp", "Patented curve-hugging brush for neat application", "Removes easily with standard remover"],
-      ingredients: "Butyl Acetate, Ethyl Acetate, Nitrocellulose, Tosylamide/Epoxy Resin, Isopropyl Alcohol, Acetyl Tributyl Citrate, Dipropylene Glycol Dibenzoate, Stearalkonium Hectorite.",
-      howToUse: "Apply 2 coats of Gel Couture color to clean nails. Finish with 1 coat of Gel Couture Top Coat.",
+      isBestseller: false,
+      isFeaturedValue: false,
+      isSavingsDeal: true,
+      dealLabel: "3-Shade Set",
+      description: "Curated 3-piece lipstick vault featuring the three essential everyday shades: Mauve Berry, Classic Crimson Red, and Warm Dusty Nude in soft-touch matte casings.",
+      keyBenefits: ["Complete 3-piece lipstick wardrobe in one box", "10-Hour comfortable matte wear without feathering", "Formulated with hydrating argan oil"],
+      ingredients: "Isododecane, Trimethylsiloxysilicate, Argania Spinosa (Argan) Kernel Oil, Cera Alba, Tocopherol, Mica, CI 15850, CI 77491.",
+      howToUse: "Choose your mood: Nude for work, Mauve for brunch, Crimson for evening glam.",
       shades: [
-        { name: "Blush Macaron", hex: "#E8B6BA" },
-        { name: "Dusty Rose Petal", hex: "#C98498" },
-        { name: "Spiced Burgundy", hex: "#631B2A" },
-        { name: "Champagne Shimmer", hex: "#D8C5A8" }
+        { name: "Dusty Nude", hex: "#BA766E" },
+        { name: "Classic Crimson", hex: "#C6182C" },
+        { name: "Mauve Berry", hex: "#9D4B66" }
+      ]
+    },
+    {
+      id: "prod-signature-four-shades",
+      name: "Signature 4-Shade Velvet Matte Lipstick Quad Collection",
+      brand: "Bloom Beauty",
+      category: "Makeup",
+      subcategory: "Lipstick Set",
+      price: 1499,
+      originalPrice: 1999,
+      discountPercent: 25,
+      rating: 4.9,
+      reviewCount: 2100,
+      images: [
+        "Docs/Lipsticks/Four Shades, One Signature Pout.png",
+        "Docs/Lipsticks/Glossy Curls and Crimson Lips.png"
       ],
-      inStock: true
+      badge: "NEW LAUNCH",
+      isBestseller: false,
+      isFeaturedValue: true,
+      dealLabel: "4-Piece Quad",
+      description: "Four iconic signature shades in one premier collection: Bordeaux Wine, Scarlet Velvet, Terracotta Sunset, and Petal Blush. Formulated for all Indian skin tones.",
+      keyBenefits: ["4 universally flattering couture lip shades", "Enriched with camellia seed oil and hyaluronic spheres", "Lightweight, feather-resistant all-day comfort"],
+      ingredients: "Polyglyceryl-2 Triisostearate, Dimethicone, Camellia Japonica Seed Oil, Sodium Hyaluronate, CI 77491, CI 15850, CI 45410.",
+      howToUse: "Wear individually or ombre two shades together for an editorial lip contour."
     }
   ],
 
   editorialCollections: [
     {
-      id: "everyday-makeup",
-      title: "Everyday Makeup Essentials",
-      subtitle: "Effortless radiance in under 10 minutes",
-      image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80",
-      badge: "CURATED EDIT",
+      id: "velvet-lips",
+      title: "The Signature Velvet Lip Collection",
+      subtitle: "Four shades, one signature pout. Indulge in cushiony mattes with 12h wear.",
       category: "Makeup",
-      ctaText: "Shop the Look"
+      badge: "EDITOR'S CHOICE",
+      image: "Docs/Lipsticks/Four Shades, One Signature Pout.png",
+      ctaText: "Explore Collection"
     },
     {
-      id: "glowing-skin",
-      title: "Glowing Skin Collection",
-      subtitle: "Deeply hydrated, dewy glass-skin formulas",
-      image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80",
-      badge: "DERM LOVED",
-      category: "Skincare",
-      ctaText: "Discover Glow"
-    },
-    {
-      id: "lipstick-obsession",
-      title: "Lipstick Obsession",
-      subtitle: "From iconic velvet berries to nude rosewoods",
-      image: "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?auto=format&fit=crop&w=800&q=80",
-      badge: "TRENDING NOW",
-      category: "Makeup",
-      ctaText: "Find Your Shade"
-    },
-    {
-      id: "skincare-routine",
-      title: "Skincare Routine Builder",
-      subtitle: "Cleanse, treat, hydrate & protect with clinical actives",
-      image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=80",
-      badge: "STEP-BY-STEP",
-      category: "Skincare",
-      ctaText: "Build Routine"
-    },
-    {
-      id: "hair-repair",
-      title: "Hair Repair Essentials",
-      subtitle: "Molecular bond builders for silk-like transformation",
-      image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80",
-      badge: "SALON SECRETS",
-      category: "Haircare",
-      ctaText: "Revive Hair"
-    },
-    {
-      id: "party-makeup",
-      title: "Party Makeup Favourites",
-      subtitle: "High-pigment shimmers and 24h transfer-proof wear",
-      image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
-      badge: "NIGHT OUT",
-      category: "Makeup",
-      ctaText: "Shop Party Glam"
-    },
-    {
-      id: "luxury-beauty",
-      title: "Luxury Beauty Picks",
-      subtitle: "Artisanal fragrances and gold-standard crystal tools",
-      image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=80",
-      badge: "PREMIUM LUXE",
-      category: "Fragrance",
-      ctaText: "Indulge in Luxe"
-    },
-    {
-      id: "self-care",
-      title: "Self-Care Essentials",
-      subtitle: "Whipped French shea butter and calming rose rituals",
-      image: "https://images.unsplash.com/photo-1556228722-d0b5d033a7f8?auto=format&fit=crop&w=800&q=80",
-      badge: "WELLNESS EDIT",
+      id: "french-spa",
+      title: "French Lavender Restorative Spa",
+      subtitle: "Complete 6-piece aromatherapy bath and body sets for mindful relaxation.",
       category: "Bath & Body",
-      ctaText: "Shop Rituals"
+      badge: "POPULAR RITUAL",
+      image: "Docs/Bath & Body/Lavender Body & Earth Gift Set.png",
+      ctaText: "Discover Spa Care"
+    },
+    {
+      id: "haute-fragrance",
+      title: "Haute Parfumerie & Extrait Elixirs",
+      subtitle: "Chanel Coco Mademoiselle and Lunair Her Aura 25% Parfum concentrates.",
+      category: "Fragrance",
+      badge: "LUXURY CURATION",
+      image: "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png",
+      ctaText: "Experience Scents"
+    },
+    {
+      id: "pro-manicure",
+      title: "Salon Master Manicure & Gel Systems",
+      subtitle: "14-Piece stainless toolkits, magnetic silk cat-eye gels, and strengthening oils.",
+      category: "Nail Care",
+      badge: "SALON QUALITY",
+      image: "Docs/Nail Care/Professional Nail Care Tools Flat Lay.png",
+      ctaText: "Shop Nail Care"
     }
   ],
 
-  reviews: {
-    "prod-maybelline-burgundy-glow": [
-      {
-        id: "rev-1",
-        author: "Sophia Martinez",
-        rating: 5,
-        date: "2 days ago",
-        title: "The best matte lipstick I own!",
-        comment: "The burgundy shade is stunning! Unlike other matte lipsticks, this does not crack or dry out my lips after 6 hours. High pigmentation with just one swipe.",
-        verified: true,
-        helpfulCount: 38
-      },
-      {
-        id: "rev-2",
-        author: "Aria Chen",
-        rating: 5,
-        date: "1 week ago",
-        title: "Comfortable & long-lasting",
-        comment: "Feels weightless. I got so many compliments at dinner. The color payoff is rich and luxurious.",
-        verified: true,
-        helpfulCount: 19
-      }
-    ],
-    "prod-ordinary-niacinamide": [
-      {
-        id: "rev-3",
-        author: "Elena Rostova",
-        rating: 5,
-        date: "3 days ago",
-        title: "Shrank my pores in 2 weeks",
-        comment: "Holy grail for oily T-zone. My skin texture is visibly smoother and I haven't had any breakouts since starting.",
-        verified: true,
-        helpfulCount: 52
-      }
-    ]
-  }
+  reviews: [
+    {
+      id: "rev-1",
+      productId: "prod-chanel-coco-mademoiselle",
+      author: "Pooja Sharma",
+      verified: true,
+      rating: 5,
+      date: "Nov 2, 2026",
+      title: "Pure Parisian Luxury in India!",
+      comment: "I have been wearing Coco Mademoiselle for years and buying it on Bloom Beauty was seamless. 100% authentic, the packaging was pristine and it lasts through Mumbai humidity easily!"
+    },
+    {
+      id: "rev-2",
+      productId: "prod-body-earth-lavender-set",
+      author: "Ananya Deshmukh",
+      verified: true,
+      rating: 5,
+      date: "Oct 28, 2026",
+      title: "Best Gift Set Ever",
+      comment: "Gifted this 6-piece Lavender set to my mother and she was over the moon! The fragrance is true lavender, not artificial at all. The shower gel and face cream are divine."
+    },
+    {
+      id: "rev-3",
+      productId: "prod-bloom-ceramide-barrier-cream",
+      author: "Rhea Sen",
+      verified: true,
+      rating: 5,
+      date: "Oct 30, 2026",
+      title: "Holy grail barrier cream!",
+      comment: "My damaged skin barrier recovered in just 4 days using this cream. Paired with the model application routine, my skin is glowing and completely calm."
+    },
+    {
+      id: "rev-4",
+      productId: "prod-kronzam-rosemary-spray",
+      author: "Sneha Nair",
+      verified: true,
+      rating: 5,
+      date: "Nov 1, 2026",
+      title: "Visible baby hairs after 3 weeks!",
+      comment: "The twin pack is such great value. I spray it every night before bed. It does not make my scalp greasy at all and smells fresh of real rosemary!"
+    }
+  ]
 };

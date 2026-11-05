@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       document.querySelectorAll('.cart-subtotal-display').forEach(el => {
-        el.textContent = `$${store.getSubtotal().toFixed(2)}`;
+        el.textContent = window.formatINR(store.getSubtotal());
       });
     },
 
@@ -265,13 +265,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const shipping = store.getShipping();
       const total = store.getTotal();
 
-      document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
-      document.getElementById('cart-discount').textContent = `-$${discount.toFixed(2)}`;
-      document.getElementById('cart-shipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
-      document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+      document.getElementById('cart-subtotal').textContent = window.formatINR(subtotal);
+      document.getElementById('cart-discount').textContent = `-${window.formatINR(discount)}`;
+      document.getElementById('cart-shipping').textContent = shipping === 0 ? 'FREE' : window.formatINR(shipping);
+      document.getElementById('cart-total').textContent = window.formatINR(total);
 
-      // Free shipping progress bar (target: $35)
-      const freeShippingThreshold = 35;
+      // Free shipping progress bar (target: ₹799)
+      const freeShippingThreshold = 799;
       const progressPercent = Math.min(100, (subtotal / freeShippingThreshold) * 100);
       const remaining = Math.max(0, freeShippingThreshold - subtotal);
 
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (remaining <= 0) {
           progressText.innerHTML = `🎉 <strong>Congratulations!</strong> You unlocked <strong>FREE Express Shipping</strong>!`;
         } else {
-          progressText.innerHTML = `Add <strong>$${remaining.toFixed(2)}</strong> more to get <strong>FREE Express Shipping</strong>!`;
+          progressText.innerHTML = `Add <strong>${window.formatINR(remaining)}</strong> more to get <strong>FREE Express Shipping</strong>!`;
         }
       }
 
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="flex-1 min-w-0">
               <span class="text-[10px] uppercase font-bold text-[#C98498] block">${p.brand}</span>
               <h4 class="text-xs font-semibold text-[#292329] truncate">${p.name}</h4>
-              <span class="text-xs font-bold text-[#292329] mt-0.5 block">$${p.price.toFixed(2)}</span>
+              <span class="text-xs font-bold text-[#292329] mt-0.5 block">${window.formatINR(p.price)}</span>
             </div>
             <div class="flex items-center gap-2">
               <button type="button" 
@@ -393,9 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3 class="text-xl font-serif font-bold text-[#292329] mb-2 leading-tight">${product.name}</h3>
             <div class="mb-3">${comp.renderRating(product.rating, product.reviewCount)}</div>
             <div class="flex items-baseline gap-3 mb-4">
-              <span class="text-2xl font-bold text-[#292329]">$${product.price.toFixed(2)}</span>
+              <span class="text-2xl font-bold text-[#292329]">${window.formatINR(product.price)}</span>
               ${product.originalPrice > product.price ? `
-                <span class="text-sm text-gray-400 line-through">$${product.originalPrice.toFixed(2)}</span>
+                <span class="text-sm text-gray-400 line-through">${window.formatINR(product.originalPrice)}</span>
                 <span class="text-xs font-bold text-[#A6536F] bg-[#F8E9EC] px-2 py-0.5 rounded">${product.discountPercent}% OFF</span>
               ` : ''}
             </div>
@@ -542,9 +542,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
               <!-- Price Box -->
               <div class="flex items-baseline gap-3 mb-5">
-                <span class="text-3xl font-bold text-[#292329]">$${product.price.toFixed(2)}</span>
+                <span class="text-3xl font-bold text-[#292329]">${window.formatINR(product.price)}</span>
                 ${product.originalPrice > product.price ? `
-                  <span class="text-base text-gray-400 line-through">$${product.originalPrice.toFixed(2)}</span>
+                  <span class="text-base text-gray-400 line-through">${window.formatINR(product.originalPrice)}</span>
                   <span class="text-xs font-bold text-[#A6536F] bg-[#F8E9EC] px-2.5 py-1 rounded">Save ${product.discountPercent}%</span>
                 ` : ''}
               </div>
@@ -602,7 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <input type="text" id="delivery-pincode" placeholder="Enter Zip/Postal Code (e.g. 10001)" class="text-xs bg-white border border-[#EEE7E9] rounded-lg px-3 py-2 flex-1 focus:outline-none focus:border-[#C98498]" />
                   <button type="button" id="delivery-check-btn" class="text-xs font-semibold bg-[#292329] text-white px-3.5 py-2 rounded-lg hover:bg-[#A6536F] transition-colors">Check</button>
                 </div>
-                <div id="delivery-status-msg" class="text-xs text-gray-500 mt-2">Free standard shipping on orders over $35. Express 2-day delivery available.</div>
+                <div id="delivery-status-msg" class="text-xs text-gray-500 mt-2">Free standard shipping on orders over ₹799. Express delivery available.</div>
               </div>
 
               <!-- Guarantee Badges -->
@@ -822,7 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="flex-1 min-w-0">
                   <span class="text-[10px] uppercase font-bold text-[#C98498] block">${p.brand}</span>
                   <h4 class="text-xs font-semibold text-[#292329] truncate">${p.name}</h4>
-                  <span class="text-xs font-bold text-[#292329]">$${p.price.toFixed(2)}</span>
+                  <span class="text-xs font-bold text-[#292329]">${window.formatINR(p.price)}</span>
                 </div>
                 <button type="button" 
                         class="text-xs font-semibold text-[#A6536F] hover:underline"
@@ -936,9 +936,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const subtotal = store.getSubtotal();
       const discount = store.getDiscount();
 
-      document.querySelectorAll('.checkout-subtotal-val').forEach(el => el.textContent = `$${subtotal.toFixed(2)}`);
-      document.querySelectorAll('.checkout-discount-val').forEach(el => el.textContent = `-$${discount.toFixed(2)}`);
-      document.querySelectorAll('.checkout-total-val').forEach(el => el.textContent = `$${total.toFixed(2)}`);
+      document.querySelectorAll('.checkout-subtotal-val').forEach(el => el.textContent = window.formatINR(subtotal));
+      document.querySelectorAll('.checkout-discount-val').forEach(el => el.textContent = `-${window.formatINR(discount)}`);
+      document.querySelectorAll('.checkout-total-val').forEach(el => el.textContent = window.formatINR(total));
     },
 
     completeOrder() {

@@ -1,6 +1,13 @@
 // ========================================================
-// BLOOM BEAUTY — UI COMPONENT RENDERERS
+// BLOOM BEAUTY — UI COMPONENT RENDERERS (INR ₹)
 // ========================================================
+
+if (typeof window.formatINR !== 'function') {
+  window.formatINR = function(amount) {
+    if (typeof amount !== 'number') amount = Number(amount) || 0;
+    return '₹' + Math.round(amount).toLocaleString('en-IN');
+  };
+}
 
 window.BloomComponents = {
   // Star rating helper
@@ -32,16 +39,16 @@ window.BloomComponents = {
   getBadgeClass(badge) {
     switch (badge) {
       case 'BESTSELLER': return 'bloom-badge-bestseller';
-      case 'NEW ARRIVAL': return 'bloom-badge-new';
-      case 'LIMITED OFFER': return 'bloom-badge-deal';
-      case 'BEST VALUE': return 'bloom-badge-value';
+      case 'NEW ARRIVAL': case 'NEW LAUNCH': return 'bloom-badge-new';
+      case 'LIMITED OFFER': case 'HOT DEAL': return 'bloom-badge-deal';
+      case 'BEST VALUE': case 'MEGA VALUE': return 'bloom-badge-value';
       default: return 'bg-gray-800 text-white';
     }
   },
 
   // CRITICAL PRODUCT CARD COMPONENT
   renderProductCard(product) {
-    const isSaved = window.bloomStore.isInWishlist(product.id);
+    const isSaved = window.bloomStore ? window.bloomStore.isInWishlist(product.id) : false;
     const primaryImg = product.images[0];
     const secondaryImg = product.images[1] || primaryImg;
 
@@ -59,8 +66,8 @@ window.BloomComponents = {
       <div class="bloom-card group" data-product-id="${product.id}">
         <!-- Image Box -->
         <div class="bloom-image-box">
-          <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary" loading="lazy" />
-          <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary" loading="lazy" />
+          <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary object-contain p-2" loading="lazy" />
+          <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary object-cover" loading="lazy" />
 
           <!-- Promotional Badge -->
           ${product.badge ? `<span class="bloom-badge ${this.getBadgeClass(product.badge)}">${product.badge}</span>` : ''}
@@ -123,11 +130,11 @@ window.BloomComponents = {
           <!-- Shades Preview -->
           ${shadesHtml}
 
-          <!-- Price & Discount -->
+          <!-- Price & Discount in INR -->
           <div class="mt-auto pt-2 flex items-baseline gap-2 border-t border-[#FAF6F7]">
-            <span class="text-base font-bold text-[#292329]">$${product.price.toFixed(2)}</span>
+            <span class="text-base font-bold text-[#292329]">${window.formatINR(product.price)}</span>
             ${product.originalPrice > product.price ? `
-              <span class="text-xs text-[#777078] line-through">$${product.originalPrice.toFixed(2)}</span>
+              <span class="text-xs text-[#777078] line-through">${window.formatINR(product.originalPrice)}</span>
               <span class="text-xs font-bold text-[#A6536F] ml-auto">${product.discountPercent}% OFF</span>
             ` : ''}
           </div>
@@ -221,7 +228,7 @@ window.BloomComponents = {
     const { product, quantity, selectedShade, selectedSize } = item;
     return `
       <div class="flex gap-3 py-3.5 border-b border-[#EEE7E9] last:border-b-0">
-        <img src="${product.images[0]}" alt="${product.name}" class="w-20 h-20 object-cover rounded-lg bg-[#FAF6F7] border border-[#EEE7E9] flex-shrink-0" />
+        <img src="${product.images[0]}" alt="${product.name}" class="w-20 h-20 object-contain rounded-lg bg-[#FAF6F7] border border-[#EEE7E9] flex-shrink-0 p-1" />
         <div class="flex-1 min-w-0">
           <span class="text-[10px] font-bold text-[#C98498] uppercase tracking-wider block">${product.brand}</span>
           <h4 class="text-xs font-medium text-[#292329] truncate mb-1">${product.name}</h4>
@@ -244,9 +251,9 @@ window.BloomComponents = {
                       data-shade="${selectedShade || ''}">+</button>
             </div>
 
-            <!-- Price -->
+            <!-- Price in INR -->
             <div class="text-right">
-              <span class="text-xs font-bold text-[#292329]">$${(product.price * quantity).toFixed(2)}</span>
+              <span class="text-xs font-bold text-[#292329]">${window.formatINR(product.price * quantity)}</span>
             </div>
 
             <!-- Remove Button -->
