@@ -465,6 +465,7 @@ window.BloomData = {
     // ------------------------------------------------------------------------
     {
       id: "prod-kronzam-rosemary-spray",
+      slug: "kronzam-rosemary-rice-water-spray",
       name: "Kronzam Rosemary & Rice Water Hair Re-Growth Spray (Pack of 2, 100ml each)",
       brand: "Kronzam",
       category: "Haircare",
@@ -475,8 +476,8 @@ window.BloomData = {
       rating: 4.9,
       reviewCount: 3120,
       images: [
-        "Docs/Haircare/Rosemary & Rice Water Spray Duo.png",
-        "Docs/Haircare/Glossy Haircare Spray Beauty Portrait.png"
+        "Docs/Haircare/Glossy Haircare Spray Beauty Portrait.png",
+        "Docs/Haircare/Rosemary & Rice Water Spray Duo.png"
       ],
       badge: "BESTSELLER",
       isBestseller: true,
@@ -592,6 +593,7 @@ window.BloomData = {
     // ------------------------------------------------------------------------
     {
       id: "prod-bloom-ceramide-barrier-cream",
+      slug: "ceramide-barrier-defense-face-cream",
       name: "Ceramide Barrier Defense Deep Hydrating Face Cream (50ml)",
       brand: "Bloom Beauty",
       category: "Skincare",
@@ -602,8 +604,8 @@ window.BloomData = {
       rating: 4.9,
       reviewCount: 1890,
       images: [
-        "Docs/Skincare/ceramide-barrier-cream-skincare-01.png",
-        "Docs/Skincare/Freckled Skincare Cream Portrait.png"
+        "Docs/Skincare/Freckled Skincare Cream Portrait.png",
+        "Docs/Skincare/ceramide-barrier-cream-skincare-01.png"
       ],
       badge: "BEST VALUE",
       isBestseller: false,
@@ -642,6 +644,7 @@ window.BloomData = {
     },
     {
       id: "prod-bloom-radiance-glow-serum",
+      slug: "niacinamide-vitamin-c-radiance-serum",
       name: "10% Niacinamide & Vitamin C Radiance Booster Serum (30ml)",
       brand: "Bloom Beauty",
       category: "Skincare",
@@ -652,8 +655,8 @@ window.BloomData = {
       rating: 4.9,
       reviewCount: 3410,
       images: [
-        "Docs/Skincare/radiance-glow-serum-skincare-03.png",
-        "Docs/Skincare/Radiant Serum Skincare Close-Up.png"
+        "Docs/Skincare/Radiant Serum Skincare Close-Up.png",
+        "Docs/Skincare/radiance-glow-serum-skincare-03.png"
       ],
       badge: "BEST VALUE",
       isBestseller: false,
@@ -715,6 +718,7 @@ window.BloomData = {
     },
     {
       id: "prod-bloom-glass-skin-essence",
+      slug: "centella-green-tea-glass-skin-essence",
       name: "Centella & Green Tea Calming Dewy Glass Skin Essence (120ml)",
       brand: "Bloom Beauty",
       category: "Skincare",
@@ -725,8 +729,8 @@ window.BloomData = {
       rating: 4.8,
       reviewCount: 970,
       images: [
-        "Docs/Skincare/calming-glass-skin-essence-skincare-06.png",
-        "Docs/Skincare/Serene Skincare Portrait with Gold Ear Piercings.png"
+        "Docs/Skincare/Serene Skincare Portrait with Gold Ear Piercings.png",
+        "Docs/Skincare/calming-glass-skin-essence-skincare-06.png"
       ],
       badge: "NEW ARRIVAL",
       isBestseller: false,
@@ -1265,3 +1269,6 @@ window.BloomData = {
     }
   ]
 };
+
+window.data = window.BloomData;
+export default window.BloomData;

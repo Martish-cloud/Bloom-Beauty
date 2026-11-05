@@ -9,10 +9,10 @@ window.formatINR = function(amount) {
 
 window.BloomData = {
   announcements: [
-    "✨ Discover Your Beauty, Your Way | Complimentary Deluxe Mini on Orders over ₹999",
+    "🌿 100% Authentic Products Sourced Directly from Global & Indian Brands.",
+    "✨ Complimentary Deluxe Mini on Orders over ₹999 | Free Express Delivery",
     "🌸 Free Express Shipping Across India on All Cosmetics & Skincare over ₹799",
-    "💄 Exclusive: Up to 40% Off Selected Luxury Fragrances, Lipsticks & Skincare",
-    "🌿 100% Authentic Products Sourced Directly from Global & Indian Brands"
+    "💄 Exclusive: Up to 40% Off Selected Luxury Fragrances, Lipsticks & Skincare"
   ],
 
   heroSlides: [
@@ -55,25 +55,25 @@ window.BloomData = {
     {
       id: "makeup",
       name: "Makeup",
-      tagline: "Lipsticks, Foundations, Eyes & Blushes",
+      tagline: "Lipsticks, Foundations, Eyes, and More",
       itemCount: "240+ Products",
       image: "Docs/Lipsticks/Luxury Red Lipstick Mood Board.png",
       subcategories: ["Lipsticks & Glosses", "Foundations & Concealers", "Eyeshadow & Mascara", "Blush & Highlighters", "Primers & Setting Sprays"],
-      popularBrands: ["Maybelline New York", "Praush Beauty", "Prime Matte", "L'Oréal Paris", "Praush Beauty", "Huda Beauty"]
+      popularBrands: ["Maybelline New York", "Praush Beauty", "L'Oréal Paris", "Praush Beauty", "Huda Beauty"]
     },
     {
       id: "skincare",
       name: "Skincare",
-      tagline: "Serums, Cleansers, SPF & Moisturizers",
+      tagline: "Serums, Cleansers, Moisturizers & More",
       itemCount: "190+ Products",
       image: "Docs/Skincare/Radiant Serum Skincare Glow.png",
       subcategories: ["Cleansers & Toners", "Serums & Essences", "Moisturizers & Creams", "Sunscreen SPF 50+", "Face Masks & Peels"],
-      popularBrands: ["Bloom Beauty", "Bloom Beauty", "CeraVe", "Cetaphil", "Minimalist"]
+      popularBrands: ["CeraVe", "Cetaphil", "CeraVe", "Cetaphil", "Minimalist"]
     },
     {
       id: "haircare",
       name: "Haircare",
-      tagline: "Bond Repair, Shampoos & Masks",
+      tagline: "Bond Repair, Shampoos & More",
       itemCount: "150+ Products",
       image: "Docs/Haircare/Voluminous Waves Beauty Portrait.png",
       subcategories: ["Bond Repair & Masks", "Shampoos & Conditioners", "Hair Oils & Serums", "Scalp Care & Scrubs", "Styling & Heat Protect"],
@@ -82,25 +82,25 @@ window.BloomData = {
     {
       id: "bath-body",
       name: "Bath & Body",
-      tagline: "Body Butters, Scrubs & Shower Gels",
+      tagline: "Body Butters, Scrubs, Shower Gels & More",
       itemCount: "95+ Products",
       image: "Docs/Bath & Body/Lavender Body & Earth Gift Set.png",
       subcategories: ["Body Butters & Lotions", "Shower Gels & Washes", "Body Scrubs & Exfoliators", "Hand & Foot Care", "Bath Salts & Soaks"],
-      popularBrands: ["Bath & Body Works", "Body & Earth", "American Girl", "Bloom Beauty"]
+      popularBrands: ["Bath & Body Works", "Body & Earth", "American Girl"]
     },
     {
       id: "fragrance",
       name: "Fragrance",
-      tagline: "Eau de Parfum, Mists & Travel Sets",
+      tagline: "Eau de Parfum, Mists, and Discoveries",
       itemCount: "80+ Products",
       image: "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png",
       subcategories: ["Eau de Parfum", "Eau de Toilette", "Body Mists & Sprays", "Perfume Oils", "Discovery Sets"],
-      popularBrands: ["Chanel Paris", "Lunair", "SKINN by Titan", "Arabian Aroma", "Bloom Beauty"]
+      popularBrands: ["Chanel Paris", "Lunair", "Arabian Aroma", "Bloom Beauty"]
     },
     {
       id: "nail-care",
       name: "Nail Care",
-      tagline: "Gel Polish, Cuticle Oils & Sets",
+      tagline: "Gel Polish, Cuticle Oils, Nail Treatments & More",
       itemCount: "65+ Products",
       image: "Docs/Nail Care/MII Fashion Metallic Pink Nail Polish.png",
       subcategories: ["Gel Finish Polish", "Nail Treatments", "Cuticle Oils & Creams", "Base & Top Coats", "Nail Tools"],
@@ -109,7 +109,7 @@ window.BloomData = {
     {
       id: "beauty-tools",
       name: "Beauty Tools",
-      tagline: "Rollers, Gua Sha & Brushes",
+      tagline: "Rollers, Gua Sha, Brushes & More",
       itemCount: "75+ Products",
       image: "Docs/Nail Care/Professional Nail Care Tools Flat Lay.png",
       subcategories: ["Facial Rollers & Gua Sha", "Makeup Brushes & Sponges", "Eyelash Curlers", "Cleansing Brushes", "Vanity Organizers"],
@@ -117,10 +117,9 @@ window.BloomData = {
     }
   ],
 
-  brands: [
+    brands: [
     { id: "chanel-paris", name: "Chanel Paris", category: "Fragrance", tag: "HAUTE LUXE", desc: "Timeless Parisian elegance and iconic perfumery" },
     { id: "maybelline", name: "Maybelline New York", category: "Makeup", tag: "ICONIC", desc: "Trendsetting global cosmetics" },
-    { id: "bloom-beauty", name: "Bloom Beauty", category: "Skincare", tag: "CLEAN CLINICAL", desc: "Dermatologically tested biocompatible skincare" },
     { id: "bath-body-works", name: "Bath & Body Works", category: "Bath & Body", tag: "FAN FAVORITE", desc: "Signature fine mists and decadent body care" },
     { id: "kronzam", name: "Kronzam", category: "Haircare", tag: "BOTANICAL", desc: "Active rosemary & rice water hair wellness" },
     { id: "loreal-paris", name: "L'Oréal Paris", category: "Haircare", tag: "GLOBAL BEST", desc: "Advanced haircare formulas engineered for results" },
@@ -128,12 +127,9 @@ window.BloomData = {
     { id: "rose-lily", name: "Rose & Lily", category: "Nail Care", tag: "SALON CARE", desc: "Intensive nail strengthening and cuticle therapy" },
     { id: "body-earth", name: "Body & Earth", category: "Bath & Body", tag: "AROMATHERAPY", desc: "Calming French lavender spa collections" },
     { id: "lunair", name: "Lunair", category: "Fragrance", tag: "EXTRAIT DE LUXE", desc: "Artisanal long-wearing luxury extrait fragrances" },
-    { id: "titan-skinn", name: "SKINN by Titan", category: "Fragrance", tag: "FINE ART", desc: "Crafted in France, celebrated across India" },
     { id: "nail-republic", name: "Nail Republic", category: "Nail Care", tag: "GEL SYSTEM", desc: "Professional cat-eye and UV salon finishes" },
-    { id: "prime-matte", name: "Prime Matte", category: "Makeup", tag: "ALL DAY MATTE", desc: "Featherlight full-coverage matte lipsticks" },
     { id: "maheorthe", name: "Maheorthe", category: "Haircare", tag: "AYURVEDIC HERBAL", desc: "Pure coconut and red hibiscus hair remedies" },
-    { id: "miss-nails", name: "Miss Nails", category: "Nail Care", tag: "HIGH SHINE", desc: "Quick-drying chip-resistant mini lacquers" },
-    { id: "american-girl", name: "Bath & Body Works x American Girl", category: "Bath & Body", tag: "COLLABORATION", desc: "Vibrant vitamin-infused body splashes" }
+    { id: "miss-nails", name: "Miss Nails", category: "Nail Care", tag: "HIGH SHINE", desc: "Quick-drying chip-resistant mini lacquers" }
   ],
 
   products: [
@@ -469,6 +465,7 @@ window.BloomData = {
     // ------------------------------------------------------------------------
     {
       id: "prod-kronzam-rosemary-spray",
+      slug: "kronzam-rosemary-rice-water-spray",
       name: "Kronzam Rosemary & Rice Water Hair Re-Growth Spray (Pack of 2, 100ml each)",
       brand: "Kronzam",
       category: "Haircare",
@@ -479,8 +476,8 @@ window.BloomData = {
       rating: 4.9,
       reviewCount: 3120,
       images: [
-        "Docs/Haircare/Rosemary & Rice Water Spray Duo.png",
-        "Docs/Haircare/Glossy Haircare Spray Beauty Portrait.png"
+        "Docs/Haircare/Glossy Haircare Spray Beauty Portrait.png",
+        "Docs/Haircare/Rosemary & Rice Water Spray Duo.png"
       ],
       badge: "BESTSELLER",
       isBestseller: true,
@@ -596,6 +593,7 @@ window.BloomData = {
     // ------------------------------------------------------------------------
     {
       id: "prod-bloom-ceramide-barrier-cream",
+      slug: "ceramide-barrier-defense-face-cream",
       name: "Ceramide Barrier Defense Deep Hydrating Face Cream (50ml)",
       brand: "Bloom Beauty",
       category: "Skincare",
@@ -606,8 +604,8 @@ window.BloomData = {
       rating: 4.9,
       reviewCount: 1890,
       images: [
-        "Docs/Skincare/ceramide-barrier-cream-skincare-01.png",
-        "Docs/Skincare/Freckled Skincare Cream Portrait.png"
+        "Docs/Skincare/Freckled Skincare Cream Portrait.png",
+        "Docs/Skincare/ceramide-barrier-cream-skincare-01.png"
       ],
       badge: "BEST VALUE",
       isBestseller: false,
@@ -646,6 +644,7 @@ window.BloomData = {
     },
     {
       id: "prod-bloom-radiance-glow-serum",
+      slug: "niacinamide-vitamin-c-radiance-serum",
       name: "10% Niacinamide & Vitamin C Radiance Booster Serum (30ml)",
       brand: "Bloom Beauty",
       category: "Skincare",
@@ -656,8 +655,8 @@ window.BloomData = {
       rating: 4.9,
       reviewCount: 3410,
       images: [
-        "Docs/Skincare/radiance-glow-serum-skincare-03.png",
-        "Docs/Skincare/Radiant Serum Skincare Close-Up.png"
+        "Docs/Skincare/Radiant Serum Skincare Close-Up.png",
+        "Docs/Skincare/radiance-glow-serum-skincare-03.png"
       ],
       badge: "BEST VALUE",
       isBestseller: false,
@@ -719,6 +718,7 @@ window.BloomData = {
     },
     {
       id: "prod-bloom-glass-skin-essence",
+      slug: "centella-green-tea-glass-skin-essence",
       name: "Centella & Green Tea Calming Dewy Glass Skin Essence (120ml)",
       brand: "Bloom Beauty",
       category: "Skincare",
@@ -729,8 +729,8 @@ window.BloomData = {
       rating: 4.8,
       reviewCount: 970,
       images: [
-        "Docs/Skincare/calming-glass-skin-essence-skincare-06.png",
-        "Docs/Skincare/Serene Skincare Portrait with Gold Ear Piercings.png"
+        "Docs/Skincare/Serene Skincare Portrait with Gold Ear Piercings.png",
+        "Docs/Skincare/calming-glass-skin-essence-skincare-06.png"
       ],
       badge: "NEW ARRIVAL",
       isBestseller: false,
@@ -962,7 +962,7 @@ window.BloomData = {
     {
       id: "prod-prime-matte-trio",
       name: "Prime Matte Velvet Long-Wear Lipstick Trio (Mauve, Crimson & Nude)",
-      brand: "Prime Matte",
+      brand: "MAC Cosmetics",
       category: "Makeup",
       subcategory: "Lipstick Set",
       price: 1299,
@@ -1269,3 +1269,6 @@ window.BloomData = {
     }
   ]
 };
+
+window.data = window.BloomData;
+export default window.BloomData;

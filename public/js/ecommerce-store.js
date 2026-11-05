@@ -11,11 +11,16 @@ class BloomCommerceStore {
   // --- Storage Initialization ---
   initStorage() {
     // 1. Current Customer Profile
-    if (!localStorage.getItem('bloom_customer_profile')) {
+    let storedProfile = null;
+    try {
+      storedProfile = JSON.parse(localStorage.getItem('bloom_customer_profile') || 'null');
+    } catch (e) {}
+
+    if (!storedProfile || storedProfile.name === 'Jane Doe' || storedProfile.email === 'jane.doe@example.com' || (storedProfile.email && storedProfile.email.includes('example.com'))) {
       const defaultUser = {
-        id: 'cust-jane-doe',
-        name: 'Jane Doe',
-        email: 'jane.doe@example.com',
+        id: 'cust-ankita-mehta',
+        name: 'Ankita Mehta',
+        email: 'ankitamehta06@gmail.com',
         phone: '+91 98765 43210',
         memberSince: 'October 2024',
         isAuthenticated: true
@@ -24,11 +29,16 @@ class BloomCommerceStore {
     }
 
     // 2. Saved Addresses
-    if (!localStorage.getItem('bloom_customer_addresses')) {
+    let storedAddresses = null;
+    try {
+      storedAddresses = JSON.parse(localStorage.getItem('bloom_customer_addresses') || 'null');
+    } catch (e) {}
+
+    if (!storedAddresses || storedAddresses.some(a => a.name === 'Jane Doe')) {
       const defaultAddresses = [
         {
           id: 'addr-1',
-          name: 'Jane Doe',
+          name: 'Ankita Mehta',
           phone: '+91 98765 43210',
           houseNo: 'Flat 402, Lotus Residency',
           street: '12th Main Road, HAL 2nd Stage, Indiranagar',
@@ -41,7 +51,7 @@ class BloomCommerceStore {
         },
         {
           id: 'addr-2',
-          name: 'Jane Doe',
+          name: 'Ankita Mehta',
           phone: '+91 98765 43210',
           houseNo: 'Tech Park One, 5th Floor, Tower B',
           street: 'Outer Ring Road, Kadubeesanahalli',
@@ -57,7 +67,12 @@ class BloomCommerceStore {
     }
 
     // 3. Saved Cards / Payment Methods (Tokenized only - no raw card numbers/CVV)
-    if (!localStorage.getItem('bloom_saved_cards')) {
+    let storedCards = null;
+    try {
+      storedCards = JSON.parse(localStorage.getItem('bloom_saved_cards') || 'null');
+    } catch (e) {}
+
+    if (!storedCards || storedCards.some(c => c.nameOnCard === 'Jane Doe' || (c.upiId && c.upiId.includes('jane.doe')))) {
       const defaultCards = [
         {
           id: 'card-1',
@@ -66,7 +81,7 @@ class BloomCommerceStore {
           last4: '4242',
           expiry: '08/28',
           bank: 'HDFC Bank',
-          nameOnCard: 'Jane Doe'
+          nameOnCard: 'Ankita Mehta'
         },
         {
           id: 'card-2',
@@ -75,13 +90,13 @@ class BloomCommerceStore {
           last4: '8891',
           expiry: '11/27',
           bank: 'ICICI Bank',
-          nameOnCard: 'Jane Doe'
+          nameOnCard: 'Ankita Mehta'
         },
         {
           id: 'card-3',
           type: 'upi',
           brand: 'UPI',
-          upiId: 'jane.doe@okhdfcbank',
+          upiId: 'ankita.mehta@okhdfcbank',
           bank: 'Google Pay'
         }
       ];
@@ -136,18 +151,23 @@ class BloomCommerceStore {
     }
 
     // 5. Seed Existing Orders for Customer History
-    if (!localStorage.getItem('bloom_customer_orders')) {
+    let storedOrders = null;
+    try {
+      storedOrders = JSON.parse(localStorage.getItem('bloom_customer_orders') || 'null');
+    } catch (e) {}
+
+    if (!storedOrders || storedOrders.some(o => o.customerName === 'Jane Doe' || (o.customerEmail && o.customerEmail.includes('example.com')))) {
       const seedOrders = [
         {
           id: 'BB-2026-78412',
           date: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
           formattedDate: this.formatDate(new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)),
-          customerId: 'cust-jane-doe',
-          customerName: 'Jane Doe',
-          customerEmail: 'jane.doe@example.com',
+          customerId: 'cust-ankita-mehta',
+          customerName: 'Ankita Mehta',
+          customerEmail: 'ankitamehta06@gmail.com',
           customerPhone: '+91 98765 43210',
           shippingAddress: {
-            name: 'Jane Doe',
+            name: 'Ankita Mehta',
             phone: '+91 98765 43210',
             houseNo: 'Flat 402, Lotus Residency',
             street: '12th Main Road, HAL 2nd Stage, Indiranagar',
@@ -234,12 +254,12 @@ class BloomCommerceStore {
           id: 'BB-2026-65109',
           date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
           formattedDate: this.formatDate(new Date(Date.now() - 10 * 24 * 60 * 60 * 1000)),
-          customerId: 'cust-jane-doe',
-          customerName: 'Jane Doe',
-          customerEmail: 'jane.doe@example.com',
+          customerId: 'cust-ankita-mehta',
+          customerName: 'Ankita Mehta',
+          customerEmail: 'ankitamehta06@gmail.com',
           customerPhone: '+91 98765 43210',
           shippingAddress: {
-            name: 'Jane Doe',
+            name: 'Ankita Mehta',
             phone: '+91 98765 43210',
             houseNo: 'Tech Park One, 5th Floor',
             street: 'Outer Ring Road, Kadubeesanahalli',
@@ -1043,3 +1063,4 @@ class BloomCommerceStore {
 
 // Export singleton instance globally
 window.bloomCommerce = new BloomCommerceStore();
+

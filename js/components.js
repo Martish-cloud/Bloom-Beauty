@@ -66,8 +66,8 @@ window.BloomComponents = {
       <div class="bloom-card group" data-product-id="${product.id}">
         <!-- Image Box -->
         <div class="bloom-image-box cursor-pointer" data-action="view-details" data-id="${product.id}">
-          <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary object-contain p-2" loading="lazy" />
-          <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary object-cover" loading="lazy" />
+          <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary w-full h-full object-cover" loading="lazy" />
+          <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary w-full h-full object-cover" loading="lazy" />
 
           <!-- Promotional Badge -->
           ${product.badge ? `<span class="bloom-badge ${this.getBadgeClass(product.badge)}">${product.badge}</span>` : ''}

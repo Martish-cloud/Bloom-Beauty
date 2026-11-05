@@ -399,20 +399,20 @@ const BloomEcommerceUI = {
       const firstName = profile.name.split(' ')[0];
       if (headerGreeting) headerGreeting.textContent = `Hello, ${firstName}`;
       if (nameEl) nameEl.textContent = `Hello, ${profile.name}`;
-      if (emailEl) emailEl.textContent = profile.email || 'customer@bloombeauty.com';
+      if (emailEl) emailEl.textContent = profile.email || 'ankitamehta06@gmail.com';
       if (avatarEl) avatarEl.textContent = profile.name.charAt(0).toUpperCase();
       if (badgeEl) {
         badgeEl.textContent = 'VIP Member';
         badgeEl.className = 'text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full';
       }
     } else {
-      if (headerGreeting) headerGreeting.textContent = 'Hello, Sign In';
-      if (nameEl) nameEl.textContent = 'Hello, Sign In';
-      if (emailEl) emailEl.textContent = 'Sign in for personalized offers';
-      if (avatarEl) avatarEl.textContent = '?';
+      if (headerGreeting) headerGreeting.textContent = 'Hello, Ankita';
+      if (nameEl) nameEl.textContent = 'Hello, Ankita Mehta';
+      if (emailEl) emailEl.textContent = 'ankitamehta06@gmail.com';
+      if (avatarEl) avatarEl.textContent = 'A';
       if (badgeEl) {
-        badgeEl.textContent = 'Guest';
-        badgeEl.className = 'text-[10px] font-semibold text-bloom-muted bg-gray-100 border border-gray-200 px-2 py-0.5 rounded-full';
+        badgeEl.textContent = 'VIP Member';
+        badgeEl.className = 'text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full';
       }
     }
   },
@@ -484,6 +484,30 @@ const BloomEcommerceUI = {
     }
   },
 
+  getProduct(identifier) {
+    if (!identifier) return null;
+    const prods = (window.BloomData && window.BloomData.products) || 
+                  (window.data && window.data.products) || [];
+    const clean = String(identifier).trim().toLowerCase();
+    
+    // 1. Direct ID match
+    let found = prods.find(p => p.id && p.id.toLowerCase() === clean);
+    if (found) return found;
+
+    // 2. Slug match
+    found = prods.find(p => p.slug && p.slug.toLowerCase() === clean);
+    if (found) return found;
+
+    // 3. Partial ID/slug match
+    found = prods.find(p => (p.id && p.id.toLowerCase().includes(clean)) || (p.slug && p.slug.toLowerCase().includes(clean)));
+    if (found) return found;
+
+    // 4. Normalized name match
+    const slugify = s => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    found = prods.find(p => slugify(p.name || '') === clean);
+    return found || null;
+  },
+
   // --- PART 1: PRODUCT DETAIL PAGE & STATE-PRESERVING BACK NAVIGATION ---
   openProductPage(productId) {
     // Record current browsing state
@@ -510,7 +534,7 @@ const BloomEcommerceUI = {
   },
 
   renderProductDetailPage(productId) {
-    const product = window.data?.products?.find(p => p.id === productId);
+    const product = this.getProduct(productId);
     if (!product) {
       this.closeProductDetailPage();
       window.BloomApp?.showToast('Product not found');
@@ -536,7 +560,8 @@ const BloomEcommerceUI = {
     const activeImage = images[this.activeDetailImageIndex] || images[0];
 
     // Related products (same category)
-    const relatedProducts = (window.data?.products || [])
+    const allProds = (window.BloomData && window.BloomData.products) || (window.data && window.data.products) || [];
+    const relatedProducts = allProds
       .filter(p => p.category === product.category && p.id !== product.id)
       .slice(0, 4);
 
@@ -607,7 +632,7 @@ const BloomEcommerceUI = {
                 ${images.map((img, idx) => `
                   <button type="button" 
                           onclick="BloomEcommerceUI.switchDetailImage(${idx})"
-                          class="w-16 h-16 rounded-xl border-2 overflow-hidden shrink-0 transition-all ${idx === this.activeDetailImageIndex ? 'border-bloom-rose shadow-md scale-105' : 'border-bloom-border opacity-70 hover:opacity-100'}">
+                          class="detail-thumb-btn w-16 h-16 rounded-xl border-2 overflow-hidden shrink-0 transition-all ${idx === this.activeDetailImageIndex ? 'border-bloom-rose shadow-md scale-105' : 'border-bloom-border opacity-70 hover:opacity-100'}">
                     <img src="${img}" alt="Thumbnail ${idx + 1}" class="w-full h-full object-cover" />
                   </button>
                 `).join('')}
@@ -840,6 +865,16 @@ const BloomEcommerceUI = {
       const el = document.getElementById('detail-main-img');
       if (el) el.src = img;
     }
+    const thumbs = document.querySelectorAll('.detail-thumb-btn');
+    thumbs.forEach((btn, idx) => {
+      if (idx === index) {
+        btn.classList.add('border-bloom-rose', 'shadow-md', 'scale-105');
+        btn.classList.remove('border-bloom-border', 'opacity-70');
+      } else {
+        btn.classList.remove('border-bloom-rose', 'shadow-md', 'scale-105');
+        btn.classList.add('border-bloom-border', 'opacity-70');
+      }
+    });
   },
 
   selectDetailShade(shadeName, btn) {
@@ -887,7 +922,7 @@ const BloomEcommerceUI = {
   },
 
   toggleWishlistDetail(productId) {
-    const p = window.data?.products?.find(item => item.id === productId);
+    const p = this.getProduct(productId);
     if (!p) return;
     window.bloomStore.toggleWishlist(p);
     this.renderProductDetailPage(productId);
@@ -965,8 +1000,8 @@ const BloomEcommerceUI = {
   renderAccountDashboard(activeTab = 'profile') {
     this.activeAccountTab = activeTab;
     const profile = window.bloomCommerce.getCustomerProfile() || {
-      name: 'Jane Doe',
-      email: 'jane.doe@example.com',
+      name: 'Ankita Mehta',
+      email: 'ankitamehta06@gmail.com',
       phone: '+91 98765 43210',
       memberSince: 'October 2024'
     };
@@ -1592,8 +1627,8 @@ const BloomEcommerceUI = {
     const total = window.bloomStore.getTotal();
 
     const profile = window.bloomCommerce.getCustomerProfile() || {
-      name: 'Jane Doe',
-      email: 'jane.doe@example.com',
+      name: 'Ankita Mehta',
+      email: 'ankitamehta06@gmail.com',
       phone: '+91 98765 43210'
     };
 
@@ -1654,13 +1689,13 @@ const BloomEcommerceUI = {
                 </div>
               </div>
 
-              <!-- OTP Verification Demo Simulation -->
+              <!-- OTP Quick Verification -->
               <div class="p-3.5 bg-bloom-soft rounded-xl border border-bloom-border">
                 <span class="text-xs font-bold text-bloom-deepRose block mb-1">🔐 Identity Verification (OTP)</span>
-                <p class="text-[11px] text-bloom-muted mb-2">A 4-digit verification code will be simulated for demo purposes.</p>
+                <p class="text-[11px] text-bloom-muted mb-2">A 4-digit verification code will be sent to your registered number.</p>
                 <div class="flex items-center gap-2">
                   <input type="text" id="chk-login-otp" value="1234" maxlength="4" placeholder="Enter OTP" class="w-32 text-center text-xs font-mono font-bold bg-white border border-bloom-border rounded-lg p-2 focus:outline-none focus:border-bloom-rose" />
-                  <span class="text-[11px] text-emerald-700 font-semibold">✔ Demo Code Auto-Filled (1234)</span>
+                  <span class="text-[11px] text-emerald-700 font-semibold">✔ Verification Code Ready (1234)</span>
                 </div>
               </div>
 
@@ -1910,7 +1945,7 @@ const BloomEcommerceUI = {
     }
 
     if (otp !== '1234' && otp.length !== 4) {
-      alert('Please enter valid 4-digit verification OTP (Demo: 1234)');
+      alert('Please enter valid 4-digit verification OTP (1234)');
       return;
     }
 
@@ -2202,7 +2237,7 @@ const BloomEcommerceUI = {
   },
 
   showAddressModal() {
-    const name = prompt('Recipient Name:', 'Jane Doe');
+    const name = prompt('Recipient Name:', 'Ankita Mehta');
     if (!name) return;
     const houseNo = prompt('Flat / House / Building:', 'Flat 101, Sunshine Heights');
     if (!houseNo) return;
@@ -2257,7 +2292,7 @@ const BloomEcommerceUI = {
         last4,
         expiry,
         bank,
-        nameOnCard: 'Jane Doe'
+        nameOnCard: 'Ankita Mehta'
       });
       this.renderAccountDashboard('cards');
     }
@@ -2270,7 +2305,7 @@ const BloomEcommerceUI = {
   },
 
   moveWishlistToCart(productId) {
-    const p = window.data?.products?.find(item => item.id === productId);
+    const p = this.getProduct(productId);
     if (p) {
       window.bloomStore.addToCart(p, 1);
       window.bloomStore.toggleWishlist(p);
@@ -2279,7 +2314,7 @@ const BloomEcommerceUI = {
   },
 
   removeWishlist(productId) {
-    const p = window.data?.products?.find(item => item.id === productId);
+    const p = this.getProduct(productId);
     if (p) {
       window.bloomStore.toggleWishlist(p);
       this.renderAccountDashboard('wishlist');
@@ -2290,7 +2325,7 @@ const BloomEcommerceUI = {
     const order = window.bloomCommerce.getOrderById(orderId);
     if (order && order.items) {
       order.items.forEach(it => {
-        const prod = window.data?.products?.find(p => p.id === it.id);
+        const prod = this.getProduct(it.id);
         if (prod) {
           window.bloomStore.addToCart(prod, it.quantity, it.shade, it.size);
         }

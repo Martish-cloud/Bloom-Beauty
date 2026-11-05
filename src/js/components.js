@@ -65,9 +65,9 @@ window.BloomComponents = {
     return `
       <div class="bloom-card group" data-product-id="${product.id}">
         <!-- Image Box -->
-        <div class="bloom-image-box">
-          <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary object-contain p-2" loading="lazy" />
-          <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary object-cover" loading="lazy" />
+        <div class="bloom-image-box cursor-pointer" data-action="view-details" data-id="${product.id}">
+          <img src="${primaryImg}" alt="${product.name}" class="bloom-img-primary w-full h-full object-cover" loading="lazy" />
+          <img src="${secondaryImg}" alt="${product.name} alternate view" class="bloom-img-secondary w-full h-full object-cover" loading="lazy" />
 
           <!-- Promotional Badge -->
           ${product.badge ? `<span class="bloom-badge ${this.getBadgeClass(product.badge)}">${product.badge}</span>` : ''}
@@ -75,7 +75,7 @@ window.BloomComponents = {
           <!-- Wishlist Heart Button -->
           <button type="button" 
                   class="bloom-wishlist-toggle ${isSaved ? 'is-active' : ''}" 
-                  data-action="wishlist" 
+                  data-action="wishlist" onclick="event.stopPropagation();" 
                   data-id="${product.id}"
                   aria-label="Save to Wishlist"
                   title="${isSaved ? 'Remove from Wishlist' : 'Add to Wishlist'}">
@@ -88,7 +88,7 @@ window.BloomComponents = {
           <div class="bloom-quick-actions">
             <button type="button" 
                     class="flex-1 bg-[#292329] hover:bg-[#A6536F] text-[#FFFDF9] py-2 px-3 rounded-lg text-xs font-semibold tracking-wide transition-colors flex items-center justify-center gap-1.5 shadow-sm"
-                    data-action="quick-add" 
+                    data-action="quick-add" onclick="event.stopPropagation();" 
                     data-id="${product.id}">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
@@ -97,7 +97,7 @@ window.BloomComponents = {
             </button>
             <button type="button" 
                     class="bg-white hover:bg-[#F8E9EC] text-[#292329] p-2 rounded-lg border border-[#EEE7E9] text-xs font-medium transition-colors"
-                    data-action="quick-view" 
+                    data-action="quick-view" onclick="event.stopPropagation();" 
                     data-id="${product.id}"
                     aria-label="Quick View"
                     title="Quick View">
@@ -143,48 +143,118 @@ window.BloomComponents = {
     `;
   },
 
-  // Category Grid Card
+  // Category Grid Card (Explore Your Beauty Essentials Showcase)
   renderCategoryCard(cat) {
+    // Curated pastel badge themes with high-contrast readable typography
+    const badgeThemes = {
+      'makeup': {
+        bg: '#FCE8ED', // Blush Pink
+        text: '#7A2840',
+        border: '#F3C4D0'
+      },
+      'skincare': {
+        bg: '#FFF8E7', // Dewy Cream
+        text: '#6E4F18',
+        border: '#F7E5BD'
+      },
+      'haircare': {
+        bg: '#FDF2E9', // Warm Champagne
+        text: '#7A4016',
+        border: '#F6D8C0'
+      },
+      'bath-body': {
+        bg: '#F3EBF9', // Soft Lavender
+        text: '#552773',
+        border: '#E0D0EE'
+      },
+      'fragrance': {
+        bg: '#FBE9ED', // Rose Quartz
+        text: '#782338',
+        border: '#F5C7D2'
+      },
+      'nail-care': {
+        bg: '#F7E9F4', // Pale Lilac
+        text: '#6E2260',
+        border: '#ECCCE5'
+      },
+      'beauty-tools': {
+        bg: '#EBF7F2', // Pale Mint
+        text: '#1E5740',
+        border: '#CDE9DC'
+      }
+    };
+
+    const theme = badgeThemes[cat.id] || {
+      bg: '#F8E9EC',
+      text: '#A6536F',
+      border: '#EEE7E9'
+    };
+
+    // Format badge text in bold uppercase e.g. "240+ PRODUCTS"
+    const badgeText = (cat.itemCount || '100+ Products').toUpperCase();
+
     return `
-      <div class="relative group rounded-xl overflow-hidden bg-white border border-[#EEE7E9] shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
+      <div class="category-card group w-[160px] sm:w-[175px] md:w-[190px] lg:w-full shrink-0 snap-start lg:shrink"
            data-action="filter-category" 
-           data-category="${cat.name}">
-        <div class="aspect-[4/5] overflow-hidden bg-[#FAF6F7] relative">
+           data-category="${cat.name}"
+           role="button"
+           tabindex="0"
+           aria-label="Browse ${cat.name} Collection (${badgeText})">
+        
+        <!-- Category Background Image -->
+        <div class="category-card-bg">
           <img src="${cat.image}" 
                alt="${cat.name}" 
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-          
-          <div class="absolute bottom-0 inset-x-0 p-4 text-white">
-            <span class="text-[11px] uppercase tracking-wider text-[#F3D2DA] font-semibold">${cat.itemCount}</span>
-            <h3 class="text-lg font-serif font-bold text-white mb-1 group-hover:text-[#F3D2DA] transition-colors">${cat.name}</h3>
-            <p class="text-xs text-white/80 line-clamp-1 mb-2">${cat.tagline}</p>
-            <div class="inline-flex items-center text-xs font-semibold text-white group-hover:translate-x-1 transition-transform">
-              Shop Now
-              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </div>
+        </div>
+
+        <!-- Subtle Dark Gradient Overlay (Clear on top, rich contrast on bottom) -->
+        <div class="category-card-gradient"></div>
+        
+        <!-- Category Text & Button Content -->
+        <div class="category-card-content">
+          <!-- 1. Product Count Pill Badge -->
+          <span class="category-pill-badge" 
+                style="background-color: ${theme.bg} !important; color: ${theme.text} !important; border: 1px solid ${theme.border} !important;">
+            ${badgeText}
+          </span>
+
+          <!-- 2. Category Title -->
+          <h3 class="category-card-title">${cat.name}</h3>
+
+          <!-- 3. Category Description -->
+          <p class="category-card-desc">${cat.tagline}</p>
+
+          <!-- 4. Shop Now Button -->
+          <div class="category-shop-now-btn">
+            <span>Shop Now</span>
+            <svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
           </div>
         </div>
+
       </div>
     `;
   },
 
-  // Brand Tile Card
+    // Brand Tile Card
   renderBrandCard(brand) {
     return `
-      <div class="brand-card group" data-action="filter-brand" data-brand="${brand.name}">
-        <span class="text-[10px] uppercase font-bold tracking-widest text-[#C98498] bg-[#F8E9EC] px-2 py-0.5 rounded-full mb-3">${brand.category}</span>
-        <h4 class="text-base font-bold text-[#292329] group-hover:text-[#A6536F] transition-colors mb-1 tracking-tight">${brand.name}</h4>
-        <p class="text-xs text-[#777078] line-clamp-1 mb-3">${brand.desc}</p>
-        <span class="text-xs font-semibold text-[#A6536F] group-hover:underline flex items-center gap-1">
-          Explore Brand
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
-          </svg>
-        </span>
+      <div class="brand-card group flex flex-col justify-between" data-action="filter-brand" data-brand="${brand.name}">
+        <div class="flex flex-col items-center text-center w-full">
+          <span class="text-[10px] uppercase font-bold tracking-widest text-[#C98498] bg-[#F8E9EC] px-3 py-1 rounded-full mb-3 inline-block">${brand.category}</span>
+          <h4 class="text-base sm:text-lg font-serif font-bold text-[#292329] group-hover:text-[#A6536F] transition-colors mb-2 tracking-tight">${brand.name}</h4>
+          <p class="text-xs text-[#777078] leading-relaxed line-clamp-2 max-w-[280px] mb-4">${brand.desc}</p>
+        </div>
+        <div class="mt-auto pt-3 border-t border-bloom-border/50 w-full flex justify-center">
+          <span class="text-xs font-semibold text-[#A6536F] group-hover:text-[#292329] inline-flex items-center gap-1.5 transition-all group-hover:translate-x-1">
+            Explore Brand
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+            </svg>
+          </span>
+        </div>
       </div>
     `;
   },
