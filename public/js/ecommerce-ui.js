@@ -139,6 +139,7 @@ const BloomEcommerceUI = {
   },
 
   // --- Account Dropdown Menu Interactions (Strict Click-To-Toggle for Desktop & Mobile) ---
+  // --- Account Dropdown Menu Interactions (Strict Click-To-Toggle for Desktop & Mobile) ---
   setupAccountDropdown() {
     const wrapper = document.getElementById('account-dropdown-wrapper');
     const btn = document.getElementById('account-dropdown-btn');
@@ -146,26 +147,37 @@ const BloomEcommerceUI = {
     const chevron = document.getElementById('account-dropdown-chevron') || btn?.querySelector('svg.transition-transform');
     if (!wrapper || !btn || !menu) return;
 
+    let isOpen = false;
+    let lastToggleTimestamp = 0;
+    let openScrollY = 0;
+
     // Helper: explicitly synchronize chevron arrow
-    const setArrowState = (isOpen) => {
-      if (chevron) {
-        chevron.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+    const setVisualState = (open) => {
+      if (open) {
+        menu.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        if (chevron) chevron.style.transform = 'rotate(180deg)';
+      } else {
+        menu.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        if (chevron) chevron.style.transform = 'rotate(0deg)';
       }
     };
 
     // Helper: Open dropdown
     const openMenu = () => {
+      isOpen = true;
+      lastToggleTimestamp = Date.now();
+      openScrollY = window.scrollY;
       this.updateAccountDropdownUI();
-      menu.classList.add('is-open');
-      btn.setAttribute('aria-expanded', 'true');
-      setArrowState(true);
+      setVisualState(true);
     };
 
     // Helper: Close dropdown
     const closeMenu = () => {
-      menu.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', 'false');
-      setArrowState(false);
+      isOpen = false;
+      lastToggleTimestamp = Date.now();
+      setVisualState(false);
     };
 
     // Ensure initial closed state on page load
@@ -175,7 +187,6 @@ const BloomEcommerceUI = {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const isOpen = menu.classList.contains('is-open');
       if (isOpen) {
         closeMenu();
       } else {
@@ -188,28 +199,31 @@ const BloomEcommerceUI = {
       e.stopPropagation();
     });
 
-    // --- 3. CLOSE ON CLICK/TAP OUTSIDE ---
+    // --- 3. CLOSE ON CLICK/TAP OUTSIDE (Guarded against same-interaction clicks) ---
     const handleOutsideInteraction = (e) => {
-      if (menu.classList.contains('is-open') && !wrapper.contains(e.target)) {
-        closeMenu();
-      }
+      if (!isOpen) return;
+      // Prevent closing during the exact same interaction as opening
+      if (Date.now() - lastToggleTimestamp < 220) return;
+      // Ignore if clicked inside account wrapper
+      if (e.target && e.target.closest && e.target.closest('#account-dropdown-wrapper')) return;
+      closeMenu();
     };
 
     document.addEventListener('click', handleOutsideInteraction);
-    document.addEventListener('pointerdown', handleOutsideInteraction);
+    document.addEventListener('touchend', handleOutsideInteraction, { passive: true });
 
     // --- 4. CLOSE ON ESCAPE KEY ---
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+      if (e.key === 'Escape' && isOpen) {
         e.preventDefault();
         closeMenu();
         btn.focus();
       }
     });
 
-    // --- 5. CLOSE ON PAGE SCROLL ---
+    // --- 5. CLOSE ON MEANINGFUL PAGE SCROLL (> 60px) ---
     window.addEventListener('scroll', () => {
-      if (menu.classList.contains('is-open')) {
+      if (isOpen && Math.abs(window.scrollY - openScrollY) > 60) {
         closeMenu();
       }
     }, { passive: true });
@@ -246,7 +260,7 @@ const BloomEcommerceUI = {
     // Keyboard support on the trigger button
     btn.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
-        if (!menu.classList.contains('is-open')) {
+        if (!isOpen) {
           e.preventDefault();
           openMenu();
           const firstItem = menu.querySelector('.account-menu-item');

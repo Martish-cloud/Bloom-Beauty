@@ -848,7 +848,7 @@ body {
 }
 @media (max-width: 1023px) { .mega-menu-panel { display: none !important; } }
 </style>
-  <link rel="stylesheet" href="./css/styles.css?v=3.9.0" />
+  <link rel="stylesheet" href="./css/styles.css?v=4.0.0" />
   <!-- Preload Critical Hero Slide 1 Image -->
   <link rel="preload" as="image" href="Header Images/one.png" type="image/png" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1557,12 +1557,12 @@ body {
        LIPSTICK ADVERTISEMENT VIDEO SECTION
        (Positioned between Explore Your Beauty Essentials & More Beauty, Better Value)
        ======================================================== -->
-  <section class="lipstick-campaign-section w-full bg-[#FFFDF9] border-t border-bloom-border flex flex-col justify-center items-center" id="lipstick-video-section">
+    <section class="lipstick-campaign-section w-full bg-[#FFFDF9] border-t border-bloom-border py-8 sm:py-10 md:py-12 flex flex-col justify-center items-center" id="lipstick-video-section">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
       
       <!-- Section Header -->
-      <div class="text-center max-w-2xl mx-auto mb-3 sm:mb-4">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text leading-tight mb-1.5">
+      <div class="text-center max-w-2xl mx-auto mb-4 sm:mb-6">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text leading-tight mb-2">
           The Art of Velvet Elegance
         </h2>
         <p class="text-xs sm:text-sm text-bloom-muted leading-relaxed">
@@ -1570,12 +1570,13 @@ body {
         </p>
       </div>
 
-      <!-- Video Player Wrapper (Enlarged, Centered, 16:9, Single Fullscreen Control) -->
-      <div class="lipstick-video-wrapper relative w-full mx-auto rounded-2xl overflow-hidden shadow-2xl border border-bloom-border bg-black group" id="custom-video-container">
-        <!-- Silent Video Element -->
+      <!-- Video Player Wrapper (Responsive 16:9, Contained, Subtle Bloom Beauty Badge, Fullscreen Button) -->
+      <div class="lipstick-video-wrapper relative w-full max-w-4xl lg:max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl border border-bloom-border bg-black group" id="custom-video-container" style="aspect-ratio: 16 / 9;">
+        <!-- Silent Autoplay Video Element with object-fit: contain (Full Frame, Zero Cropping) -->
         <video 
           id="lipstick-advertisement-video"
-          class="w-full h-full object-cover block"
+          class="w-full h-full block mx-auto"
+          style="object-fit: contain; width: 100%; height: 100%;"
           src="Docs/Lipsticks/Lipstick_advertisement_Video_silent.mp4"
           poster="Docs/Lipsticks/Lipstick_advertisement_video_poster.jpg"
           autoplay
@@ -1589,27 +1590,37 @@ body {
           Your browser does not support the video tag.
         </video>
 
-        <!-- Minimal Fullscreen Button (Single Visible Control) -->
+        <!-- Subtle Bloom Beauty Brand Watermark Badge (Bottom-Right, Covers generator watermark) -->
+        <div class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center gap-1.5 bg-[#292329]/85 text-[#FFFDF9] backdrop-blur-md px-2.5 py-1 sm:px-3 sm:py-1 rounded-full border border-white/15 shadow-md pointer-events-none select-none" aria-hidden="true">
+          <div class="w-3.5 h-3.5 rounded-full bg-bloom-rose text-white flex items-center justify-center shrink-0">
+            <svg class="w-2 h-2" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/>
+            </svg>
+          </div>
+          <span class="font-serif text-[10px] sm:text-xs font-semibold tracking-wider text-white">Bloom Beauty</span>
+        </div>
+
+        <!-- Minimal Fullscreen Button (Top-Right, Single Essential Control) -->
         <button type="button" 
                 id="video-fullscreen-btn" 
-                class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-xs shadow-lg opacity-85 hover:opacity-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer" 
+                class="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center transition-all duration-200 backdrop-blur-xs shadow-lg opacity-85 hover:opacity-100 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white/50 cursor-pointer" 
                 title="Toggle Fullscreen" 
                 aria-label="Toggle Fullscreen">
-          <svg id="fullscreen-enter-icon" class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg id="fullscreen-enter-icon" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
           </svg>
-          <svg id="fullscreen-exit-icon" class="w-4 h-4 sm:w-5 sm:h-5 text-white hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <svg id="fullscreen-exit-icon" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5l5.25 5.25"/>
           </svg>
         </button>
       </div>
 
-      <!-- Single Call to Action (Centred Underneath Video) -->
-      <div class="flex items-center justify-center mt-3 sm:mt-4">
+      <!-- Action Button Centered Under Video -->
+      <div class="mt-5 sm:mt-6 text-center">
         <button type="button" 
-                class="bg-[#292329] hover:bg-bloom-deepRose text-[#FFFDF9] px-8 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-md active:scale-95 cursor-pointer"
+                class="open-catalog-btn inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#292329] hover:bg-bloom-deepRose text-white text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer" 
                 data-action="filter-category" 
-                data-category="Makeup">
+                data-category="Lipsticks">
           Shop Lipstick Collection
         </button>
       </div>
@@ -2380,7 +2391,7 @@ body {
   <script type="module" src="./js/components.js?v=3.5.0"></script>
   <script type="module" src="./js/app.js?v=3.6.0"></script>
   <script type="module" src="./js/ecommerce-store.js?v=3.7.0"></script>
-  <script type="module" src="./js/ecommerce-ui.js?v=3.9.0"></script>
+  <script type="module" src="./js/ecommerce-ui.js?v=4.0.0"></script>
 
   <!-- Global Fixed Watermark: Made by Zynova -->
   <div id="zynova-watermark" class="zynova-global-watermark" aria-hidden="true">Made by Zynova</div>
