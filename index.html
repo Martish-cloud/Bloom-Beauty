@@ -848,7 +848,7 @@ body {
 }
 @media (max-width: 1023px) { .mega-menu-panel { display: none !important; } }
 </style>
-  <link rel="stylesheet" href="./css/styles.css?v=4.1.0" />
+  <link rel="stylesheet" href="./css/styles.css?v=4.2.0" />
   <!-- Preload Critical Hero Slide 1 Image -->
   <link rel="preload" as="image" href="Header Images/one.png" type="image/png" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1602,21 +1602,21 @@ body {
   </section>
 
   <!-- ========================================================
-       4. SHOP BY CATEGORY (SECTION 5)
+       4. SHOP BY CATEGORY (SECTION 5) — EXPLORE YOUR BEAUTY ESSENTIALS
        ======================================================== -->
-  <section class="py-14 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12">
+  <section class="py-12 sm:py-16 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full" id="curation-section">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 sm:mb-8 md:mb-10">
       <div>
-        <span class="text-xs uppercase font-bold tracking-[0.2em] text-bloom-deepRose block mb-1">Curation</span>
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text">Explore Your Beauty Essentials</h2>
+        <span class="text-[11px] uppercase font-bold tracking-[0.25em] text-bloom-deepRose block mb-1.5">CURATION</span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-bloom-text tracking-tight">Explore Your Beauty Essentials</h2>
       </div>
-      <p class="text-xs sm:text-sm text-bloom-muted mt-2 sm:mt-0 max-w-md">
+      <p class="text-xs sm:text-sm text-bloom-muted max-w-md leading-relaxed md:text-right">
         Handpicked luxury formulations across cosmetics, skincare, haircare, and personal beauty rituals.
       </p>
     </div>
 
-    <!-- Categories Grid -->
-    <div id="category-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3.5 sm:gap-4"></div>
+    <!-- Categories Grid / Showcase Track (7-Column Desktop, Smooth Horizontal Swipe on Touch/Mobile) -->
+    <div id="category-grid" class="category-showcase-track flex overflow-x-auto snap-x snap-mandatory gap-3 sm:gap-3.5 lg:gap-3.5 xl:gap-4 pb-3 lg:pb-0 no-scrollbar lg:grid lg:grid-cols-7 lg:overflow-visible"></div>
   </section>
 
   <!-- ========================================================
@@ -2457,12 +2457,12 @@ body {
   <div id="toast-container" class="toast-container"></div>
 
   <!-- Scripts -->
-  <script type="module" src="./js/data.js?v=3.5.0"></script>
-  <script type="module" src="./js/state.js?v=3.0.0"></script>
-  <script type="module" src="./js/components.js?v=3.5.0"></script>
-  <script type="module" src="./js/app.js?v=3.6.0"></script>
-  <script type="module" src="./js/ecommerce-store.js?v=3.7.0"></script>
-  <script type="module" src="./js/ecommerce-ui.js?v=4.1.0"></script>
+  <script type="module" src="./js/data.js?v=4.2.0"></script>
+  <script type="module" src="./js/state.js?v=4.2.0"></script>
+  <script type="module" src="./js/components.js?v=4.2.0"></script>
+  <script type="module" src="./js/app.js?v=4.2.0"></script>
+  <script type="module" src="./js/ecommerce-store.js?v=4.2.0"></script>
+  <script type="module" src="./js/ecommerce-ui.js?v=4.2.0"></script>
 
   <script>
     // Safeguard: Ensure BloomEcommerceUI is initialized as soon as scripts load

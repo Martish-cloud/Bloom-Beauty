@@ -55,7 +55,7 @@ window.BloomData = {
     {
       id: "makeup",
       name: "Makeup",
-      tagline: "Lipsticks, Foundations, Eyes & Blushes",
+      tagline: "Lipsticks, Foundations, Eyes, and More",
       itemCount: "240+ Products",
       image: "Docs/Lipsticks/Luxury Red Lipstick Mood Board.png",
       subcategories: ["Lipsticks & Glosses", "Foundations & Concealers", "Eyeshadow & Mascara", "Blush & Highlighters", "Primers & Setting Sprays"],
@@ -64,7 +64,7 @@ window.BloomData = {
     {
       id: "skincare",
       name: "Skincare",
-      tagline: "Serums, Cleansers, SPF & Moisturizers",
+      tagline: "Serums, Cleansers, Moisturizers & More",
       itemCount: "190+ Products",
       image: "Docs/Skincare/Radiant Serum Skincare Glow.png",
       subcategories: ["Cleansers & Toners", "Serums & Essences", "Moisturizers & Creams", "Sunscreen SPF 50+", "Face Masks & Peels"],
@@ -73,7 +73,7 @@ window.BloomData = {
     {
       id: "haircare",
       name: "Haircare",
-      tagline: "Bond Repair, Shampoos & Masks",
+      tagline: "Bond Repair, Shampoos & More",
       itemCount: "150+ Products",
       image: "Docs/Haircare/Voluminous Waves Beauty Portrait.png",
       subcategories: ["Bond Repair & Masks", "Shampoos & Conditioners", "Hair Oils & Serums", "Scalp Care & Scrubs", "Styling & Heat Protect"],
@@ -82,7 +82,7 @@ window.BloomData = {
     {
       id: "bath-body",
       name: "Bath & Body",
-      tagline: "Body Butters, Scrubs & Shower Gels",
+      tagline: "Body Butters, Scrubs, Shower Gels & More",
       itemCount: "95+ Products",
       image: "Docs/Bath & Body/Lavender Body & Earth Gift Set.png",
       subcategories: ["Body Butters & Lotions", "Shower Gels & Washes", "Body Scrubs & Exfoliators", "Hand & Foot Care", "Bath Salts & Soaks"],
@@ -91,7 +91,7 @@ window.BloomData = {
     {
       id: "fragrance",
       name: "Fragrance",
-      tagline: "Eau de Parfum, Mists & Travel Sets",
+      tagline: "Eau de Parfum, Mists, and Discoveries",
       itemCount: "80+ Products",
       image: "Docs/Fragance/Chanel Coco Mademoiselle on Pink Satin.png",
       subcategories: ["Eau de Parfum", "Eau de Toilette", "Body Mists & Sprays", "Perfume Oils", "Discovery Sets"],
@@ -100,7 +100,7 @@ window.BloomData = {
     {
       id: "nail-care",
       name: "Nail Care",
-      tagline: "Gel Polish, Cuticle Oils & Sets",
+      tagline: "Gel Polish, Cuticle Oils, Nail Treatments & More",
       itemCount: "65+ Products",
       image: "Docs/Nail Care/MII Fashion Metallic Pink Nail Polish.png",
       subcategories: ["Gel Finish Polish", "Nail Treatments", "Cuticle Oils & Creams", "Base & Top Coats", "Nail Tools"],
@@ -109,7 +109,7 @@ window.BloomData = {
     {
       id: "beauty-tools",
       name: "Beauty Tools",
-      tagline: "Rollers, Gua Sha & Brushes",
+      tagline: "Rollers, Gua Sha, Brushes & More",
       itemCount: "75+ Products",
       image: "Docs/Nail Care/Professional Nail Care Tools Flat Lay.png",
       subcategories: ["Facial Rollers & Gua Sha", "Makeup Brushes & Sponges", "Eyelash Curlers", "Cleansing Brushes", "Vanity Organizers"],

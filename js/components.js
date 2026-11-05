@@ -143,31 +143,97 @@ window.BloomComponents = {
     `;
   },
 
-  // Category Grid Card
+  // Category Grid Card (Explore Your Beauty Essentials Showcase)
   renderCategoryCard(cat) {
+    // Curated pastel badge themes with high-contrast readable typography
+    const badgeThemes = {
+      'makeup': {
+        bg: '#FCE8ED', // Blush Pink
+        text: '#7A2840',
+        border: '#F3C4D0'
+      },
+      'skincare': {
+        bg: '#FFF8E7', // Dewy Cream
+        text: '#6E4F18',
+        border: '#F7E5BD'
+      },
+      'haircare': {
+        bg: '#FDF2E9', // Warm Champagne
+        text: '#7A4016',
+        border: '#F6D8C0'
+      },
+      'bath-body': {
+        bg: '#F3EBF9', // Soft Lavender
+        text: '#552773',
+        border: '#E0D0EE'
+      },
+      'fragrance': {
+        bg: '#FBE9ED', // Rose Quartz
+        text: '#782338',
+        border: '#F5C7D2'
+      },
+      'nail-care': {
+        bg: '#F7E9F4', // Pale Lilac
+        text: '#6E2260',
+        border: '#ECCCE5'
+      },
+      'beauty-tools': {
+        bg: '#EBF7F2', // Pale Mint
+        text: '#1E5740',
+        border: '#CDE9DC'
+      }
+    };
+
+    const theme = badgeThemes[cat.id] || {
+      bg: '#F8E9EC',
+      text: '#A6536F',
+      border: '#EEE7E9'
+    };
+
+    // Format badge text in bold uppercase e.g. "240+ PRODUCTS"
+    const badgeText = (cat.itemCount || '100+ Products').toUpperCase();
+
     return `
-      <div class="relative group rounded-xl overflow-hidden bg-white border border-[#EEE7E9] shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
+      <div class="category-card group w-[160px] sm:w-[175px] md:w-[190px] lg:w-full shrink-0 snap-start lg:shrink"
            data-action="filter-category" 
-           data-category="${cat.name}">
-        <div class="aspect-[4/5] overflow-hidden bg-[#FAF6F7] relative">
+           data-category="${cat.name}"
+           role="button"
+           tabindex="0"
+           aria-label="Browse ${cat.name} Collection (${badgeText})">
+        
+        <!-- Category Background Image -->
+        <div class="category-card-bg">
           <img src="${cat.image}" 
                alt="${cat.name}" 
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                loading="lazy" />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent"></div>
-          
-          <div class="absolute bottom-0 inset-x-0 p-4 text-white">
-            <span class="text-[11px] uppercase tracking-wider text-[#F3D2DA] font-semibold">${cat.itemCount}</span>
-            <h3 class="text-lg font-serif font-bold text-white mb-1 group-hover:text-[#F3D2DA] transition-colors">${cat.name}</h3>
-            <p class="text-xs text-white/80 line-clamp-1 mb-2">${cat.tagline}</p>
-            <div class="inline-flex items-center text-xs font-semibold text-white group-hover:translate-x-1 transition-transform">
-              Shop Now
-              <svg class="w-3.5 h-3.5 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </div>
+        </div>
+
+        <!-- Subtle Dark Gradient Overlay (Clear on top, rich contrast on bottom) -->
+        <div class="category-card-gradient"></div>
+        
+        <!-- Category Text & Button Content -->
+        <div class="category-card-content">
+          <!-- 1. Product Count Pill Badge -->
+          <span class="category-pill-badge" 
+                style="background-color: ${theme.bg} !important; color: ${theme.text} !important; border: 1px solid ${theme.border} !important;">
+            ${badgeText}
+          </span>
+
+          <!-- 2. Category Title -->
+          <h3 class="category-card-title">${cat.name}</h3>
+
+          <!-- 3. Category Description -->
+          <p class="category-card-desc">${cat.tagline}</p>
+
+          <!-- 4. Shop Now Button -->
+          <div class="category-shop-now-btn">
+            <span>Shop Now</span>
+            <svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
+            </svg>
           </div>
         </div>
+
       </div>
     `;
   },
