@@ -603,15 +603,15 @@ body {
 }
 
 /* ========================================================
-   HERO CAROUSEL — FULL-WIDTH 16:9 EDGE-TO-EDGE LUXURY BANNER
+   HERO CAROUSEL — FULL-WIDTH 17:9 EDGE-TO-EDGE LUXURY BANNER
    (STRICTLY NO CARDS, NO BORDER RADIUS, NO CROPPING)
    ======================================================== */
 #hero-carousel {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 17 / 9;
   min-height: 380px;
-  max-height: 760px;
+  max-height: 800px;
   overflow: hidden;
   background-color: #1A151A;
 }
@@ -650,7 +650,7 @@ body {
   z-index: 1;
 }
 
-/* Ambient 16:9 Background Extension (softly blurred copy to fill non-16:9 viewports gracefully) */
+/* Ambient 17:9 Background Extension (softly blurred copy to fill non-16:9 viewports gracefully) */
 .hero-slide-bg {
   position: absolute;
   inset: 0;
@@ -663,7 +663,7 @@ body {
   pointer-events: none;
 }
 
-/* Foreground 16:9 Image Layer — 100% UNTOUCHED, COMPLETE, UNMODIFIED & UNBOUNDED */
+/* Foreground 17:9 Image Layer — 100% UNTOUCHED, COMPLETE, UNMODIFIED & UNBOUNDED */
 .hero-slide-fg {
   position: absolute;
   inset: 0;
@@ -1457,16 +1457,16 @@ body {
 
       <!-- ========================================================
        3. HERO CAMPAIGN CAROUSEL (SECTION 4)
-       Full-Width 16:9 Edge-to-Edge Slideshow (Order: 1 -> 2 -> 3)
+       Full-Width 17:9 Edge-to-Edge Slideshow (Order: 1 -> 2 -> 3)
        ======================================================== -->
   <section class="relative bg-[#1A151A] overflow-hidden w-full" id="hero-carousel">
-    <div class="relative w-full h-full min-h-[380px] sm:min-h-[440px] md:min-h-[520px] lg:min-h-[600px] xl:min-h-[680px]">
+    <div class="relative w-full h-full min-h-[380px] md:min-h-0">
       
       <!-- Slide 1: Header Images/1.png (Velvet Lipstick Campaign) -->
       <div class="hero-slide is-active">
         <!-- Ambient blurred backdrop -->
         <img src="Header Images/1.png" aria-hidden="true" class="hero-slide-bg" />
-        <!-- Complete 16:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
+        <!-- Complete 17:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
         <img src="Header Images/1.png" alt="Bloom Beauty Velvet Lipstick Campaign" class="hero-slide-fg" />
         <!-- Subtle luxury gradient overlay for typography readability -->
         <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
@@ -1505,7 +1505,7 @@ body {
       <div class="hero-slide">
         <!-- Ambient blurred backdrop -->
         <img src="Header Images/2.png" aria-hidden="true" class="hero-slide-bg" />
-        <!-- Complete 16:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
+        <!-- Complete 17:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
         <img src="Header Images/2.png" alt="Bloom Beauty Clinical Skincare Campaign" class="hero-slide-fg" />
         <!-- Subtle luxury gradient overlay for typography readability -->
         <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
@@ -1544,7 +1544,7 @@ body {
       <div class="hero-slide">
         <!-- Ambient blurred backdrop -->
         <img src="Header Images/3.png" aria-hidden="true" class="hero-slide-bg" />
-        <!-- Complete 16:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
+        <!-- Complete 17:9 Foreground Image (Zero Cropping, Object-Contain, No Card Box) -->
         <img src="Header Images/3.png" alt="Bloom Beauty Salon Hair Care Campaign" class="hero-slide-fg" />
         <!-- Subtle luxury gradient overlay for typography readability -->
         <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
